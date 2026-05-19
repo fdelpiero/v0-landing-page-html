@@ -157,14 +157,13 @@ export default function RegisterPage() {
                     className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                   />
                 </div>
-
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a…</label>
-                  <select
-                    name="type"
-                    className="bg-[rgba(0,0,0,0.3)] border border-border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none"
-                  >
-                    <option value="">Select one</option>
+              <div className="flex flex-col gap-1.5">
+               <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a… *</label>
+              <select
+              name="type"
+              className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.type ? "border-red-500" : "border-border"}`}
+               >
+              <option value="">Select one</option>
                     <option>Business owner / founder</option>
                     <option>Marketing / ops professional</option>
                     <option>Corporate team member</option>
