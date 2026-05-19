@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { HeroVisual } from "./hero-visual"
+import { MatelabLogoSmall } from "./matelab-logo"
 
 export function HeroSection() {
   return (
@@ -57,7 +58,9 @@ export function HeroSection() {
                 <div className="text-[11px] text-muted-foreground tracking-[0.08em]">No code</div>
               </div>
               <div>
-                <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em]">🌏</div>
+                <div className="h-[26px] flex items-center">
+                  <MatelabLogoSmall size={26} />
+                </div>
                 <div className="text-[11px] text-muted-foreground tracking-[0.08em]">Remote-first</div>
               </div>
               <div>
