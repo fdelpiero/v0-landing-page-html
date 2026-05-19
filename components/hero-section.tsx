@@ -20,7 +20,7 @@ export function HeroSection() {
             {/* Tag */}
             <div className="animate-fade-up inline-flex items-center gap-2 bg-accent border border-[rgba(0,229,160,0.3)] text-primary text-[11px] tracking-[0.15em] uppercase px-3.5 py-1.5 mb-7">
               <span className="w-1.5 h-1.5 bg-primary rounded-full animate-blink" />
-              Born in Sydney. Built for the world.
+              Born in Australia. Built for the world.
             </div>
 
             {/* Title */}
