@@ -49,7 +49,7 @@ export function Navbar() {
         </li>
         <li>
           <Link 
-            href="#workshop" 
+            href="/register" 
             className="bg-primary text-primary-foreground text-xs tracking-[0.1em] uppercase px-4 py-2 font-medium hover:opacity-85 transition-opacity"
           >
             Free Workshop &rarr;
@@ -103,7 +103,7 @@ export function Navbar() {
             </li>
             <li>
               <Link 
-                href="#workshop" 
+                href="/register" 
                 className="inline-block bg-primary text-primary-foreground text-sm tracking-[0.1em] uppercase px-4 py-2 font-medium hover:opacity-85 transition-opacity mt-2"
                 onClick={() => setMobileMenuOpen(false)}
               >

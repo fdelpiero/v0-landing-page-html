@@ -33,7 +33,7 @@ export function WorkshopCTA() {
 
             <div className="flex flex-col gap-3 items-start relative z-10">
               <Link 
-                href="#" 
+                href="/register" 
                 className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm whitespace-nowrap hover:opacity-90 hover:-translate-y-0.5 transition-all"
               >
                 Reserve My Spot &rarr;
