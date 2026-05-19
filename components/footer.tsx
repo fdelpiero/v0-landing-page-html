@@ -21,7 +21,6 @@ export function Footer() {
             </Link>
             <p className="text-[11px] text-muted-foreground tracking-[0.05em] max-w-[200px] leading-[1.7]">
               AI Automation · Education · Consulting<br />
-              🌏 Born in Australia. Built for the world.
             </p>
           </div>
 
@@ -61,7 +60,7 @@ export function Footer() {
 
             {/* Instagram */}
             <Link
-              href="https://instagram.com/matelabai"
+              href="https://instagram.com/matelab.ai"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 no-underline group"
