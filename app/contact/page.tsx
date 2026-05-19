@@ -9,20 +9,23 @@ export default function ContactPage() {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, boolean>>({})
 
-  const GOOGLE_FORM_URL = "YOUR_GOOGLE_FORM_ACTION_URL_HERE"
-  // Replace entry IDs below with your real Google Form entry IDs
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeDnG1aduT6bbol9yiHSwZkyjlMbEbVhzPRbWyowTp49iIwbA/formResponse"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
 
-    const name = data.get("name") as string
+    const name  = data.get("name") as string
     const email = data.get("email") as string
+    const phone = data.get("phone") as string
+    const need  = data.get("need") as string
 
     const newErrors: Record<string, boolean> = {}
-    if (!name.trim()) newErrors.name = true
+    if (!name.trim())  newErrors.name  = true
     if (!email.trim()) newErrors.email = true
+    if (!phone.trim()) newErrors.phone = true
+    if (!need || need.trim() === "") newErrors.need = true
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
@@ -32,18 +35,40 @@ export default function ContactPage() {
     setLoading(true)
 
     const params = new URLSearchParams()
-    params.append("entry.XXXXXXXXX", name)                              // ← replace
-    params.append("entry.XXXXXXXXX", data.get("company") as string)    // ← replace
-    params.append("entry.XXXXXXXXX", email)                             // ← replace
-    params.append("entry.XXXXXXXXX", data.get("need") as string)       // ← replace
-    params.append("entry.XXXXXXXXX", data.get("message") as string)    // ← replace
+    params.append("entry.1741629160", name)
+    params.append("entry.636791634",  data.get("company") as string)
+    params.append("entry.2125242247", email)
+    params.append("entry.227034055",  phone)
+    params.append("entry.354612509",  need)
+    params.append("entry.1468929445", data.get("message") as string)
 
     try {
-      await fetch(GOOGLE_FORM_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: params,
-      })
+      const iframe = document.createElement("iframe")
+      iframe.style.display = "none"
+      document.body.appendChild(iframe)
+
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+      if (iframeDoc) {
+        const formEl = iframeDoc.createElement("form")
+        formEl.method = "POST"
+        formEl.action = GOOGLE_FORM_URL
+
+        params.forEach((value, key) => {
+          const input = iframeDoc.createElement("input")
+          input.type = "hidden"
+          input.name = key
+          input.value = value
+          formEl.appendChild(input)
+        })
+
+        iframeDoc.body.appendChild(formEl)
+        formEl.submit()
+      }
+
+      setTimeout(() => {
+        document.body.removeChild(iframe)
+      }, 2000)
+
     } catch (_) {}
 
     setLoading(false)
@@ -53,10 +78,8 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
 
-      {/* Grid bg */}
       <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
 
-      {/* Simple nav */}
       <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-4 md:px-12 bg-[rgba(10,10,15,0.85)] backdrop-blur-[20px] border-b border-border">
         <Link href="/" className="flex items-center gap-2.5 no-underline">
           <MatelabLogoSmall size={28} />
@@ -70,13 +93,11 @@ export default function ContactPage() {
         </Link>
       </nav>
 
-      {/* Main */}
       <main className="flex-1 flex items-center justify-center px-6 pt-32 pb-20 relative z-10">
         <div className="w-full max-w-lg">
 
           {!submitted ? (
             <>
-              {/* Header */}
               <div className="mb-10">
                 <div className="inline-block border border-border text-muted-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
                   Consulting · Corporate · Partnerships
@@ -88,8 +109,6 @@ export default function ContactPage() {
                 <p className="text-sm text-muted-foreground leading-[1.7] max-w-md">
                   Tell us about your business. We&apos;ll map out exactly where AI automation can save you time and money — no obligation, no sales pressure.
                 </p>
-
-                {/* What to expect */}
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
                     { icon: "📞", label: "30 min call" },
@@ -104,8 +123,8 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Form */}
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex flex-col gap-1.5">
                     <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Name *</label>
@@ -127,21 +146,32 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Email *</label>
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="you@company.com"
-                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
-                  />
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Email *</label>
+                    <input
+                      name="email"
+                      type="email"
+                      placeholder="you@company.com"
+                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Phone *</label>
+                    <input
+                      name="phone"
+                      type="tel"
+                      placeholder="+61 4XX XXX XXX"
+                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.phone ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">What do you need help with?</label>
+                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">What do you need help with? *</label>
                   <select
                     name="need"
-                    className="bg-[rgba(0,0,0,0.3)] border border-border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none"
+                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.need ? "border-red-500" : "border-border"}`}
                   >
                     <option value="">Select one</option>
                     <option>Build a chatbot for my business</option>
@@ -162,6 +192,12 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {Object.keys(errors).length > 0 && (
+                  <p className="text-red-500 text-[11px] tracking-[0.05em]">
+                    Please fill in all required fields marked with *
+                  </p>
+                )}
+
                 <button
                   type="submit"
                   disabled={loading}
@@ -173,15 +209,15 @@ export default function ContactPage() {
                 <p className="text-[11px] text-[#404055] tracking-[0.05em]">
                   No obligation · 30 min · We&apos;ll reach out within 24 hours
                 </p>
+
               </form>
             </>
           ) : (
-            /* Success state */
             <div className="text-center py-16">
               <div className="text-6xl mb-6">✅</div>
               <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">Got it!</h2>
               <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-                Thanks for reaching out. We&apos;ll be in touch within 24 hours to book your strategy call.
+                Thanks for reaching out. We&apos;ll be in touch within 24 hours to book your strategy call. 🤖
               </p>
               <Link
                 href="/"
@@ -195,7 +231,6 @@ export default function ContactPage() {
         </div>
       </main>
 
-      {/* Footer strip */}
       <div className="border-t border-border py-5 px-6 text-center relative z-10">
         <p className="text-[11px] text-[#404055] tracking-[0.05em]">
           © 2026 Matelab AI · Sydney, AU ·{" "}
@@ -206,4 +241,5 @@ export default function ContactPage() {
     </div>
   )
 }
+
 
