@@ -86,6 +86,7 @@ export default function ContactPage() {
           <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
             <span className="text-foreground">mate</span>
             <span className="text-primary">lab</span>
+            <span className="text-primary text-lg opacity-100 tracking-[-0.04em]">.ai</span>
           </div>
         </Link>
         <Link href="/" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
