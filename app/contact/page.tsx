@@ -213,15 +213,38 @@ export default function ContactPage() {
               </form>
             </>
           ) : (
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6">✅</div>
-              <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">Got it!</h2>
-              <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-                Thanks for reaching out. We&apos;ll be in touch within 24 hours to book your strategy call. 🤖
+            <div className="py-16">
+              {/* Minimal node mark */}
+              <div className="mb-10">
+                <svg width="48" height="48" viewBox="0 0 52 52" fill="none">
+                  <line x1="19" y1="35" x2="26" y2="20" stroke="#00E5A0" strokeWidth="2.5" strokeLinecap="round" opacity="0.8"/>
+                  <line x1="26" y1="20" x2="33" y2="35" stroke="#00E5A0" strokeWidth="2.5" strokeLinecap="round" opacity="0.45"/>
+                  <line x1="19" y1="35" x2="33" y2="35" stroke="#00E5A0" strokeWidth="2.5" strokeLinecap="round" opacity="0.25"/>
+                  <circle cx="26" cy="20" r="4.5" fill="#00E5A0"/>
+                  <circle cx="26" cy="20" r="1.6" fill="#111118"/>
+                  <circle cx="19" cy="35" r="4.5" fill="#00E5A0" opacity="0.6"/>
+                  <circle cx="19" cy="35" r="1.6" fill="#111118" opacity="0.6"/>
+                  <circle cx="33" cy="35" r="4.5" fill="#00E5A0" opacity="0.3"/>
+                  <circle cx="33" cy="35" r="1.6" fill="#111118" opacity="0.3"/>
+                </svg>
+              </div>
+
+              <div className="inline-block border border-[rgba(0,229,160,0.3)] text-primary text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-6">
+                Message received
+              </div>
+
+              <h2 className="font-sans font-black text-[clamp(28px,4vw,40px)] tracking-[-0.03em] leading-[1.05] mb-4">
+                We&apos;ll be in touch<br />
+                <span className="text-primary italic font-serif font-normal">within 24 hours</span>
+              </h2>
+
+              <p className="text-sm text-muted-foreground leading-[1.7] mb-10 max-w-sm">
+                Thanks for reaching out. One of our team will contact you to book your free AI strategy call.
               </p>
+
               <Link
                 href="/"
-                className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
+                className="inline-block border border-border text-muted-foreground font-sans font-bold text-xs tracking-[0.1em] uppercase px-6 py-3 hover:border-[rgba(0,229,160,0.3)] hover:text-primary transition-all"
               >
                 ← Back to Matelab
               </Link>
