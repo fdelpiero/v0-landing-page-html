@@ -12,7 +12,7 @@ const audiences = [
     body: "Want to learn AI and automation for your daily life and work? We make it simple, practical and fun — zero tech skills required."
   },
   {
-    emoji: "🏦",
+    emoji: "🏢",
     title: "Corporate Teams",
     body: "Banks, law firms, agencies, startups — we upskill your team with hands-on workshops and leave them fully equipped to build internally."
   }
