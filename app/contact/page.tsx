@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle2, Loader2 } from "lucide-react"
+import { ArrowLeft, CheckCircle2, Loader2, Instagram } from "lucide-react"
 import { MatelabLogo } from "@/components/matelab-logo"
 
 export default function ContactPage() {
@@ -227,6 +227,24 @@ export default function ContactPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* Instagram */}
+              <div className="mt-8 pt-6 border-t border-border">
+                <h3 className="text-xs tracking-[0.1em] uppercase text-muted-foreground mb-4">
+                  Follow Us
+                </h3>
+                <a 
+                  href="https://instagram.com/matelab.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 text-sm text-foreground hover:text-primary transition-colors group"
+                >
+                  <span className="flex items-center justify-center w-9 h-9 bg-card border border-border group-hover:border-primary transition-colors">
+                    <Instagram className="w-4 h-4" />
+                  </span>
+                  @matelab.ai
+                </a>
               </div>
             </>
           ) : (
