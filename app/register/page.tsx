@@ -38,12 +38,33 @@ export default function RegisterPage() {
     params.append("entry.355061805", email)
     params.append("entry.700825334", data.get("type") as string)
 
-    try {
-      await fetch(GOOGLE_FORM_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: params,
-      })
+   try {
+      const iframe = document.createElement("iframe")
+      iframe.style.display = "none"
+      document.body.appendChild(iframe)
+      
+      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+      if (iframeDoc) {
+        const form = iframeDoc.createElement("form")
+        form.method = "POST"
+        form.action = GOOGLE_FORM_URL
+        
+        params.forEach((value, key) => {
+          const input = iframeDoc.createElement("input")
+          input.type = "hidden"
+          input.name = key
+          input.value = value
+          form.appendChild(input)
+        })
+        
+        iframeDoc.body.appendChild(form)
+        form.submit()
+      }
+      
+      setTimeout(() => {
+        document.body.removeChild(iframe)
+      }, 2000)
+      
     } catch (_) {}
 
     setLoading(false)
