@@ -3,7 +3,7 @@ import { Reveal } from "./reveal"
 const audiences = [
   {
     emoji: "🧑‍💼",
-    title: "Business Owners/Founders",
+    title: "Business Owners",
     body: "Save 10+ hours a week by automating your bookings, leads, follow-ups, social posts and customer queries. No developer needed."
   },
   {
