@@ -9,9 +9,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, boolean>>({})
 
-  const GOOGLE_FORM_URL = "YOUR_GOOGLE_FORM_ACTION_URL_HERE"
-  // Replace entry IDs below with your real Google Form entry IDs
-  // Get them by: Google Form → ⋯ → Get pre-filled link → fill dummy data → copy URL
+  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeOw0Vu6Rnv41kIs67wgrxmrhNVngquBFID1m9_i-Ta9nT2WA/formResponse"
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -35,10 +33,10 @@ export default function RegisterPage() {
     setLoading(true)
 
     const params = new URLSearchParams()
-    params.append("entry.XXXXXXXXX", firstName)       // ← replace with real entry ID
-    params.append("entry.XXXXXXXXX", lastName)        // ← replace with real entry ID
-    params.append("entry.XXXXXXXXX", email)           // ← replace with real entry ID
-    params.append("entry.XXXXXXXXX", data.get("type") as string) // ← replace
+    params.append("entry.1145376415", firstName)
+    params.append("entry.700943531", lastName)
+    params.append("entry.355061805", email)
+    params.append("entry.700825334", data.get("type") as string)
 
     try {
       await fetch(GOOGLE_FORM_URL, {
