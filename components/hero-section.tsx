@@ -52,20 +52,20 @@ export function HeroSection() {
             </div>
 
             {/* Meta stats */}
-            <div className="animate-fade-up animation-delay-400 flex gap-8 mt-10">
-              <div>
-                <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em]">100%</div>
-                <div className="text-[11px] text-muted-foreground tracking-[0.08em]">No code</div>
+            <div className="animate-fade-up animation-delay-400 flex items-end gap-8 mt-10">
+              <div className="text-center">
+                <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em] leading-none">100%</div>
+                <div className="text-[11px] text-muted-foreground tracking-[0.08em] mt-1.5">No code</div>
               </div>
-              <div className="flex flex-col items-center">
-                <div className="h-[26px] flex items-center justify-center">
+              <div className="text-center">
+                <div className="flex items-center justify-center">
                   <MatelabLogoSmall size={26} />
                 </div>
-                <div className="text-[11px] text-muted-foreground tracking-[0.08em]">Remote-first</div>
+                <div className="text-[11px] text-muted-foreground tracking-[0.08em] mt-1.5">Remote-first</div>
               </div>
-              <div>
-                <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em]">n8n</div>
-                <div className="text-[11px] text-muted-foreground tracking-[0.08em]">+ 10 tools</div>
+              <div className="text-center">
+                <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em] leading-none">n8n</div>
+                <div className="text-[11px] text-muted-foreground tracking-[0.08em] mt-1.5">+ 10 tools</div>
               </div>
             </div>
           </div>
