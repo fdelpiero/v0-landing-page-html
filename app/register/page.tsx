@@ -1,236 +1,199 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, CheckCircle2, Loader2 } from "lucide-react"
-import { MatelabLogo } from "@/components/matelab-logo"
+import { useState } from "react"
+import { MatelabLogoSmall } from "@/components/matelab-logo"
 
 export default function RegisterPage() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
-  const [error, setError] = useState("")
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [errors, setErrors] = useState<Record<string, boolean>>({})
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
+  const GOOGLE_FORM_URL = "YOUR_GOOGLE_FORM_ACTION_URL_HERE"
+  // Replace entry IDs below with your real Google Form entry IDs
+  // Get them by: Google Form → ⋯ → Get pre-filled link → fill dummy data → copy URL
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    setError("")
-    setIsSubmitting(true)
+    const form = e.currentTarget
+    const data = new FormData(form)
 
-    // Simulate form submission - replace with your actual API endpoint or Google Form integration
-    try {
-      // Example: Send to your API route
-      // const response = await fetch('/api/register', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
-      
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      setIsSubmitted(true)
-    } catch {
-      setError("Something went wrong. Please try again.")
-    } finally {
-      setIsSubmitting(false)
+    const firstName = data.get("firstName") as string
+    const lastName = data.get("lastName") as string
+    const email = data.get("email") as string
+
+    const newErrors: Record<string, boolean> = {}
+    if (!firstName.trim()) newErrors.firstName = true
+    if (!lastName.trim()) newErrors.lastName = true
+    if (!email.trim()) newErrors.email = true
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
     }
+
+    setLoading(true)
+
+    const params = new URLSearchParams()
+    params.append("entry.XXXXXXXXX", firstName)       // ← replace with real entry ID
+    params.append("entry.XXXXXXXXX", lastName)        // ← replace with real entry ID
+    params.append("entry.XXXXXXXXX", email)           // ← replace with real entry ID
+    params.append("entry.XXXXXXXXX", data.get("type") as string) // ← replace
+
+    try {
+      await fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: params,
+      })
+    } catch (_) {}
+
+    setLoading(false)
+    setSubmitted(true)
   }
 
   return (
-    <main className="min-h-screen bg-background relative">
-      {/* Grid background */}
-      <div className="grid-bg" />
+    <div className="min-h-screen bg-background flex flex-col">
 
-      {/* Header */}
-      <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12">
+      {/* Grid bg */}
+      <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
+
+      {/* Simple nav */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-4 md:px-12 bg-[rgba(10,10,15,0.85)] backdrop-blur-[20px] border-b border-border">
         <Link href="/" className="flex items-center gap-2.5 no-underline">
-          <MatelabLogo size={32} />
-          <div className="font-sans font-extrabold text-xl tracking-[-0.04em]">
+          <MatelabLogoSmall size={28} />
+          <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
             <span className="text-foreground">mate</span>
             <span className="text-primary">lab</span>
           </div>
         </Link>
-        <Link 
-          href="/" 
-          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Home
+        <Link href="/" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+          ← Back to home
         </Link>
-      </header>
+      </nav>
 
-      {/* Form Section */}
-      <section className="relative z-10 flex items-center justify-center px-6 py-12 md:py-24">
-        <div className="w-full max-w-[520px]">
-          {!isSubmitted ? (
+      {/* Main */}
+      <main className="flex-1 flex items-center justify-center px-6 pt-32 pb-20 relative z-10">
+        <div className="w-full max-w-lg">
+
+          {!submitted ? (
             <>
-              {/* Form Header */}
-              <div className="text-center mb-10">
-                <div className="inline-block bg-accent border border-[rgba(0,229,160,0.3)] text-accent-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
-                  Free Workshop Registration
+              {/* Header */}
+              <div className="mb-10">
+                <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
+                  Free · Online · This Month
                 </div>
-                <h1 className="font-sans text-[clamp(28px,4vw,42px)] font-black tracking-[-0.02em] leading-[1.1] mb-4 text-foreground">
-                  Reserve Your Spot
+                <h1 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
+                  Join our next free<br />
+                  <span className="text-primary italic font-serif font-normal">AI Automation</span> Workshop
                 </h1>
-                <p className="text-sm text-muted-foreground max-w-[400px] mx-auto leading-[1.7]">
-                  Join our next free AI Automation Workshop. 60 minutes of hands-on learning with real results.
+                <p className="text-sm text-muted-foreground leading-[1.7] max-w-md">
+                  60 minutes. Live. We build a real automation from scratch — a chatbot, a calendar agent, or a lead capture flow. No code. No fluff. Just results.
                 </p>
+
+                {/* What to expect */}
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {[
+                    { icon: "⚡", label: "60 min live" },
+                    { icon: "🛠️", label: "Build something real" },
+                    { icon: "🎓", label: "Zero tech skills" },
+                  ].map((item) => (
+                    <div key={item.label} className="bg-card border border-border p-3 text-center">
+                      <div className="text-lg mb-1">{item.icon}</div>
+                      <div className="text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div>
-                  <label 
-                    htmlFor="name" 
-                    className="block text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="John Doe"
-                    className="w-full bg-card border border-border px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                  />
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">First Name *</label>
+                    <input
+                      name="firstName"
+                      type="text"
+                      placeholder="Fer"
+                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.firstName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Last Name *</label>
+                    <input
+                      name="lastName"
+                      type="text"
+                      placeholder="Del Piero"
+                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.lastName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
+                    />
+                  </div>
                 </div>
 
-                <div>
-                  <label 
-                    htmlFor="email" 
-                    className="block text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2"
-                  >
-                    Email Address
-                  </label>
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Email *</label>
                   <input
-                    type="email"
-                    id="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="john@example.com"
-                    className="w-full bg-card border border-border px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
+                    type="email"
+                    placeholder="fer@yourcompany.com"
+                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                   />
                 </div>
 
-                <div>
-                  <label 
-                    htmlFor="phone" 
-                    className="block text-xs tracking-[0.1em] uppercase text-muted-foreground mb-2"
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a…</label>
+                  <select
+                    name="type"
+                    className="bg-[rgba(0,0,0,0.3)] border border-border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none"
                   >
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    placeholder="+1 (555) 000-0000"
-                    className="w-full bg-card border border-border px-4 py-3.5 text-foreground text-sm placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary transition-colors"
-                  />
+                    <option value="">Select one</option>
+                    <option>Business owner / founder</option>
+                    <option>Marketing / ops professional</option>
+                    <option>Corporate team member</option>
+                    <option>Freelancer / consultant</option>
+                    <option>Just curious</option>
+                  </select>
                 </div>
-
-                {error && (
-                  <p className="text-sm text-red-400">{error}</p>
-                )}
 
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-primary text-primary-foreground px-7 py-4 font-sans font-bold text-sm tracking-[0.05em] uppercase hover:opacity-90 hover:-translate-y-0.5 transition-all disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0 flex items-center justify-center gap-2"
+                  disabled={loading}
+                  className="mt-2 bg-primary text-primary-foreground font-sans font-bold text-sm px-7 py-4 hover:opacity-90 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed text-left"
                 >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Registering...
-                    </>
-                  ) : (
-                    "Register Now"
-                  )}
+                  {loading ? "Reserving your spot…" : "Reserve My Spot →"}
                 </button>
 
-                <p className="text-center text-[11px] text-muted-foreground tracking-[0.05em]">
-                  Free · No credit card · 60 min workshop
+                <p className="text-[11px] text-[#404055] tracking-[0.05em]">
+                  Free · No credit card · 60 min · We&apos;ll email you the details
                 </p>
               </form>
-
-              {/* Workshop Details */}
-              <div className="mt-12 pt-8 border-t border-border">
-                <h3 className="text-xs tracking-[0.1em] uppercase text-muted-foreground mb-4">
-                  What you&apos;ll get
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Live 60-minute hands-on session",
-                    "Build a real automation from scratch",
-                    "No coding experience required",
-                    "Recording sent to your email",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-3 text-sm text-foreground">
-                      <span className="w-1.5 h-1.5 bg-primary flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </>
           ) : (
-            /* Success State */
-            <div className="text-center py-12">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-accent border border-[rgba(0,229,160,0.3)] mb-6">
-                <CheckCircle2 className="w-8 h-8 text-primary" />
-              </div>
-              <h2 className="font-sans text-[clamp(24px,3.5vw,36px)] font-black tracking-[-0.02em] leading-[1.1] mb-4 text-foreground">
-                You&apos;re Registered!
-              </h2>
-              <p className="text-sm text-muted-foreground max-w-[400px] mx-auto leading-[1.7] mb-8">
-                Thanks for signing up, <span className="text-foreground">{formData.name}</span>! 
-                We&apos;ve sent a confirmation email to <span className="text-foreground">{formData.email}</span> with 
-                all the workshop details.
+            /* Success state */
+            <div className="text-center py-16">
+              <div className="text-6xl mb-6">🎉</div>
+              <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">You&apos;re in!</h2>
+              <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
+                Check your inbox — we&apos;ve sent you the workshop details. See you there!
               </p>
-              <Link 
+              <Link
                 href="/"
-                className="inline-block bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm hover:opacity-90 hover:-translate-y-0.5 transition-all"
+                className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
               >
-                Back to Home
+                ← Back to Matelab
               </Link>
             </div>
           )}
         </div>
-      </section>
+      </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-8 px-6 md:px-12 border-t border-border mt-auto">
-        <div className="max-w-[1100px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <MatelabLogo size={24} />
-            <span className="font-sans font-bold text-sm">
-              <span className="text-foreground">mate</span>
-              <span className="text-primary">lab</span>
-            </span>
-          </div>
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Matelab AI. All rights reserved.
-          </p>
-        </div>
-      </footer>
-    </main>
+      {/* Footer strip */}
+      <div className="border-t border-border py-5 px-6 text-center relative z-10">
+        <p className="text-[11px] text-[#404055] tracking-[0.05em]">
+          © 2026 Matelab AI · Sydney, AU ·{" "}
+          <Link href="/" className="hover:text-primary transition-colors">matelab.ai</Link>
+        </p>
+      </div>
+
+    </div>
   )
 }
