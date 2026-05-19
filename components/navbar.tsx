@@ -48,6 +48,11 @@ export function Navbar() {
           </Link>
         </li>
         <li>
+          <Link href="/contact" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+            Book a Call
+          </Link>
+        </li>
+        <li>
           <Link 
             href="/register" 
             className="bg-primary text-primary-foreground text-xs tracking-[0.1em] uppercase px-4 py-2 font-medium hover:opacity-85 transition-opacity"
@@ -99,6 +104,15 @@ export function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Who it&apos;s for
+              </Link>
+            </li>
+            <li>
+              <Link 
+                href="/contact" 
+                className="text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Book a Call
               </Link>
             </li>
             <li>
