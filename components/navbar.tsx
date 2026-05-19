@@ -26,8 +26,7 @@ export function Navbar() {
         <MatelabLogo size={32} />
         <div className="font-sans font-extrabold text-xl tracking-[-0.04em]">
           <span className="text-foreground">mate</span>
-          <span className="text-primary">lab</span><span className="text-primary text-xl opacity-100 tracking-[-0.02em]">.ai</span><span className="text-primary text-xl opacity-100 tracking-[-0.02em]">.ai</span>
-        </div>
+          <span className="text-primary">lab</span><span className="text-primary text-xl opacity-100 tracking-[-0.02em]">.ai</span>
       </Link>
 
       {/* Desktop nav */}
