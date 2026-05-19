@@ -3,18 +3,18 @@ import { Reveal } from "./reveal"
 const audiences = [
   {
     emoji: "🧑‍💼",
-    title: "Small Business Owners",
-    body: "Save 10+ hours a week by automating your bookings, follow-ups, social posts and customer queries. No developer needed."
+    title: "Business Owners/Founders",
+    body: "Save 10+ hours a week by automating your bookings, leads, follow-ups, social posts and customer queries. No developer needed."
   },
   {
-    emoji: "📈",
-    title: "Marketing & Ops Teams",
-    body: "Connect your CRM, email, Slack and spreadsheets into one seamless flow. Stop copy-pasting and start shipping."
+    emoji: "🙋",
+    title: "Everyday People",
+    body: "Want to learn AI and automation for your daily life and work? We make it simple, practical and fun — zero tech skills required."
   },
   {
     emoji: "🏦",
     title: "Corporate Teams",
-    body: "Banks, law firms, agencies — we upskill your team with hands-on workshops and leave them fully equipped to build internally."
+    body: "Banks, law firms, agencies, startups — we upskill your team with hands-on workshops and leave them fully equipped to build internally."
   }
 ]
 
@@ -54,3 +54,4 @@ export function WhoItsFor() {
     </section>
   )
 }
+
