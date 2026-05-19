@@ -24,6 +24,7 @@ export default function RegisterPage() {
     if (!firstName.trim()) newErrors.firstName = true
     if (!lastName.trim()) newErrors.lastName = true
     if (!email.trim()) newErrors.email = true
+    if (!data.get("type") || (data.get("type") as string).trim() === "") newErrors.type = true
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors)
