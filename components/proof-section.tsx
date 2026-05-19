@@ -21,7 +21,7 @@ export function ProofSection() {
                     <MatelabLogoSmall size={40} />
                   </div>
                 ) : (
-                  <div className="font-serif italic text-[40px] font-normal text-primary tracking-[-0.03em] leading-none mb-1.5">
+                  <div className="font-sans text-[40px] font-black text-primary tracking-[-0.03em] leading-none mb-1.5">
                     {stat.num}
                   </div>
                 )}
