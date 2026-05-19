@@ -167,19 +167,22 @@ export default function RegisterPage() {
             </>
           ) : (
             /* Success state */
-            <div className="text-center py-16">
-              <div className="text-6xl mb-6">🎉</div>
-              <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">You&apos;re in!</h2>
-              <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-                Check your inbox — we&apos;ve sent you the workshop details. See you there!
-              </p>
-              <Link
-                href="/"
-                className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
-              >
-                ← Back to Matelab
-              </Link>
-            </div>
+           <div className="text-center py-16">
+  <div className="text-6xl mb-6">🎉</div>
+  <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">
+    You&apos;re in!
+  </h2>
+  <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
+    Thanks for registering! We&apos;ll be in touch within 48 hours 
+    with all the workshop details. See you there! 🤖
+  </p>
+  <Link
+    href="/"
+    className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
+  >
+    ← Back to Matelab
+  </Link>
+</div>
           )}
         </div>
       </main>
