@@ -57,8 +57,8 @@ export function HeroSection() {
                 <div className="font-sans text-[26px] font-extrabold text-primary tracking-[-0.02em]">100%</div>
                 <div className="text-[11px] text-muted-foreground tracking-[0.08em]">No code</div>
               </div>
-              <div>
-                <div className="h-[26px] flex items-center">
+              <div className="flex flex-col items-center">
+                <div className="h-[26px] flex items-center justify-center">
                   <MatelabLogoSmall size={26} />
                 </div>
                 <div className="text-[11px] text-muted-foreground tracking-[0.08em]">Remote-first</div>
