@@ -20,7 +20,6 @@ export function Footer() {
               </div>
             </Link>
             <p className="text-[11px] text-muted-foreground tracking-[0.05em] max-w-[200px] leading-[1.7]">
-              AI Automation · Education · Consulting<br />
             </p>
           </div>
 
@@ -71,7 +70,7 @@ export function Footer() {
                 <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
               </svg>
               <span className="text-[11px] text-muted-foreground tracking-[0.08em] group-hover:text-primary transition-colors">
-                @matelabai
+                @matelab.ai
               </span>
             </Link>
 
