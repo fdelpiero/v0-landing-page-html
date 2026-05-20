@@ -38,7 +38,7 @@ export function HeroSection() {
             {/* Buttons */}
             <div className="animate-fade-up animation-delay-300 flex flex-wrap gap-3.5">
               <Link 
-                href="#workshop" 
+                href="/register" 
                 className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm tracking-[0.02em] hover:opacity-90 hover:-translate-y-0.5 transition-all"
               >
                 Join Free Workshop &rarr;
