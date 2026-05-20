@@ -1,144 +1,115 @@
 export function HeroVisual() {
   return (
-    <svg 
-      width="480" 
-      height="460" 
-      viewBox="0 0 480 460" 
-      fill="none" 
-      xmlns="http://www.w3.org/2000/svg" 
+    <svg
+      width="480"
+      height="460"
+      viewBox="0 0 480 460"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
       className="w-full max-w-[480px] h-auto"
     >
-      {/* Large dark circle backdrop */}
-      <circle cx="240" cy="230" r="170" fill="#0D1A17" stroke="#1a2a25" strokeWidth="1"/>
-      
-      {/* Subtle inner glow */}
-      <circle cx="240" cy="230" r="140" fill="rgba(0,229,160,0.02)"/>
+      {/* Backdrop glow */}
+      <circle cx="240" cy="240" r="180" fill="rgba(0,229,160,0.04)"/>
+      <circle cx="240" cy="240" r="180" fill="none" stroke="#1a2a25" strokeWidth="1"/>
 
-      {/* Connection lines - diamond pattern */}
-      {/* Top to Left */}
-      <line x1="240" y1="100" x2="140" y2="230" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5">
+      {/* ── NODE POSITIONS ──────────────────────────
+          Top (TRIGGER):    cx=240 cy=100
+          Bottom-left (AGENT):  cx=110 cy=340
+          Bottom-right (OUTPUT): cx=370 cy=340
+      */}
+
+      {/* Peripheral faint lines */}
+      <line x1="240" y1="100" x2="60" y2="60" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.1">
+        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="5s" repeatCount="indefinite"/>
+      </line>
+      <line x1="370" y1="340" x2="430" y2="420" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.08">
+        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="6s" repeatCount="indefinite"/>
+      </line>
+      <line x1="110" y1="340" x2="50" y2="420" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.08">
+        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="4.5s" repeatCount="indefinite"/>
+      </line>
+
+      {/* Peripheral tiny dots */}
+      <circle cx="60" cy="60" r="4" fill="#00E5A0" opacity="0.1">
+        <animate attributeName="opacity" values="0.1;0.05;0.1" dur="4s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="430" cy="420" r="4" fill="#00E5A0" opacity="0.08">
+        <animate attributeName="opacity" values="0.08;0.04;0.08" dur="5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="50" cy="420" r="4" fill="#00E5A0" opacity="0.08">
+        <animate attributeName="opacity" values="0.08;0.04;0.08" dur="6s" repeatCount="indefinite"/>
+      </circle>
+
+      {/* ── CONNECTING LINES (triangle) ──────────── */}
+
+      {/* Top → Bottom-left */}
+      <line x1="240" y1="100" x2="110" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.6">
         <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2s" repeatCount="indefinite"/>
       </line>
-      
-      {/* Top to Right */}
-      <line x1="240" y1="100" x2="340" y2="230" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5">
-        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2.2s" repeatCount="indefinite"/>
-      </line>
-      
-      {/* Left to Bottom */}
-      <line x1="140" y1="230" x2="240" y2="360" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5">
-        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.8s" repeatCount="indefinite"/>
-      </line>
-      
-      {/* Right to Bottom */}
-      <line x1="340" y1="230" x2="240" y2="360" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.5">
+
+      {/* Top → Bottom-right */}
+      <line x1="240" y1="100" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.35">
         <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2.4s" repeatCount="indefinite"/>
       </line>
-      
-      {/* Left to Right (horizontal through middle) */}
-      <line x1="140" y1="230" x2="340" y2="230" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.25">
+
+      {/* Bottom-left → Bottom-right */}
+      <line x1="110" y1="340" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.2">
         <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="3s" repeatCount="indefinite"/>
       </line>
-      
-      {/* Peripheral lines to corner dots */}
-      <line x1="240" y1="100" x2="60" y2="180" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.15">
-        <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="4s" repeatCount="indefinite"/>
-      </line>
-      <line x1="340" y1="230" x2="420" y2="150" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.15">
-        <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="3.5s" repeatCount="indefinite"/>
-      </line>
-      <line x1="240" y1="360" x2="60" y2="340" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.15">
-        <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="4.5s" repeatCount="indefinite"/>
-      </line>
-      <line x1="340" y1="230" x2="420" y2="340" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.12">
-        <animate attributeName="stroke-dashoffset" from="0" to="-10" dur="5s" repeatCount="indefinite"/>
-      </line>
 
-      {/* Small peripheral dots at corners */}
-      <circle cx="60" cy="180" r="5" fill="#00E5A0" opacity="0.15">
-        <animate attributeName="opacity" values="0.15;0.08;0.15" dur="3s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="420" cy="150" r="5" fill="#00E5A0" opacity="0.15">
-        <animate attributeName="opacity" values="0.15;0.08;0.15" dur="3.5s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="60" cy="340" r="5" fill="#00E5A0" opacity="0.12">
-        <animate attributeName="opacity" values="0.12;0.06;0.12" dur="4s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="420" cy="340" r="5" fill="#00E5A0" opacity="0.12">
-        <animate attributeName="opacity" values="0.12;0.06;0.12" dur="4.5s" repeatCount="indefinite"/>
-      </circle>
+      {/* ── MAIN NODES ───────────────────────────── */}
 
-      {/* Main nodes - donut style */}
-      
-      {/* Top node: TRIGGER (brightest) */}
-      <circle cx="240" cy="100" r="24" fill="#00E5A0">
+      {/* TOP — TRIGGER: 100% active */}
+      <circle cx="240" cy="100" r="28" fill="#00E5A0">
         <animate attributeName="opacity" values="1;0.75;1" dur="2.5s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="240" cy="100" r="10" fill="#0a0a0f"/>
+      <circle cx="240" cy="100" r="11" fill="#0a0a0f"/>
 
-      {/* Left node: AGENT */}
-      <circle cx="140" cy="230" r="22" fill="#00E5A0" opacity="0.65">
-        <animate attributeName="opacity" values="0.65;0.4;0.65" dur="2s" repeatCount="indefinite"/>
+      {/* BOTTOM-LEFT — AGENT: 60% in transit */}
+      <circle cx="110" cy="340" r="26" fill="#00E5A0" opacity="0.6">
+        <animate attributeName="opacity" values="0.6;0.35;0.6" dur="2s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="140" cy="230" r="9" fill="#0a0a0f" opacity="0.8"/>
+      <circle cx="110" cy="340" r="10" fill="#0a0a0f" opacity="0.6"/>
 
-      {/* Right node: ACTION */}
-      <circle cx="340" cy="230" r="22" fill="#00E5A0" opacity="0.55">
-        <animate attributeName="opacity" values="0.55;0.3;0.55" dur="2.8s" repeatCount="indefinite"/>
+      {/* BOTTOM-RIGHT — OUTPUT: 30% fading */}
+      <circle cx="370" cy="340" r="26" fill="#00E5A0" opacity="0.3">
+        <animate attributeName="opacity" values="0.3;0.15;0.3" dur="2.8s" repeatCount="indefinite"/>
       </circle>
-      <circle cx="340" cy="230" r="9" fill="#0a0a0f" opacity="0.75"/>
+      <circle cx="370" cy="340" r="10" fill="#0a0a0f" opacity="0.3"/>
 
-      {/* Bottom node: OUTPUT */}
-      <circle cx="240" cy="360" r="20" fill="#00E5A0" opacity="0.6">
-        <animate attributeName="opacity" values="0.6;0.35;0.6" dur="2.2s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="240" cy="360" r="8" fill="#0a0a0f" opacity="0.8"/>
+      {/* ── LABELS ───────────────────────────────── */}
 
-      {/* Labels */}
-      <text 
-        x="240" 
-        y="58" 
-        textAnchor="middle" 
-        fontFamily="DM Mono, monospace" 
-        fontSize="11" 
-        fill="#00E5A0" 
-        opacity="0.8" 
+      <text
+        x="240" y="56"
+        textAnchor="middle"
+        fontFamily="DM Mono, monospace"
+        fontSize="11"
+        fill="#00E5A0"
+        opacity="0.9"
         letterSpacing="2"
       >
         TRIGGER
       </text>
-      <text 
-        x="80" 
-        y="235" 
-        textAnchor="middle" 
-        fontFamily="DM Mono, monospace" 
-        fontSize="11" 
-        fill="#00E5A0" 
-        opacity="0.6" 
+
+      <text
+        x="110" y="392"
+        textAnchor="middle"
+        fontFamily="DM Mono, monospace"
+        fontSize="11"
+        fill="#00E5A0"
+        opacity="0.6"
         letterSpacing="2"
       >
         AGENT
       </text>
-      <text 
-        x="405" 
-        y="235" 
-        textAnchor="middle" 
-        fontFamily="DM Mono, monospace" 
-        fontSize="11" 
-        fill="#00E5A0" 
-        opacity="0.5" 
-        letterSpacing="2"
-      >
-        ACTION
-      </text>
-      <text 
-        x="240" 
-        y="410" 
-        textAnchor="middle" 
-        fontFamily="DM Mono, monospace" 
-        fontSize="11" 
-        fill="#00E5A0" 
-        opacity="0.55" 
+
+      <text
+        x="370" y="392"
+        textAnchor="middle"
+        fontFamily="DM Mono, monospace"
+        fontSize="11"
+        fill="#00E5A0"
+        opacity="0.35"
         letterSpacing="2"
       >
         OUTPUT
