@@ -23,9 +23,9 @@ export function WorkshopCTA() {
               Book a free<br />
               <span className="text-primary italic font-serif font-normal">AI Automation</span> strategy session
             </h2>
-            <p className="text-sm text-muted-foreground leading-[1.7] max-w-md mx-auto">
-              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required
-            </p> 
+            <p className="text-sm text-muted-foreground max-w-[480px] leading-[1.7]">
+              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required.
+            </p>
             </div>
 
             <div className="flex flex-col gap-3 items-start relative z-10">
