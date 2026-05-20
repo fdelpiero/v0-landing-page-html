@@ -166,10 +166,10 @@ export default function RegisterPage() {
               className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.type ? "border-red-500" : "border-border"}`}
                >
               <option value="">Select one</option>
-                    <option>Business owner / founder</option>
-                    <option>Marketing / ops professional</option>
+                    <option>Business owner / Founder</option>
+                    <option>Self Employed</option>
                     <option>Corporate team member</option>
-                    <option>Freelancer / consultant</option>
+                    <option>Freelancer / Consultant</option>
                     <option>Just curious</option>
                   </select>
                 </div>
