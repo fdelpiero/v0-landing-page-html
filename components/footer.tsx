@@ -16,7 +16,7 @@ export function Footer() {
               <div className="font-sans font-extrabold text-[17px] tracking-[-0.04em]">
                 <span className="text-foreground">mate</span>
                 <span className="text-primary">lab</span>
-                <span className="text-primary text-[13px] opacity-70 tracking-[0.02em]">.ai</span>
+                <span className="text-primary text-[17px] tracking-[-0.04em]">.ai</span>
               </div>
             </Link>
             <p className="text-[11px] text-muted-foreground tracking-[0.05em] max-w-[200px] leading-[1.7]">
