@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import { Reveal } from "./reveal"
+import { IconSchool, IconSettings, IconBuildingSkyscraper, IconUsers } from "@tabler/icons-react"
 
 interface ServiceCardProps {
-  icon: string
+  icon: React.ReactNode
   title: string
   body: string
   tags: { label: string }[]
@@ -31,7 +32,9 @@ function ServiceCard({ icon, title, body, tags, active, onClick }: ServiceCardPr
           : 'bg-card hover:bg-secondary border border-transparent'
       }`}
     >
-      <span className="text-[32px] mb-5 block">{icon}</span>
+      <div className="mb-5 text-primary">
+        {icon}
+      </div>
       <div className="font-sans text-xl font-extrabold mb-2.5 tracking-[-0.01em]">
         {title}
       </div>
@@ -58,7 +61,7 @@ function ServiceCard({ icon, title, body, tags, active, onClick }: ServiceCardPr
 
 const services = [
   {
-    icon: "🎓",
+    icon: <IconSchool size={32} stroke={1.5} />,
     title: "Education & Courses",
     body: "Live cohorts, workshops and self-paced courses that take you from zero to building real AI automations. Designed for non-technical people in business.",
     tags: [
@@ -69,7 +72,7 @@ const services = [
     ],
   },
   {
-    icon: "⚙️",
+    icon: <IconSettings size={32} stroke={1.5} />,
     title: "Done-For-You Automation",
     body: "We build the flows for you. Chatbots, lead capture, calendar agents, CRM automations — custom-built for your business in days, not months.",
     tags: [
@@ -80,7 +83,7 @@ const services = [
     ]
   },
   {
-    icon: "🏢",
+    icon: <IconBuildingSkyscraper size={32} stroke={1.5} />,
     title: "Corporate Upskilling",
     body: "Half-day and full-day workshops for teams of 10–50. We come to you — or run it remotely — and leave your team able to build and manage their own AI tools.",
     tags: [
@@ -90,7 +93,7 @@ const services = [
     ]
   },
   {
-    icon: "🤝",
+    icon: <IconUsers size={32} stroke={1.5} />,
     title: "Consulting & Retainers",
     body: "Ongoing automation strategy and implementation support. We embed with your team monthly to keep your AI stack evolving as your business grows.",
     tags: [
