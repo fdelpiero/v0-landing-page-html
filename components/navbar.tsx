@@ -49,16 +49,16 @@ export function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/contact" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
-            Book a Call
+          <Link href="/register" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+            Free Workshop
           </Link>
         </li>
         <li>
           <Link 
-            href="/register" 
+            href="/contact" 
             className="bg-primary text-primary-foreground text-xs tracking-[0.1em] uppercase px-4 py-2 font-medium hover:opacity-85 transition-opacity"
           >
-            Free Workshop &rarr;
+            Book a Call &rarr;
           </Link>
         </li>
       </ul>
@@ -109,7 +109,7 @@ export function Navbar() {
             </li>
             <li>
               <Link 
-                href="/contact" 
+                href="/register" 
                 className="text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
