@@ -17,7 +17,7 @@ export function WorkshopCTA() {
             
             <div className="relative z-10">
               <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
-                Free · Online · This Month
+                Free · Online · Secure
               </div>
               <h2 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
               Book a free<br />
@@ -25,20 +25,18 @@ export function WorkshopCTA() {
             </h2>
             <p className="text-sm text-muted-foreground leading-[1.7] max-w-md mx-auto">
               Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required
-            </p>
-
-              
+            </p> 
             </div>
 
             <div className="flex flex-col gap-3 items-start relative z-10">
               <Link 
-                href="/register" 
+                href="/contact" 
                 className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm whitespace-nowrap hover:opacity-90 hover:-translate-y-0.5 transition-all"
               >
-                Reserve My Spot &rarr;
+                Book a Call &rarr;
               </Link>
               <p className="text-[11px] text-muted-foreground tracking-[0.05em]">
-                Free · No credit card · 60 min
+                Free · 30 min
               </p>
             </div>
           </div>
