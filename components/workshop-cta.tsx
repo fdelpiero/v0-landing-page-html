@@ -19,16 +19,15 @@ export function WorkshopCTA() {
               <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
                 Free · Online · This Month
               </div>
-              <h2 className="font-sans text-[clamp(28px,3.5vw,42px)] font-black tracking-[-0.02em] leading-[1.1] mb-4 text-foreground">
-                Join our next free<br/>AI Automation Workshop
-              </h2>
-              <p className="text-sm text-muted-foreground max-w-[480px] leading-[1.7]">
-                60 minutes. Live. We build a real automation from scratch —
-                a chatbot, a calendar agent, or a lead capture flow.
-                You watch, you follow along, you walk away with something working.
-                <br/><br/>
-                No code. No fluff. Just results.
-              </p>
+              <h2 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
+              Book a free<br />
+              <span className="text-primary italic font-serif font-normal">AI Automation</span> strategy session
+            </h2>
+            <p className="text-sm text-muted-foreground leading-[1.7] max-w-md mx-auto">
+              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required
+            </p>
+
+              
             </div>
 
             <div className="flex flex-col gap-3 items-start relative z-10">
