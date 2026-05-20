@@ -109,7 +109,7 @@ export function Navbar() {
             </li>
             <li>
               <Link 
-                href="/register" 
+                href="/contact" 
                 className="text-sm tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors"
                 onClick={() => setMobileMenuOpen(false)}
               >
