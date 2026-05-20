@@ -8,7 +8,7 @@ const marqueeItems = [
   "Lead Capture Flows",
   "Make · Zapier · n8n",
   "Consulting",
-  "Enhance Capabilities",
+  "Customisation",
   "Corporate Workshops",
   "Online Courses"
 ]
