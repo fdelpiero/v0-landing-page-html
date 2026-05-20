@@ -135,7 +135,7 @@ export default function RegisterPage() {
                     <input
                       name="firstName"
                       type="text"
-                      placeholder="Fer"
+                      placeholder="Mick"
                       className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.firstName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                     />
                   </div>
@@ -144,7 +144,7 @@ export default function RegisterPage() {
                     <input
                       name="lastName"
                       type="text"
-                      placeholder="Del Piero"
+                      placeholder="Dundee"
                       className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.lastName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                     />
                   </div>
@@ -155,7 +155,7 @@ export default function RegisterPage() {
                   <input
                     name="email"
                     type="email"
-                    placeholder="fer@yourcompany.com"
+                    placeholder="hello@yourcompany.com"
                     className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                   />
                 </div>
