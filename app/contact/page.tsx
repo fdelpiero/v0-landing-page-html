@@ -39,7 +39,7 @@ export default function RegisterPage() {
               <span className="text-primary italic font-serif font-normal">AI Automation</span> strategy session
             </h1>
             <p className="text-sm text-muted-foreground leading-[1.7] max-w-md mx-auto">
-              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity and save your buisness time and money — no obligation, no code experience required
+              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity and save your business time and money — no obligation, no code experience required
             </p>
             <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
