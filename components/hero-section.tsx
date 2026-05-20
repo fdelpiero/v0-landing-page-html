@@ -41,7 +41,7 @@ export function HeroSection() {
                 href="/register"
                 className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm tracking-[0.02em] hover:opacity-90 hover:-translate-y-0.5 transition-all"
               >
-                Join Free Workshop &rarr;
+                Free Online Workshops &rarr;
               </Link>
               <Link 
                 href="#services" 
