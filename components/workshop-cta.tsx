@@ -31,10 +31,10 @@ export function WorkshopCTA() {
             <div className="flex flex-col gap-3 items-start relative z-10">
               <Link 
                 href="/contact" 
-                className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm whitespace-nowrap hover:opacity-90 hover:-translate-y-0.5 transition-all"
-              >
+                className="bg-primary text-primary-foreground text-xs tracking-[0.1em] uppercase px-4 py-2 font-medium hover:opacity-85 transition-opacity"
+               >
                 BOOK A CALL &rarr;
-              </Link>
+          </Link>
               <p className="text-[11px] text-muted-foreground tracking-[0.05em]">
               </p>
             </div>
