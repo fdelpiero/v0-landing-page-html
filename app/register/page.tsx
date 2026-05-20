@@ -106,7 +106,7 @@ export default function RegisterPage() {
                 </div>
                 <h1 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
                   Join our next free<br />
-                  <span className="text-primary italic font-serif font-normal">AI Automation</span> Workshop
+                  <span className="text-primary italic font-serif font-normal">AI Automation</span> workshop
                 </h1>
                 <p className="text-sm text-muted-foreground leading-[1.7] max-w-md">
                   60 minutes. Live. We build a real automation from scratch — a chatbot, a calendar agent, or a lead capture flow. No code. No fluff. Just results.
