@@ -7,8 +7,8 @@ const marqueeItems = [
   "Chatbots for SMBs",
   "Lead Capture Flows",
   "Make · Zapier · n8n",
-  "Sydney Based",
-  "Remote First",
+  "Consulting",
+  "Enhance Capabilities",
   "Corporate Workshops",
   "Online Courses"
 ]
