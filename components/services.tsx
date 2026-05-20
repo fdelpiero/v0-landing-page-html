@@ -1,20 +1,34 @@
+"use client"
+
+import { useState } from "react"
 import { Reveal } from "./reveal"
 
 interface ServiceCardProps {
   icon: string
   title: string
   body: string
-  tags: { label: string; green?: boolean }[]
-  featured?: boolean
+  tags: { label: string }[]
+  active: boolean
+  onClick: () => void
 }
 
-function ServiceCard({ icon, title, body, tags, featured }: ServiceCardProps) {
+function ServiceCard({ icon, title, body, tags, active, onClick }: ServiceCardProps) {
   return (
-    <div 
-      className={`p-10 relative overflow-hidden transition-colors cursor-default ${
-        featured 
-          ? 'bg-accent border border-[rgba(0,229,160,0.3)]' 
-          : 'bg-card hover:bg-secondary'
+    <div
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          onClick()
+        }
+      }}
+      aria-pressed={active}
+      className={`p-10 relative overflow-hidden transition-colors cursor-pointer ${
+        active
+          ? 'bg-accent border border-[rgba(0,229,160,0.3)]'
+          : 'bg-card hover:bg-secondary border border-transparent'
       }`}
     >
       <span className="text-[32px] mb-5 block">{icon}</span>
@@ -26,11 +40,11 @@ function ServiceCard({ icon, title, body, tags, featured }: ServiceCardProps) {
       </p>
       <div className="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
-          <span 
+          <span
             key={tag.label}
             className={`text-[10px] px-2.5 py-0.5 tracking-[0.08em] ${
-              tag.green 
-                ? 'border border-[rgba(0,229,160,0.3)] text-primary bg-accent' 
+              active
+                ? 'border border-[rgba(0,229,160,0.3)] text-primary bg-accent'
                 : 'border border-border text-muted-foreground'
             }`}
           >
@@ -48,12 +62,11 @@ const services = [
     title: "Education & Courses",
     body: "Live cohorts, workshops and self-paced courses that take you from zero to building real AI automations. Designed for non-technical people in business.",
     tags: [
-      { label: "Live Cohorts", green: true },
-      { label: "Online Courses", green: true },
-      { label: "Free Workshops", green: true },
-      { label: "Community", green: true }
+      { label: "Live Cohorts" },
+      { label: "Online Courses" },
+      { label: "Free Workshops" },
+      { label: "Community" }
     ],
-    featured: true
   },
   {
     icon: "⚙️",
@@ -89,6 +102,8 @@ const services = [
 ]
 
 export function Services() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
   return (
     <section id="services" className="pb-[120px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
@@ -104,8 +119,13 @@ export function Services() {
 
         <Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5">
-            {services.map((service) => (
-              <ServiceCard key={service.title} {...service} />
+            {services.map((service, index) => (
+              <ServiceCard
+                key={service.title}
+                {...service}
+                active={activeIndex === index}
+                onClick={() => setActiveIndex(index)}
+              />
             ))}
           </div>
         </Reveal>
