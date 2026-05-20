@@ -39,13 +39,13 @@ export default function RegisterPage() {
               <span className="text-primary italic font-serif font-normal">AI Automation</span> strategy session
             </h1>
             <p className="text-sm text-muted-foreground leading-[1.7] max-w-md mx-auto">
-              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity and save your business time and money — no obligation, no code experience required
+              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity and save your business time and money — no obligation, no coding experience required
             </p>
             <div className="mt-6 grid grid-cols-3 gap-3">
                   {[
                     { icon: "📞", label: "30 min call" },
                     { icon: "🗺️", label: "Custom roadmap" },
-                    { icon: "👩🏻‍💻", label: "No code experience" },
+                    { icon: "👩🏻‍💻", label: "No coding experience required" },
                   ].map((item) => (
                     <div key={item.label} className="bg-card border border-border p-3 text-center">
                       <div className="text-lg mb-1">{item.icon}</div>
