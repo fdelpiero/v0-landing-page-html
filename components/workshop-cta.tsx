@@ -33,10 +33,9 @@ export function WorkshopCTA() {
                 href="/contact" 
                 className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm whitespace-nowrap hover:opacity-90 hover:-translate-y-0.5 transition-all"
               >
-                Book a Call &rarr;
+                BOOK A CALL &rarr;
               </Link>
               <p className="text-[11px] text-muted-foreground tracking-[0.05em]">
-                Free · 30 min
               </p>
             </div>
           </div>
