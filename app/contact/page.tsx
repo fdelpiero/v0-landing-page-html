@@ -45,7 +45,7 @@ export default function RegisterPage() {
                   {[
                     { icon: "📞", label: "30 min call" },
                     { icon: "🗺️", label: "Custom roadmap" },
-                    { icon: "👩🏻‍💻", label: "No coding experience required" },
+                    { icon: "👩🏻‍💻", label: "No coding experience" },
                   ].map((item) => (
                     <div key={item.label} className="bg-card border border-border p-3 text-center">
                       <div className="text-lg mb-1">{item.icon}</div>
