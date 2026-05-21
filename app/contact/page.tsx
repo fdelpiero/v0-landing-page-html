@@ -3,6 +3,31 @@
 import Link from "next/link"
 import { MatelabLogoSmall } from "@/components/matelab-logo"
 
+const IconPhone = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+)
+
+const IconMap = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+    <line x1="9" y1="3" x2="9" y2="18"/>
+    <line x1="15" y1="6" x2="15" y2="21"/>
+  </svg>
+)
+const IconNoCode = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+    <polyline points="22 4 12 14.01 9 11.01"/>
+  </svg>
+)
+const featureItems = [
+  { icon: <IconPhone />, label: "30 min call" },
+  { icon: <IconMap />, label: "Custom roadmap" },
+  { icon: <IconNoCode />, label: "No coding experience" },
+]
+
 export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -28,7 +53,7 @@ export default function RegisterPage() {
       {/* Main Container */}
       <main className="flex-1 flex flex-col items-center justify-center px-6 pt-32 pb-20 relative z-10">
         <div className="w-full max-w-4xl flex flex-col items-center">
-          
+
           {/* Header section */}
           <div className="mb-8 text-center max-w-2xl">
             <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
@@ -42,17 +67,15 @@ export default function RegisterPage() {
               Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required
             </p>
             <div className="mt-6 grid grid-cols-3 gap-3">
-                  {[
-                    { icon: "📞", label: "30 min call" },
-                    { icon: "🗺️", label: "Custom roadmap" },
-                    { icon: "👩🏻‍💻", label: "No coding experience" },
-                  ].map((item) => (
-                    <div key={item.label} className="bg-card border border-border p-3 text-center">
-                      <div className="text-lg mb-1">{item.icon}</div>
-                      <div className="text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
-                    </div>
-                  ))}
+              {featureItems.map((item) => (
+                <div key={item.label} className="bg-card border border-border p-3 text-center">
+                  <div className="text-primary flex justify-center mb-2">
+                    {item.icon}
+                  </div>
+                  <div className="text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
                 </div>
+              ))}
+            </div>
           </div>
 
           {/* Calendly Inline Embed */}
