@@ -8,15 +8,31 @@ export function HeroVisual() {
       xmlns="http://www.w3.org/2000/svg"
       className="w-full max-w-[480px] h-auto"
     >
+      <style>{`
+        @keyframes heroFlowLine {
+          to { stroke-dashoffset: -14; }
+        }
+        @keyframes heroNode1 {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.6; }
+        }
+        @keyframes heroNode2 {
+          0%, 100% { opacity: 0.6; }
+          50% { opacity: 0.3; }
+        }
+        @keyframes heroNode3 {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 0.15; }
+        }
+        .hero-flow { stroke-dasharray: 4 3; animation: heroFlowLine 1.5s linear infinite; }
+        .hero-n1 { animation: heroNode1 2s ease-in-out infinite 0s; }
+        .hero-n2 { animation: heroNode2 2s ease-in-out infinite 0.4s; }
+        .hero-n3 { animation: heroNode3 2s ease-in-out infinite 0.8s; }
+      `}</style>
+
       {/* Backdrop glow */}
       <circle cx="240" cy="240" r="180" fill="rgba(0,229,160,0.04)"/>
       <circle cx="240" cy="240" r="180" fill="none" stroke="#1a2a25" strokeWidth="1"/>
-
-      {/* ── NODE POSITIONS ──────────────────────────
-          Top (TRIGGER):    cx=240 cy=100
-          Bottom-left (AGENT):  cx=110 cy=340
-          Bottom-right (OUTPUT): cx=370 cy=340
-      */}
 
       {/* Peripheral faint lines */}
       <line x1="240" y1="100" x2="60" y2="60" stroke="#00E5A0" strokeWidth="1" strokeDasharray="4 6" opacity="0.1">
@@ -40,80 +56,27 @@ export function HeroVisual() {
         <animate attributeName="opacity" values="0.08;0.04;0.08" dur="6s" repeatCount="indefinite"/>
       </circle>
 
-      {/* ── CONNECTING LINES (triangle) ──────────── */}
+      {/* Connecting lines — matched to logo: dasharray 4 3, 1.5s linear */}
+      <line x1="240" y1="100" x2="110" y2="340" stroke="#00E5A0" strokeWidth="1.5" opacity="0.6" className="hero-flow"/>
+      <line x1="240" y1="100" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" opacity="0.35" className="hero-flow"/>
+      <line x1="110" y1="340" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" opacity="0.2" className="hero-flow"/>
 
-      {/* Top → Bottom-left */}
-      <line x1="240" y1="100" x2="110" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.6">
-        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2s" repeatCount="indefinite"/>
-      </line>
-
-      {/* Top → Bottom-right */}
-      <line x1="240" y1="100" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.35">
-        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="2.4s" repeatCount="indefinite"/>
-      </line>
-
-      {/* Bottom-left → Bottom-right */}
-      <line x1="110" y1="340" x2="370" y2="340" stroke="#00E5A0" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.2">
-        <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="3s" repeatCount="indefinite"/>
-      </line>
-
-      {/* ── MAIN NODES ───────────────────────────── */}
-
-      {/* TOP — TRIGGER: 100% active */}
-      <circle cx="240" cy="100" r="28" fill="#00E5A0">
-        <animate attributeName="opacity" values="1;0.75;1" dur="2.5s" repeatCount="indefinite"/>
-      </circle>
+      {/* TRIGGER — full opacity, stagger 0s */}
+      <circle cx="240" cy="100" r="28" fill="#00E5A0" className="hero-n1"/>
       <circle cx="240" cy="100" r="11" fill="#0a0a0f"/>
 
-      {/* BOTTOM-LEFT — AGENT: 60% in transit */}
-      <circle cx="110" cy="340" r="26" fill="#00E5A0" opacity="0.6">
-        <animate attributeName="opacity" values="0.6;0.35;0.6" dur="2s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="110" cy="340" r="10" fill="#0a0a0f" opacity="0.6"/>
+      {/* AGENT — 60% base, stagger 0.4s */}
+      <circle cx="110" cy="340" r="26" fill="#00E5A0" className="hero-n2"/>
+      <circle cx="110" cy="340" r="10" fill="#0a0a0f"/>
 
-      {/* BOTTOM-RIGHT — OUTPUT: 30% fading */}
-      <circle cx="370" cy="340" r="26" fill="#00E5A0" opacity="0.3">
-        <animate attributeName="opacity" values="0.3;0.15;0.3" dur="2.8s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="370" cy="340" r="10" fill="#0a0a0f" opacity="0.3"/>
+      {/* OUTPUT — 30% base, stagger 0.8s */}
+      <circle cx="370" cy="340" r="26" fill="#00E5A0" className="hero-n3"/>
+      <circle cx="370" cy="340" r="10" fill="#0a0a0f"/>
 
-      {/* ── LABELS ───────────────────────────────── */}
-
-      <text
-        x="240" y="56"
-        textAnchor="middle"
-        fontFamily="DM Mono, monospace"
-        fontSize="11"
-        fill="#00E5A0"
-        opacity="0.9"
-        letterSpacing="2"
-      >
-        TRIGGER
-      </text>
-
-      <text
-        x="110" y="392"
-        textAnchor="middle"
-        fontFamily="DM Mono, monospace"
-        fontSize="11"
-        fill="#00E5A0"
-        opacity="0.6"
-        letterSpacing="2"
-      >
-        AGENT
-      </text>
-
-      <text
-        x="370" y="392"
-        textAnchor="middle"
-        fontFamily="DM Mono, monospace"
-        fontSize="11"
-        fill="#00E5A0"
-        opacity="0.35"
-        letterSpacing="2"
-      >
-        OUTPUT
-      </text>
+      {/* Labels */}
+      <text x="240" y="56" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.9" letterSpacing="2">TRIGGER</text>
+      <text x="110" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.6" letterSpacing="2">AGENT</text>
+      <text x="370" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.35" letterSpacing="2">OUTPUT</text>
     </svg>
   )
 }
