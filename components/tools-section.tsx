@@ -2,13 +2,12 @@ const tools = [
   "n8n",
   "Make",
   "Zapier",
-  "ChatGPT",
-  "Claude AI",
-  "Voiceflow",
+  "WhatsApp API",
+  "Claude Code",
   "Fireflies",
   "Notion AI",
   "Slack Bots",
-  "WhatsApp API"
+  "ChatGPT"
 ]
 
 export function ToolsSection() {
