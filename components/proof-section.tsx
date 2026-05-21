@@ -3,7 +3,7 @@ import { MatelabLogoSmall } from "./matelab-logo"
 
 const stats = [
   { num: "10+", label: "Tools covered", isLogo: false },
-  { num: "100%", label: "No code required", isLogo: false },
+  { num: "0%", label: "Coding skills required", isLogo: false },
   { num: null, label: "Remote-first global", isLogo: true },
   { num: "AU", label: "Sydney-based team", isLogo: false }
 ]
