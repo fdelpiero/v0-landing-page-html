@@ -4,6 +4,37 @@ import Link from "next/link"
 import { useState } from "react"
 import { MatelabLogoSmall } from "@/components/matelab-logo"
 
+const IconBolt = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+  </svg>
+)
+
+const IconWrench = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+  </svg>
+)
+
+const IconCheck = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+    <polyline points="22 4 12 14.01 9 11.01"/>
+  </svg>
+)
+
+const IconStar = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </svg>
+)
+
+const featureItems = [
+  { icon: <IconBolt />, label: "60 min live" },
+  { icon: <IconWrench />, label: "Build something real" },
+  { icon: <IconCheck />, label: "Zero tech skills" },
+]
+
 export default function RegisterPage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -39,17 +70,17 @@ export default function RegisterPage() {
     params.append("entry.355061805", email)
     params.append("entry.700825334", data.get("type") as string)
 
-   try {
+    try {
       const iframe = document.createElement("iframe")
       iframe.style.display = "none"
       document.body.appendChild(iframe)
-      
+
       const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
       if (iframeDoc) {
         const form = iframeDoc.createElement("form")
         form.method = "POST"
         form.action = GOOGLE_FORM_URL
-        
+
         params.forEach((value, key) => {
           const input = iframeDoc.createElement("input")
           input.type = "hidden"
@@ -57,15 +88,15 @@ export default function RegisterPage() {
           input.value = value
           form.appendChild(input)
         })
-        
+
         iframeDoc.body.appendChild(form)
         form.submit()
       }
-      
+
       setTimeout(() => {
         document.body.removeChild(iframe)
       }, 2000)
-      
+
     } catch (_) {}
 
     setLoading(false)
@@ -112,15 +143,12 @@ export default function RegisterPage() {
                   60 minutes. Live. We build a real automation from scratch — a chatbot, a calendar agent, or a lead capture flow. No code. No fluff. Just results.
                 </p>
 
-                {/* What to expect */}
                 <div className="mt-6 grid grid-cols-3 gap-3">
-                  {[
-                    { icon: "⚡", label: "60 min live" },
-                    { icon: "🛠️", label: "Build something real" },
-                    { icon: "🎓", label: "Zero tech skills" },
-                  ].map((item) => (
+                  {featureItems.map((item) => (
                     <div key={item.label} className="bg-card border border-border p-3 text-center">
-                      <div className="text-lg mb-1">{item.icon}</div>
+                      <div className="text-primary flex justify-center mb-2">
+                        {item.icon}
+                      </div>
                       <div className="text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
                     </div>
                   ))}
@@ -159,13 +187,14 @@ export default function RegisterPage() {
                     className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
                   />
                 </div>
-              <div className="flex flex-col gap-1.5">
-               <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a… *</label>
-              <select
-              name="type"
-              className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.type ? "border-red-500" : "border-border"}`}
-               >
-              <option value="">Select one</option>
+
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a… *</label>
+                  <select
+                    name="type"
+                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.type ? "border-red-500" : "border-border"}`}
+                  >
+                    <option value="">Select one</option>
                     <option>Business owner / Founder</option>
                     <option>Self Employed</option>
                     <option>Corporate team member</option>
@@ -189,22 +218,24 @@ export default function RegisterPage() {
             </>
           ) : (
             /* Success state */
-           <div className="text-center py-16">
-  <div className="text-6xl mb-6">🎉</div>
-  <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">
-    You&apos;re in!
-  </h2>
-  <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-    Thanks for registering! We&apos;ll be in touch within 48 hours 
-    with all the workshop details. See you there! 🤖
-  </p>
-  <Link
-    href="/"
-    className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
-  >
-    ← Back to Matelab
-  </Link>
-</div>
+            <div className="text-center py-16">
+              <div className="text-primary flex justify-center mb-6">
+                <IconStar />
+              </div>
+              <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">
+                You&apos;re in!
+              </h2>
+              <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
+                Thanks for registering! We&apos;ll be in touch within 48 hours
+                with all the workshop details. See you there!
+              </p>
+              <Link
+                href="/"
+                className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
+              >
+                ← Back to Matelab
+              </Link>
+            </div>
           )}
         </div>
       </main>
