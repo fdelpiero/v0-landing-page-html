@@ -55,7 +55,7 @@ export function WhoItsFor() {
             Built for <em className="font-serif italic text-primary font-normal">everyone</em><br/>not just developers
           </h2>
           <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            If you can use email, you can automate your business. We&apos;ll show you how.
+            You can learn AI automation without tech or coding skills. We&apos;ll show you how.
           </p>
         </Reveal>
 
