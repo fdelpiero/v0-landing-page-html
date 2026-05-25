@@ -24,7 +24,7 @@ export function IsThisForYou() {
     <section id="is-this-for-you" className="py-[120px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">Is this you?</div>
+          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">THE PROBLEM</div>
           <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
             Is this for <em className="font-serif italic text-primary font-normal">you?</em>
           </h2>
