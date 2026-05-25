@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { Marquee } from "@/components/marquee"
-import { HowItWorks } from "@/components/how-it-works"
+import { HowItWorks } from "@/components/is-this-for-you"
 import { Services } from "@/components/services"
 import { ToolsSection } from "@/components/tools-section"
 import { WhoItsFor } from "@/components/who-its-for"
