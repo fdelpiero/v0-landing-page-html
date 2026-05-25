@@ -147,7 +147,7 @@ export function Services() {
             Learn it. Build it.<br/><em className="font-serif italic text-primary font-normal">Scale it.</em>
           </h2>
           <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            Four ways to work with Matelab — pick your level.
+            Four ways to work with matelab.ai 
           </p>
         </Reveal>
 
