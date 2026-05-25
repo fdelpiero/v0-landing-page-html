@@ -31,8 +31,8 @@ export function HeroSection() {
 
             {/* Subtitle */}
             <p className="animate-fade-up animation-delay-200 text-base text-muted-foreground leading-[1.7] max-w-[460px] mb-10">
-              We teach <strong className="text-foreground font-normal">everyday people and businesses</strong> to build AI agents, automation flows and chatbots —
-              <strong className="text-foreground font-normal"> No code, No tech skills required.</strong> Just results.
+              We teach <strong className="text-foreground font-normal">everyday people and businesses</strong> to build AI agents, automation flows and chatbots — Save 10+ hours a week. Automate your business with AI  without writing a line of code.
+              <strong className="text-foreground font-normal"> No code, No tech skills required.</strong> 
             </p>
 
             {/* Buttons */}
