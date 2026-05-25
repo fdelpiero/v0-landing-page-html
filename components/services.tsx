@@ -142,12 +142,12 @@ export function Services() {
     <section id="services" className="pb-[120px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">What we do</div>
+          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">WHERE DO I START?</div>
           <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
             Learn it. Build it.<br/><em className="font-serif italic text-primary font-normal">Scale it.</em>
           </h2>
           <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            Three ways to work with Matelab — pick your level.
+            Four ways to work with Matelab — pick your level.
           </p>
         </Reveal>
 
