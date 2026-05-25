@@ -1,63 +1,61 @@
 import { Clock, Sparkles, Rocket } from "lucide-react"
+import { Reveal } from "./reveal"
+
+const pains = [
+  {
+    icon: Clock,
+    title: "You spend hours on tasks that should take minutes",
+    body: "Manual reports, copy-pasting data between sheets, answering the same questions over and over. There's a better way — and you don't need to code to build it."
+  },
+  {
+    icon: Sparkles,
+    title: "You use AI but feel you're tapping 10% of what it can do",
+    body: "You know there's more beyond ChatGPT but don't know where to start. Our program takes you from basic prompting to AI agents in production."
+  },
+  {
+    icon: Rocket,
+    title: "You want to build with AI but don't know where to start",
+    body: "Integrate AI into your product, business or career — to scale, differentiate and build real competitive advantages."
+  }
+]
 
 export function IsThisForYou() {
-  const cards = [
-    {
-      icon: Clock,
-      title: "You spend hours on tasks that should take minutes",
-      body: "Manual reports, copy-pasting data between sheets, answering the same questions over and over. There's a better way — and you don't need to code to build it.",
-    },
-    {
-      icon: Sparkles,
-      title: "You use AI but feel you're tapping 10% of what it can do",
-      body: "You know there's more beyond ChatGPT but don't know where to start. Our program takes you from basic prompting to AI agents in production.",
-    },
-    {
-      icon: Rocket,
-      title: "You want to build with AI but don't know where to start",
-      body: "Integrate AI into your product, business or career — to scale, differentiate and build real competitive advantages.",
-    },
-  ]
-
   return (
-    <section id="is-this-for-you" className="border-t border-white/10 bg-black">
-      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
-        <div className="mb-16 max-w-3xl">
-          <p className="mb-6 text-xs uppercase tracking-widest text-emerald-400 font-mono">
-            Is this you?
-          </p>
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-white leading-[1.05]">
-            Is this for{" "}
-            <span className="font-serif italic font-normal text-emerald-400">
-              you?
-            </span>
+    <section id="is-this-for-you" className="py-[120px] relative z-10">
+      <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+        <Reveal>
+          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">Is this you?</div>
+          <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+            Is this for <em className="font-serif italic text-primary font-normal">you?</em>
           </h2>
-          <p className="mt-6 text-white/60 font-mono">
+          <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
             If you recognise yourself in any of these, then yes.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid gap-6 md:grid-cols-3">
-          {cards.map((card, i) => {
-            const Icon = card.icon
-            return (
-              <div
-                key={i}
-                className="rounded-lg border border-white/10 bg-white/[0.02] p-8"
-              >
-                <div className="mb-6 inline-flex h-10 w-10 items-center justify-center rounded-md border border-emerald-400/30 bg-emerald-400/10">
-                  <Icon className="h-5 w-5 text-emerald-400" />
+        <Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5">
+            {pains.map((pain, i) => {
+              const Icon = pain.icon
+              return (
+                <div
+                  key={i}
+                  className="step-card bg-card hover:bg-secondary p-9 relative overflow-hidden transition-colors"
+                >
+                  <div className="mb-5">
+                    <Icon className="w-10 h-10 text-primary" strokeWidth={1.5} />
+                  </div>
+                  <div className="font-sans text-lg font-bold mb-2.5">
+                    {pain.title}
+                  </div>
+                  <p className="text-[13px] text-muted-foreground leading-[1.7]">
+                    {pain.body}
+                  </p>
                 </div>
-                <h3 className="font-display text-xl font-bold text-white mb-3 leading-tight">
-                  {card.title}
-                </h3>
-                <p className="text-white/60 font-mono text-sm leading-relaxed">
-                  {card.body}
-                </p>
-              </div>
-            )
-          })}
-        </div>
+              )
+            })}
+          </div>
+        </Reveal>
       </div>
     </section>
   )
