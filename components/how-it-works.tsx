@@ -1,57 +1,63 @@
-import { Reveal } from "./reveal"
+import { Clock, Sparkles, Rocket } from "lucide-react"
 
-const steps = [
-  {
-    num: "01",
-    title: "Join the Community",
-    body: "Start free. Access our Sydney-based AI automation community, weekly live sessions, and beginner-friendly resources. No experience needed."
-  },
-  {
-    num: "02",
-    title: "Learn by Building",
-    body: "Follow our workshops and courses to build real automations — chatbots, calendar agents, lead flows — using tools like n8n and ChatGPT."
-  },
-  {
-    num: "03",
-    title: "Scale Your Business",
-    body: "Apply what you've built, or bring us in to consult and implement. Our team handles the complexity so you can focus on growth."
-  }
-]
+export function IsThisForYou() {
+  const cards = [
+    {
+      icon: Clock,
+      title: "You spend hours on tasks that should take minutes",
+      body: "Manual reports, copy-pasting data between sheets, answering the same questions over and over. There's a better way — and you don't need to code to build it.",
+    },
+    {
+      icon: Sparkles,
+      title: "You use AI but feel you're tapping 10% of what it can do",
+      body: "You know there's more beyond ChatGPT but don't know where to start. Our program takes you from basic prompting to AI agents in production.",
+    },
+    {
+      icon: Rocket,
+      title: "You want to build with AI but don't know where to start",
+      body: "Integrate AI into your product, business or career — to scale, differentiate and build real competitive advantages.",
+    },
+  ]
 
-export function HowItWorks() {
   return (
-    <section id="how" className="py-[120px] relative z-10">
-      <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
-        <Reveal>
-          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">How it works</div>
-          <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
-            From zero to <em className="font-serif italic text-primary font-normal">automated</em><br/>in three steps
-          </h2>
-          <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            No jargon. No dev team. No excuses. Just you, the tools, and a workflow that runs itself.
+    <section id="is-this-for-you" className="border-t border-white/10 bg-black">
+      <div className="mx-auto max-w-6xl px-6 py-24 md:py-32">
+        <div className="mb-16 max-w-3xl">
+          <p className="mb-6 text-xs uppercase tracking-widest text-emerald-400 font-mono">
+            Is this you?
           </p>
-        </Reveal>
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-white leading-[1.05]">
+            Is this for{" "}
+            <span className="font-serif italic font-normal text-emerald-400">
+              you?
+            </span>
+          </h2>
+          <p className="mt-6 text-white/60 font-mono">
+            If you recognise yourself in any of these, then yes.
+          </p>
+        </div>
 
-        <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5">
-            {steps.map((step) => (
-              <div 
-                key={step.num} 
-                className="step-card bg-card hover:bg-secondary p-9 relative overflow-hidden transition-colors"
+        <div className="grid gap-6 md:grid-cols-3">
+          {cards.map((card, i) => {
+            const Icon = card.icon
+            return (
+              <div
+                key={i}
+                className="rounded-lg border border-white/10 bg-white/[0.02] p-8"
               >
-                <div className="font-sans text-[56px] font-black text-border leading-none mb-5 tracking-[-0.04em]">
-                  {step.num}
+                <div className="mb-6 inline-flex h-10 w-10 items-center justify-center rounded-md border border-emerald-400/30 bg-emerald-400/10">
+                  <Icon className="h-5 w-5 text-emerald-400" />
                 </div>
-                <div className="font-sans text-lg font-bold mb-2.5">
-                  {step.title}
-                </div>
-                <p className="text-[13px] text-muted-foreground leading-[1.7]">
-                  {step.body}
+                <h3 className="font-display text-xl font-bold text-white mb-3 leading-tight">
+                  {card.title}
+                </h3>
+                <p className="text-white/60 font-mono text-sm leading-relaxed">
+                  {card.body}
                 </p>
               </div>
-            ))}
-          </div>
-        </Reveal>
+            )
+          })}
+        </div>
       </div>
     </section>
   )
