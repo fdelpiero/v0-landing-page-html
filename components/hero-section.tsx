@@ -24,7 +24,7 @@ export function HeroSection() {
             </div>
 
             {/* Title */}
-            <h1 className="animate-fade-up animation-delay-100 font-sans text-[clamp(42px,5.5vw,72px)] font-black leading-none tracking-[-0.03em] mb-6">
+            <h1 className="animate-fade-up animation-delay-100 font-sans text-[clamp(32px,4.5vw,60px)] font-extrabold leading-[1.05] tracking-[-0.02em] mb-6">
               Save 10+ hours a week.<br/>
               Start <em className="font-serif italic text-primary font-normal">Automating.</em>
             </h1>
