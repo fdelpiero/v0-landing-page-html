@@ -36,7 +36,7 @@ const audiences = [
   {
     icon: <IconHandWave />,
     title: "Everyday People",
-    body: "Want to learn AI and automation for your daily life and work? We make it simple, practical and fun — zero tech skills required."
+    body: "Become the most valuable hire at your company. We make AI automation simple, practical and fun — zero tech skills required."
   },
   {
     icon: <IconCorporateTeam />,
