@@ -25,7 +25,7 @@ export function HeroSection() {
 
             {/* Title */}
             <h1 className="animate-fade-up animation-delay-100 font-sans text-[clamp(42px,5.5vw,72px)] font-black leading-none tracking-[-0.03em] mb-6">
-              Boost Eficiency.<br/>
+              Boost Efficiency.<br/>
               Start <em className="font-serif italic text-primary font-normal">Automating.</em>
             </h1>
 
