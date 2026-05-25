@@ -25,13 +25,13 @@ export function HeroSection() {
 
             {/* Title */}
             <h1 className="animate-fade-up animation-delay-100 font-sans text-[clamp(42px,5.5vw,72px)] font-black leading-none tracking-[-0.03em] mb-6">
-              Boost Efficiency.<br/>
+              Save 10+ hours a week.<br/>
               Start <em className="font-serif italic text-primary font-normal">Automating.</em>
             </h1>
 
             {/* Subtitle */}
             <p className="animate-fade-up animation-delay-200 text-base text-muted-foreground leading-[1.7] max-w-[460px] mb-10">
-              We teach <strong className="text-foreground font-normal">everyday people and businesses</strong> to build AI agents, automation flows and chatbots — Save 10+ hours a week. Automate your business with AI.
+              We teach <strong className="text-foreground font-normal">everyday people and businesses</strong> to build AI agents, automation flows and chatbots.
               <strong className="text-foreground font-normal"> No code, No tech skills required.</strong> 
             </p>
 
