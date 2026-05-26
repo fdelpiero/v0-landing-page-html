@@ -5,7 +5,7 @@ const pains = [
   {
     icon: Clock,
     title: "You spend hours on tasks that should take minutes",
-    body: "Manual reports, copy-pasting data between sheets, answering the same questions over and over. There's a better way — and you don't need to code to build it."
+    body: "Manual reports, copy-pasting data between sheets, manual appointment bookings, answering the same questions over and over. There's a better way — and you don't need to code to build it."
   },
   {
     icon: Sparkles,
