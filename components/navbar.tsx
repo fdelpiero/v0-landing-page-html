@@ -44,7 +44,7 @@ export function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="#where" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+          <Link href="/contact" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
             Where to start
           </Link>
         </li>
