@@ -34,8 +34,8 @@ export function Navbar() {
       {/* Desktop nav */}
       <ul className="hidden md:flex items-center gap-8 list-none">
         <li>
-          <Link href="#how" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
-            How it works
+          <Link href="#who" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+            Who it&apos;s for
           </Link>
         </li>
         <li>
@@ -44,8 +44,8 @@ export function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="#who" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
-            Who it&apos;s for
+          <Link href="#where" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+            Where to start
           </Link>
         </li>
         <li>
