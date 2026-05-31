@@ -1,7 +1,7 @@
 const marqueeItems = [
   "n8n Automations",
   "AI Agents",
-  "ChatGPT Flows",
+  "Codex / Claude code",
   "No Code Required",
   "Calendar Agents",
   "Chatbots for SMBs",
