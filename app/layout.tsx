@@ -56,7 +56,7 @@ export default function RootLayout({
     <html lang="en" className={`${syne.variable} ${dmMono.variable} ${instrumentSerif.variable} bg-background`}>
       <body className="font-mono antialiased text-[15px] leading-relaxed overflow-x-hidden">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )
