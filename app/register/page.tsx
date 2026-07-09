@@ -133,16 +133,9 @@ export default function RegisterPage() {
               {/* Header */}
               <div className="mb-10">
                 <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
-                  Free · Online · This Month
+                  Contact Us
                 </div>
-                <h1 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
-                  Join our next free<br />
-                  <span className="text-primary italic font-serif font-normal">AI Automation</span> workshop
-                </h1>
-                <p className="text-sm text-muted-foreground leading-[1.7] max-w-md">
-                  60 minutes. Live. We build a real automation from scratch — a chatbot, a calendar agent, or a lead capture flow. No code. No fluff. Just results.
-                </p>
-
+                
                 <div className="mt-6 grid grid-cols-3 gap-3">
                   {featureItems.map((item) => (
                     <div key={item.label} className="bg-card border border-border p-3 text-center">
@@ -208,11 +201,11 @@ export default function RegisterPage() {
                   disabled={loading}
                   className="mt-2 bg-primary text-primary-foreground font-sans font-bold text-sm px-7 py-4 hover:opacity-90 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed text-left"
                 >
-                  {loading ? "Reserving your spot…" : "Reserve My Spot →"}
+                  {loading ? "Reserving your spot…" : "Submit my query →"}
                 </button>
 
                 <p className="text-[11px] text-[#404055] tracking-[0.05em]">
-                  Free · No credit card · 60 min · We&apos;ll email you the details
+                  We will contact you within 48 hours
                 </p>
               </form>
             </>
@@ -226,8 +219,7 @@ export default function RegisterPage() {
                 You&apos;re in!
               </h2>
               <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-                Thanks for registering! We&apos;ll be in touch within 48 hours
-                with all the workshop details. See you there!
+                Thanks for submitting your query ! We&apos;ll be in touch within 48 hours
               </p>
               <Link
                 href="/"
