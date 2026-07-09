@@ -1,21 +1,21 @@
-import { Clock, Sparkles, Rocket } from "lucide-react"
+import { Clock, Sparkles, Zap } from "lucide-react"
 import { Reveal } from "./reveal"
 
 const pains = [
   {
     icon: Clock,
-    title: "You spend hours on tasks that should take minutes",
-    body: "Manual reports, copy-pasting data between sheets, manual appointment bookings, answering the same questions over and over. There's a better way — and you don't need to code to build it."
+    title: "Hours lost to tasks that should take minutes",
+    body: "Manual reports, copy-pasting between spreadsheets, chasing bookings, answering the same customer questions daily. That's payroll spent on work software should do."
   },
   {
     icon: Sparkles,
-    title: "You use AI but feel you're tapping 10% of what it can do",
-    body: "You know there's more beyond ChatGPT but don't know where to start. Our program takes you from basic prompting to AI agents in production."
+    title: "You know AI could help — but no one has time to figure it out",
+    body: "Everyone's talking about AI agents. You've tried ChatGPT. But turning that into systems that actually run parts of your business? That's where we come in."
   },
   {
-    icon: Rocket,
-    title: "You want to build with AI but don't know where to start",
-    body: "Integrate AI into your product, business or career — to scale, differentiate and build real competitive advantages."
+    icon: Zap,
+    title: "Hiring developers is slow and expensive",
+    body: "You don't need a six-month software project. Most business automations can be scoped, built and live within weeks — on tools your team can maintain themselves."
   }
 ]
 
@@ -24,12 +24,12 @@ export function IsThisForYou() {
     <section id="is-this-for-you" className="py-[120px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">THE PROBLEM</div>
+          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">Sound familiar?</div>
           <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
-            Is this for <em className="font-serif italic text-primary font-normal">you?</em>
+            Your team is doing work <em className="font-serif italic text-primary font-normal">a robot should do.</em>
           </h2>
-          <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            If you recognise yourself in any of these, then yes.
+          <p className="text-muted-foreground max-w-[520px] mb-16 text-[15px]">
+            If any of these hit close to home, a strategy call will pay for itself. (It&apos;s free anyway.)
           </p>
         </Reveal>
 

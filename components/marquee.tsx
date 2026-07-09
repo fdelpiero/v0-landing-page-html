@@ -1,16 +1,13 @@
 const marqueeItems = [
+  "Custom AI Agents",
   "n8n Automations",
-  "AI Agents",
-  "Codex / Claude code",
-  "No Code Required",
-  "Calendar Agents",
-  "Chatbots for SMBs",
+  "AI Chatbots",
   "Lead Capture Flows",
-  "Make · Zapier · n8n",
-  "Consulting",
-  "Customisation",
+  "CRM Integrations",
+  "Automation Audits",
+  "AI Strategy",
   "Corporate Workshops",
-  "Online Courses"
+  "Make · Zapier · n8n"
 ]
 
 export function Marquee() {
@@ -19,7 +16,7 @@ export function Marquee() {
       <div className="flex w-max animate-marquee">
         {/* First set */}
         {marqueeItems.map((item, i) => (
-          <div 
+          <div
             key={`a-${i}`}
             className="whitespace-nowrap px-10 text-xs tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
           >
@@ -29,7 +26,7 @@ export function Marquee() {
         ))}
         {/* Duplicate for seamless loop */}
         {marqueeItems.map((item, i) => (
-          <div 
+          <div
             key={`b-${i}`}
             className="whitespace-nowrap px-10 text-xs tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
           >

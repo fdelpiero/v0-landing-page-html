@@ -27,23 +27,23 @@ export function Footer() {
           <ul className="flex flex-col gap-3 list-none">
             <li className="text-[10px] text-muted-foreground tracking-[0.15em] uppercase mb-1">Navigation</li>
             <li>
+              <Link href="#services" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+                What we do
+              </Link>
+            </li>
+            <li>
               <Link href="#how" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
                 How it works
               </Link>
             </li>
             <li>
-              <Link href="#services" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
-                Services
+              <Link href="#usecases" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+                What we build
               </Link>
             </li>
             <li>
-              <Link href="#who" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
-                Who it&apos;s for
-              </Link>
-            </li>
-            <li>
-              <Link href="/register" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
-                Free Workshop
+              <Link href="#workshops" className="text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+                Workshops
               </Link>
             </li>
             <li>
@@ -107,7 +107,7 @@ export function Footer() {
         {/* Bottom row */}
         <div className="border-t border-border pt-6 flex items-center justify-between flex-wrap gap-4">
           <div className="text-[11px] text-[#404055] tracking-[0.05em]">
-            © 2026 matelab.ai 
+            © 2026 matelab.ai
           </div>
           <div className="text-[11px] text-[#404055] tracking-[0.05em]">
             No code. No excuses. Just automation.
@@ -118,4 +118,3 @@ export function Footer() {
     </footer>
   )
 }
-

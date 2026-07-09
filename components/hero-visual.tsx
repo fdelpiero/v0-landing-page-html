@@ -98,9 +98,9 @@ export function HeroVisual() {
       <circle cx="370" cy="340" r="10" fill="#0a0a0f"/>
 
       {/* Labels */}
-      <text x="240" y="56" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.9" letterSpacing="2">TRIGGER</text>
-      <text x="110" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.6" letterSpacing="2">AGENT</text>
-      <text x="370" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.35" letterSpacing="2">OUTPUT</text>
+      <text x="240" y="56" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.9" letterSpacing="2">YOUR BUSINESS</text>
+      <text x="110" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.6" letterSpacing="2">AI AGENT</text>
+      <text x="370" y="392" textAnchor="middle" fontFamily="DM Mono, monospace" fontSize="11" fill="#00E5A0" opacity="0.35" letterSpacing="2">HOURS BACK</text>
     </svg>
   )
 }

@@ -2,12 +2,14 @@ const tools = [
   "n8n",
   "Make",
   "Zapier",
-  "WhatsApp API",
   "Claude Code",
-  "Fireflies",
-  "Notion AI",
+  "Codex",
+  "OpenClaw",
+  "ChatGPT",
+  "WhatsApp API",
   "Slack Bots",
-  "ChatGPT"
+  "Notion AI",
+  "Fireflies"
 ]
 
 export function ToolsSection() {
@@ -16,7 +18,7 @@ export function ToolsSection() {
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <div className="flex items-center gap-8 overflow-x-auto scrollbar-none">
           <div className="text-[11px] tracking-[0.18em] uppercase text-[#404055] whitespace-nowrap shrink-0">
-            Tools we teach
+            Built on
           </div>
           <div className="flex gap-3 items-center flex-nowrap">
             {tools.map((tool) => (
