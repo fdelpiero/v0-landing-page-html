@@ -9,11 +9,12 @@ interface ServiceCardProps {
   title: string
   body: string
   tags: { label: string }[]
+  includes: string
   active: boolean
   onClick: () => void
 }
 
-function ServiceCard({ num, badge, title, body, tags, active, onClick }: ServiceCardProps) {
+function ServiceCard({ num, badge, title, body, tags, includes, active, onClick }: ServiceCardProps) {
   return (
     <div
       onClick={onClick}
@@ -58,6 +59,17 @@ function ServiceCard({ num, badge, title, body, tags, active, onClick }: Service
           </span>
         ))}
       </div>
+      {/* Click payoff: active card reveals what's included */}
+      <div
+        className={`overflow-hidden transition-all duration-300 ease-in-out ${
+          active ? 'max-h-[140px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+        style={{ marginTop: active ? 18 : 0 }}
+      >
+        <p className="text-[12.5px] text-foreground/85 leading-[1.7] border-l-2 border-primary pl-3">
+          {includes}
+        </p>
+      </div>
     </div>
   )
 }
@@ -74,6 +86,7 @@ const services = [
       { label: "Calendar Agents" },
       { label: "CRM Integrations" }
     ],
+    includes: "Includes: scoping workshop, fixed quote, build & testing, documentation, handover training and 30 days of post-launch support."
   },
   {
     num: "02",
@@ -83,17 +96,19 @@ const services = [
       { label: "Automation Audit" },
       { label: "AI Strategy" },
       { label: "Monthly Retainers" }
-    ]
+    ],
+    includes: "Includes: workflow audit, ROI-ranked roadmap, tool selection, monthly build hours and quarterly strategy reviews."
   },
   {
     num: "03",
     title: "Corporate Workshops",
-    body: "Practical hallf-day or full-day hands-on sessions for teams – built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
+    body: "Practical half-day or full-day hands-on sessions for teams – built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
     tags: [
       { label: "Team Workshops" },
       { label: "Custom Training" },
       { label: "On-site or Remote" }
-    ]
+    ],
+    includes: "Includes: pre-workshop skills survey, tailored curriculum, hands-on build session, take-home templates and a follow-up Q&A call."
   }
 ]
 

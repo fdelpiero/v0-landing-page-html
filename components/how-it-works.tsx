@@ -2,22 +2,22 @@ import { Reveal } from "./reveal"
 
 const steps = [
   {
-    n: "01 /",
+    n: "01",
     title: "Strategy call",
     body: "Free 45 minutes. We map your workflows and spot the highest-value automation opportunities."
   },
   {
-    n: "02 /",
+    n: "02",
     title: "Automation audit",
     body: "A prioritised roadmap: what to automate first, what it saves, and a fixed quote for each build."
   },
   {
-    n: "03 /",
+    n: "03",
     title: "Build & deploy",
     body: "We build on proven tools — n8n, Make, Claude — and ship working automations in days, not months."
   },
   {
-    n: "04 /",
+    n: "04",
     title: "Handover & training",
     body: "Documentation plus training so your team owns it. No lock-in — everything we build is yours."
   }
@@ -38,23 +38,27 @@ export function HowItWorks() {
         </Reveal>
 
         <Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-0.5">
-            {steps.map((step) => (
-              <div
-                key={step.n}
-                className="bg-card p-8 border-t-2 border-transparent hover:border-primary hover:bg-secondary transition-all"
-              >
-                <div className="font-sans text-[13px] font-extrabold text-primary tracking-[0.1em] mb-3.5">
-                  {step.n}
+          {/* Timeline */}
+          <div className="relative">
+            {/* Connector line: horizontal on desktop, vertical on mobile */}
+            <div className="hidden md:block absolute top-[18px] left-[12.5%] right-[12.5%] h-px bg-border" />
+            <div className="md:hidden absolute top-0 bottom-0 left-[17px] w-px bg-border" />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 md:gap-8">
+              {steps.map((step) => (
+                <div key={step.n} className="relative pl-14 pb-10 md:pl-0 md:pb-0">
+                  <div className="absolute left-0 top-0 md:static z-10 w-9 h-9 rounded-full bg-background border border-[rgba(0,229,160,0.6)] flex items-center justify-center text-xs text-primary md:mb-5">
+                    {step.n}
+                  </div>
+                  <div className="font-sans text-base font-bold mb-2">
+                    {step.title}
+                  </div>
+                  <p className="text-[13px] text-muted-foreground leading-[1.7]">
+                    {step.body}
+                  </p>
                 </div>
-                <div className="font-sans text-base font-bold mb-2">
-                  {step.title}
-                </div>
-                <p className="text-xs text-muted-foreground leading-[1.7]">
-                  {step.body}
-                </p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </Reveal>
       </div>
