@@ -23,7 +23,7 @@ const IconNoCode = () => (
   </svg>
 )
 const featureItems = [
-  { icon: <IconPhone />, label: "30 min call" },
+  { icon: <IconPhone />, label: "45 min call" },
   { icon: <IconMap />, label: "Custom roadmap" },
   { icon: <IconNoCode />, label: "No coding experience" },
 ]
