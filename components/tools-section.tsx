@@ -1,10 +1,9 @@
 const tools = [
   "n8n",
-  "Make",
-  "Zapier",
   "Claude Code",
-  "Codex",
+  "OpenAI Codex",
   "OpenClaw",
+  "Antigravity",
   "ChatGPT",
   "WhatsApp API",
   "Slack Bots",
