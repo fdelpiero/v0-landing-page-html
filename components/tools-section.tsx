@@ -4,7 +4,7 @@ const tools = [
   "OpenAI Codex",
   "OpenClaw",
   "Antigravity",
-  "ChatGPT",
+  "Composio",
   "WhatsApp API",
   "Slack Bots",
   "Notion AI",
