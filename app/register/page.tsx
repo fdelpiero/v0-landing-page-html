@@ -30,9 +30,9 @@ const IconStar = () => (
 )
 
 const featureItems = [
-  { icon: <IconBolt />, label: "60 min live" },
-  { icon: <IconWrench />, label: "Build something real" },
-  { icon: <IconCheck />, label: "Zero tech skills" },
+  { icon: <IconBolt />, label: "Ask us anything" },
+  { icon: <IconWrench />, label: "Start Automating now" },
+  { icon: <IconCheck />, label: "We are here to help" },
 ]
 
 export default function RegisterPage() {
