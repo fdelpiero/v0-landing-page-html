@@ -76,7 +76,7 @@ export function Footer() {
 
             {/* Email / Contact */}
             <Link
-              href="/contact"
+              href="/register"
               className="flex items-center gap-2.5 no-underline group"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground group-hover:text-primary transition-colors">
