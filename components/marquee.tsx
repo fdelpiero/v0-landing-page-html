@@ -7,7 +7,7 @@ const marqueeItems = [
   "Automation Audits",
   "AI Strategy",
   "Corporate Workshops",
-  "Make · Zapier · n8n"
+  "Team Training"
 ]
 
 export function Marquee() {
