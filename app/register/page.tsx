@@ -216,7 +216,7 @@ export default function RegisterPage() {
                 <IconStar />
               </div>
               <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">
-                We&apos;ve got your query!
+                We&apos;ve got you !
               </h2>
               <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
                 Thanks for submitting your query ! We&apos;ll be in touch within 48 hours
