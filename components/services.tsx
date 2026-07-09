@@ -88,7 +88,7 @@ const services = [
   {
     num: "03",
     title: "Corporate Workshops",
-    body: "Half-day and full-day hands-on sessions for teams of 10–50. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
+    body: "Practical hallf-day or full-day hands-on sessions for teams – built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
     tags: [
       { label: "Team Workshops" },
       { label: "Custom Training" },
