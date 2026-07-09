@@ -225,7 +225,7 @@ export default function RegisterPage() {
                 href="/"
                 className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
               >
-                ← Back to Matelab
+                ← Back to Matelab.ai
               </Link>
             </div>
           )}
