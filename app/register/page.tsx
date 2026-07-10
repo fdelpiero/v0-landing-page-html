@@ -31,9 +31,16 @@ const IconStar = () => (
 
 const featureItems = [
   { icon: <IconBolt />, label: "Ask us anything" },
-  { icon: <IconWrench />, label: "Start Automating now" },
-  { icon: <IconCheck />, label: "We are here to help" },
+  { icon: <IconWrench />, label: "Start automating now" },
+  { icon: <IconCheck />, label: "We're here to help" },
 ]
+
+const inputClass = (error: boolean) =>
+  `w-full bg-card border rounded-lg text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors focus:border-primary ${
+    error ? "border-[#C0392B]" : "border-[#D4D2C6]"
+  }`
+
+const labelClass = "font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground"
 
 export default function RegisterPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -110,39 +117,41 @@ export default function RegisterPage() {
       <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
 
       {/* Simple nav */}
-      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-4 md:px-12 bg-[rgba(10,10,15,0.85)] backdrop-blur-[20px] border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] border-b border-[#E9E7DD]">
         <Link href="/" className="flex items-center gap-2.5 no-underline">
           <MatelabLogoSmall size={28} />
           <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
             <span className="text-foreground">mate</span>
-            <span className="text-primary">lab</span>
-            <span className="text-primary text-lg opacity-100 tracking-[-0.04em]">.ai</span>
+            <span className="text-primary">lab.ai</span>
           </div>
         </Link>
-        <Link href="/" className="text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors">
+        <Link href="/" className="font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
           ← Back to home
         </Link>
       </nav>
 
-      {/* Main */}
-      <main className="flex-1 flex items-center justify-center px-6 pt-32 pb-20 relative z-10">
-        <div className="w-full max-w-lg">
+      {/* Main Container */}
+      <main className="flex-1 flex justify-center px-6 pt-32 pb-20 relative z-10">
+        <div className="w-full max-w-[520px]">
 
           {!submitted ? (
-            <>
+            <div className="flex flex-col gap-[22px]">
               {/* Header */}
-              <div className="mb-10">
-                <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
-                  Contact Us
+              <div className="flex flex-col gap-[18px] items-start">
+                <div className="inline-block bg-primary text-white font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded">
+                  Contact us
                 </div>
-                
-                <div className="mt-6 grid grid-cols-3 gap-3">
+                <h1 className="font-sans font-extrabold text-[clamp(28px,5vw,38px)] tracking-[-0.02em] leading-[1.1]">
+                  Tell us what you&apos;re{" "}
+                  <em className="text-primary italic font-serif font-normal tracking-normal">trying to automate.</em>
+                </h1>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
                   {featureItems.map((item) => (
-                    <div key={item.label} className="bg-card border border-border p-3 text-center">
+                    <div key={item.label} className="bg-card border border-border rounded-[10px] p-3.5 text-center">
                       <div className="text-primary flex justify-center mb-2">
                         {item.icon}
                       </div>
-                      <div className="text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
+                      <div className="font-mono text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
                     </div>
                   ))}
                 </div>
@@ -150,43 +159,23 @@ export default function RegisterPage() {
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">First Name *</label>
-                    <input
-                      name="firstName"
-                      type="text"
-                      placeholder="Mick"
-                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.firstName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
-                    />
+                    <label htmlFor="firstName" className={labelClass}>First Name *</label>
+                    <input id="firstName" name="firstName" type="text" placeholder="Mick" className={inputClass(!!errors.firstName)} />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Last Name *</label>
-                    <input
-                      name="lastName"
-                      type="text"
-                      placeholder="Dundee"
-                      className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.lastName ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
-                    />
+                    <label htmlFor="lastName" className={labelClass}>Last Name *</label>
+                    <input id="lastName" name="lastName" type="text" placeholder="Dundee" className={inputClass(!!errors.lastName)} />
                   </div>
                 </div>
-
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">Email *</label>
-                  <input
-                    name="email"
-                    type="email"
-                    placeholder="hello@yourcompany.com"
-                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors placeholder:text-[#404055] ${errors.email ? "border-red-500" : "border-border focus:border-[rgba(0,229,160,0.3)]"}`}
-                  />
+                  <label htmlFor="email" className={labelClass}>Email *</label>
+                  <input id="email" name="email" type="email" placeholder="hello@yourcompany.com" className={inputClass(!!errors.email)} />
                 </div>
-
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[10px] tracking-[0.12em] uppercase text-muted-foreground">I am a… *</label>
-                  <select
-                    name="type"
-                    className={`bg-[rgba(0,0,0,0.3)] border text-foreground font-mono text-sm px-3.5 py-3 outline-none focus:border-[rgba(0,229,160,0.3)] transition-colors appearance-none ${errors.type ? "border-red-500" : "border-border"}`}
-                  >
+                  <label htmlFor="type" className={labelClass}>I am a… *</label>
+                  <select id="type" name="type" defaultValue="" className={`${inputClass(!!errors.type)} appearance-none`}>
                     <option value="">Select one</option>
                     <option>Business owner / Founder</option>
                     <option>Self Employed</option>
@@ -195,48 +184,47 @@ export default function RegisterPage() {
                     <option>Just curious</option>
                   </select>
                 </div>
-
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-2 bg-primary text-primary-foreground font-sans font-bold text-sm px-7 py-4 hover:opacity-90 hover:-translate-y-0.5 transition-all disabled:opacity-60 disabled:cursor-not-allowed text-left"
+                  className="mt-2 bg-primary text-white border-none cursor-pointer font-sans font-bold text-[15px] px-7 py-[15px] rounded-lg text-left hover:bg-foreground transition-colors disabled:opacity-60"
                 >
-                  {loading ? "Reserving your spot…" : "Submit my query →"}
+                  {loading ? "Sending…" : "Submit my query →"}
                 </button>
-
-                <p className="text-[11px] text-[#404055] tracking-[0.05em]">
+                <p className="font-mono text-[11px] tracking-[0.05em] text-[#B4B1A4]">
                   We will contact you within 48 hours
                 </p>
               </form>
-            </>
+            </div>
           ) : (
             /* Success state */
-            <div className="text-center py-16">
-              <div className="text-primary flex justify-center mb-6">
+            <div className="text-center py-16 flex flex-col items-center gap-5">
+              <div className="text-primary">
                 <IconStar />
               </div>
-              <h2 className="font-sans font-black text-3xl tracking-[-0.02em] mb-4">
-                We&apos;ve got you !
+              <h2 className="font-sans font-extrabold text-[30px] tracking-[-0.02em]">
+                We&apos;ve got you!
               </h2>
-              <p className="text-muted-foreground text-sm leading-[1.7] mb-8 max-w-sm mx-auto">
-                Thanks for submitting your query ! We&apos;ll be in touch within 48 hours
+              <p className="text-sm text-muted-foreground leading-[1.7] max-w-[360px]">
+                Thanks for submitting your query! We&apos;ll be in touch within 48 hours.
               </p>
               <Link
                 href="/"
-                className="inline-block bg-primary text-primary-foreground font-sans font-bold text-sm px-6 py-3 hover:opacity-90 transition-opacity"
+                className="inline-block bg-primary text-white font-sans font-bold text-sm px-6 py-[13px] rounded-lg hover:bg-foreground transition-colors"
               >
                 ← Back to Matelab.ai
               </Link>
             </div>
           )}
+
         </div>
       </main>
 
       {/* Footer strip */}
-      <div className="border-t border-border py-5 px-6 text-center relative z-10">
-        <p className="text-[11px] text-[#404055] tracking-[0.05em]">
+      <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
+        <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
           © 2026 Matelab AI · Sydney, AU ·{" "}
-          <Link href="/" className="hover:text-primary transition-colors">matelab.ai</Link>
+          <Link href="/" className="text-[#B4B1A4] hover:text-primary transition-colors">matelab.ai</Link>
         </p>
       </div>
 
