@@ -54,7 +54,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${syne.variable} ${dmMono.variable} ${instrumentSerif.variable} bg-background`}>
-      <body className="font-mono antialiased text-[15px] leading-relaxed overflow-x-hidden">
+      {/* Body font is now Syne (font-sans); DM Mono is used only for labels/eyebrows/tags */}
+      <body className="font-sans antialiased text-[15px] leading-relaxed overflow-x-hidden">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

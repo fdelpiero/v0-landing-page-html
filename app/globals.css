@@ -4,38 +4,40 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --green: #00E5A0;
-  --green60: rgba(0, 229, 160, 0.6);
-  --green30: rgba(0, 229, 160, 0.3);
-  --green10: rgba(0, 229, 160, 0.08);
-  --dark: #0A0A0F;
-  --surf: #111118;
-  --surf2: #16161f;
-  --border-custom: #1e1e2e;
-  --text: #E8E8F0;
-  --muted-custom: #6b6b80;
-  --muted2: #404055;
-  
-  --background: #0A0A0F;
-  --foreground: #E8E8F0;
-  --card: #111118;
-  --card-foreground: #E8E8F0;
-  --popover: #111118;
-  --popover-foreground: #E8E8F0;
-  --primary: #00E5A0;
-  --primary-foreground: #0A0A0F;
-  --secondary: #111118;
-  --secondary-foreground: #E8E8F0;
-  --muted: #111118;
-  --muted-foreground: #6b6b80;
-  --accent: rgba(0, 229, 160, 0.08);
-  --accent-foreground: #00E5A0;
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #1e1e2e;
-  --input: #1e1e2e;
-  --ring: #00E5A0;
-  --radius: 0rem;
+  --green: #1E8A55;
+  --green-bright: #2BB673;
+  --green60: rgba(30, 138, 85, 0.6);
+  --green30: rgba(30, 138, 85, 0.45);
+  --green10: rgba(30, 138, 85, 0.06);
+  --dark: #F7F6F0;
+  --surf: #FFFFFF;
+  --surf2: #F1EFE7;
+  --border-custom: #E4E2D8;
+  --text: #14201A;
+  --muted-custom: #6B6A5E;
+  --muted2: #8A887C;
+  --faint: #B4B1A4;
+
+  --background: #F7F6F0;
+  --foreground: #14201A;
+  --card: #FFFFFF;
+  --card-foreground: #14201A;
+  --popover: #FFFFFF;
+  --popover-foreground: #14201A;
+  --primary: #1E8A55;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F1EFE7;
+  --secondary-foreground: #14201A;
+  --muted: #F1EFE7;
+  --muted-foreground: #6B6A5E;
+  --accent: rgba(30, 138, 85, 0.06);
+  --accent-foreground: #1E8A55;
+  --destructive: #C0392B;
+  --destructive-foreground: #C0392B;
+  --border: #E4E2D8;
+  --input: #D4D2C6;
+  --ring: #1E8A55;
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -76,24 +78,13 @@
   }
 }
 
-/* Noise overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.4;
-}
-
-/* Grid background */
+/* Grid background — warm paper with faint green lines */
 .grid-bg {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 229, 160, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 229, 160, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(30, 138, 85, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 138, 85, 0.035) 1px, transparent 1px);
   background-size: 48px 48px;
   pointer-events: none;
   z-index: 0;
@@ -106,7 +97,7 @@ body::before {
 }
 
 .animate-marquee {
-  animation: marquee 22s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 
 /* Blink animation */
@@ -117,6 +108,20 @@ body::before {
 
 .animate-blink {
   animation: blink 2s ease-in-out infinite;
+}
+
+/* Pulse ring for live-automation card dots + RUNNING indicator */
+@keyframes pulseDot {
+  0% { box-shadow: 0 0 0 0 rgba(30, 138, 85, 0.35); }
+  100% { box-shadow: 0 0 0 9px rgba(30, 138, 85, 0); }
+}
+
+.animate-pulse-dot {
+  animation: pulseDot 1.6s ease-out infinite;
+}
+
+.animate-pulse-dot-fast {
+  animation: pulseDot 1.05s ease-out infinite;
 }
 
 /* Fade up animation */
@@ -138,7 +143,7 @@ body::before {
 /* Node pulse animation */
 @keyframes nodePulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+  50% { opacity: 0.55; }
 }
 
 /* Scroll reveal */
@@ -153,20 +158,12 @@ body::before {
   transform: translateY(0);
 }
 
-/* Step hover line */
-.step-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.step-card:hover::before {
-  transform: scaleX(1);
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-blink,
+  .animate-pulse-dot,
+  .animate-pulse-dot-fast,
+  .animate-fade-up {
+    animation: none;
+  }
 }
