@@ -3,39 +3,33 @@ import { Reveal } from "./reveal"
 
 export function WorkshopCTA() {
   return (
-    <section id="workshop" className="pb-[120px] relative z-10">
+    <section id="workshop" className="pb-[110px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="bg-accent border border-[rgba(0,229,160,0.3)] p-12 md:p-[72px_64px] grid grid-cols-1 md:grid-cols-[1fr_auto] gap-12 items-center relative overflow-hidden">
-            {/* Decorative glow */}
-            <div
-              className="absolute -top-[100px] -right-[100px] w-[400px] h-[400px] pointer-events-none"
-              style={{
-                background: 'radial-gradient(circle, rgba(0,229,160,0.1) 0%, transparent 70%)'
-              }}
-            />
-
-            <div className="relative z-10">
-              <div className="inline-block bg-primary text-primary-foreground text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-5">
+          {/* Inverted ink panel — the only dark moment on the page */}
+          <div className="bg-[#14201A] rounded-2xl p-9 md:p-[72px_64px] flex flex-wrap gap-12 items-center justify-between">
+            <div>
+              <div className="inline-block bg-[#2BB673] text-[#06110B] font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded mb-[22px]">
                 Free · 45 min · No obligation
               </div>
-              <h2 className="font-sans font-black text-[clamp(32px,5vw,52px)] tracking-[-0.03em] leading-[1.05] mb-4">
-                Book a free<br />
-                <span className="text-primary italic font-serif font-normal">AI strategy</span> session
+              <h2 className="font-sans font-extrabold text-[clamp(32px,5vw,46px)] tracking-[-0.03em] leading-[1.05] mb-4 text-[#F7F6F0]">
+                Book a free{" "}
+                <em className="font-serif italic font-normal tracking-normal text-[#2BB673]">AI strategy</em>{" "}
+                session
               </h2>
-              <p className="text-sm text-muted-foreground max-w-[480px] leading-[1.7]">
+              <p className="text-[15px] text-[#A9B4AD] max-w-[480px] leading-[1.7]">
                 Tell us about your business. We&apos;ll map out exactly where automation saves you time and money — and if we&apos;re not the right fit, we&apos;ll tell you that too.
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 items-start relative z-10">
+            <div className="flex flex-col gap-3 items-start">
               <Link
                 href="/contact"
-                className="bg-primary text-primary-foreground px-7 py-3.5 font-sans font-bold text-sm tracking-[0.02em] hover:opacity-90 hover:-translate-y-0.5 transition-all"
+                className="bg-[#2BB673] text-[#06110B] px-[30px] py-[15px] rounded-lg font-sans font-bold text-[15px] hover:bg-[#F7F6F0] hover:text-[#14201A] transition-colors"
               >
                 Book a call &rarr;
               </Link>
-              <p className="text-[11px] text-muted-foreground tracking-[0.05em]">
+              <p className="font-mono text-[11px] text-[#6E7A72] tracking-[0.05em]">
                 Usually replies within 24h
               </p>
             </div>

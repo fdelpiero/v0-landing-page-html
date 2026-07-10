@@ -27,33 +27,31 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
         }
       }}
       aria-pressed={active}
-      className={`p-10 relative overflow-hidden transition-colors cursor-pointer ${
+      className={`p-8 rounded-xl cursor-pointer transition-colors self-start ${
         active
-          ? 'bg-accent border border-[rgba(0,229,160,0.3)]'
-          : 'bg-card hover:bg-secondary border border-transparent'
+          ? 'bg-accent border border-[rgba(30,138,85,0.45)]'
+          : 'bg-card hover:border-[rgba(30,138,85,0.4)] border border-border'
       }`}
     >
-      <span className="absolute top-6 right-7 text-[11px] text-[#404055] tracking-[0.15em]">{num}</span>
-      {badge && (
-        <span className="inline-block bg-primary text-primary-foreground text-[9px] font-bold tracking-[0.15em] uppercase px-2 py-0.5 mb-4 font-sans">
-          {badge}
-        </span>
-      )}
+      <div className={`flex ${badge ? 'justify-between' : 'justify-end'} items-center mb-4 min-h-[20px]`}>
+        {badge && (
+          <span className="bg-primary text-white font-mono text-[9px] font-medium tracking-[0.15em] uppercase px-2 py-[3px] rounded">
+            {badge}
+          </span>
+        )}
+        <span className="font-mono text-[11px] tracking-[0.15em] text-[#B4B1A4]">{num}</span>
+      </div>
       <div className="font-sans text-xl font-extrabold mb-2.5 tracking-[-0.01em]">
         {title}
       </div>
-      <p className="text-[13px] text-muted-foreground leading-[1.75] mb-5">
+      <p className="text-[13.5px] text-muted-foreground leading-[1.75] mb-[18px]">
         {body}
       </p>
       <div className="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
           <span
             key={tag.label}
-            className={`text-[10px] px-2.5 py-0.5 tracking-[0.08em] ${
-              active
-                ? 'border border-[rgba(0,229,160,0.3)] text-primary bg-accent'
-                : 'border border-border text-muted-foreground'
-            }`}
+            className="font-mono text-[10px] px-2.5 py-[3px] tracking-[0.08em] border border-[#D4D2C6] rounded-full text-muted-foreground whitespace-nowrap"
           >
             {tag.label}
           </span>
@@ -64,9 +62,8 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
           active ? 'max-h-[140px] opacity-100' : 'max-h-0 opacity-0'
         }`}
-        style={{ marginTop: active ? 18 : 0 }}
       >
-        <p className="text-[12.5px] text-foreground/85 leading-[1.7] border-l-2 border-primary pl-3">
+        <p className="mt-[18px] text-[12.5px] text-[#3D4A42] leading-[1.7] border-l-2 border-primary pl-3">
           {includes}
         </p>
       </div>
@@ -102,7 +99,7 @@ const services = [
   {
     num: "03",
     title: "Corporate Workshops",
-    body: "Practical half-day or full-day hands-on sessions for teams – built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
+    body: "Practical half-day or full-day hands-on sessions for teams — built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
     tags: [
       { label: "Team Workshops" },
       { label: "Custom Training" },
@@ -116,20 +113,20 @@ export function Services() {
   const [activeIndex, setActiveIndex] = useState(0)
 
   return (
-    <section id="services" className="pb-[120px] relative z-10">
+    <section id="services" className="pb-[110px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="text-[10px] tracking-[0.25em] uppercase text-primary mb-4">What we do</div>
-          <h2 className="font-sans text-[clamp(32px,4vw,52px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
-            Three ways to work <em className="font-serif italic text-primary font-normal">with us.</em>
+          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">What we do</div>
+          <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+            Three ways to work <span className="text-primary">with us.</span>
           </h2>
-          <p className="text-muted-foreground max-w-[500px] mb-16 text-[15px]">
-            Start with a build, bring us in for strategy, or upskill your whole team.
+          <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+            Start with a build, bring us in for strategy, or upskill your whole team. Tap a card for what&apos;s included.
           </p>
         </Reveal>
 
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
             {services.map((service, index) => (
               <ServiceCard
                 key={service.title}

@@ -12,13 +12,13 @@ const marqueeItems = [
 
 export function Marquee() {
   return (
-    <div className="border-y border-border py-4 overflow-hidden bg-card">
+    <div className="border-y border-[#E9E7DD] py-3.5 overflow-hidden bg-card">
       <div className="flex w-max animate-marquee">
         {/* First set */}
         {marqueeItems.map((item, i) => (
           <div
             key={`a-${i}`}
-            className="whitespace-nowrap px-10 text-xs tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
+            className="whitespace-nowrap px-10 font-mono text-[11px] tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
           >
             {item}
             <span className="text-primary text-[8px]">✦</span>
@@ -28,7 +28,7 @@ export function Marquee() {
         {marqueeItems.map((item, i) => (
           <div
             key={`b-${i}`}
-            className="whitespace-nowrap px-10 text-xs tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
+            className="whitespace-nowrap px-10 font-mono text-[11px] tracking-[0.12em] uppercase text-muted-foreground flex items-center gap-3"
           >
             {item}
             <span className="text-primary text-[8px]">✦</span>
