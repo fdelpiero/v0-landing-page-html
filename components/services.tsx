@@ -27,7 +27,7 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
         }
       }}
       aria-pressed={active}
-      className={`p-8 rounded-xl cursor-pointer transition-colors self-start ${
+      className={`p-8 rounded-xl cursor-pointer transition-colors h-full flex flex-col ${
         active
           ? 'bg-accent border border-[rgba(30,138,85,0.45)]'
           : 'bg-card hover:border-[rgba(30,138,85,0.4)] border border-border'
@@ -57,13 +57,14 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
           </span>
         ))}
       </div>
-      {/* Click payoff: active card reveals what's included */}
+      {/* Reserve this space on every card so clicking never changes card height */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          active ? 'max-h-[140px] opacity-100' : 'max-h-0 opacity-0'
+        aria-hidden={!active}
+        className={`mt-auto pt-[18px] transition-opacity duration-300 ease-in-out ${
+          active ? 'visible opacity-100' : 'invisible opacity-0'
         }`}
       >
-        <p className="mt-[18px] text-[12.5px] text-[#3D4A42] leading-[1.7] border-l-2 border-primary pl-3">
+        <p className="text-[12.5px] text-[#3D4A42] leading-[1.7] border-l-2 border-primary pl-3">
           {includes}
         </p>
       </div>
@@ -126,7 +127,7 @@ export function Services() {
         </Reveal>
 
         <Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
             {services.map((service, index) => (
               <ServiceCard
                 key={service.title}
