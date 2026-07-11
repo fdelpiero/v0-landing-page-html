@@ -20,7 +20,7 @@ const instrumentSerif = Instrument_Serif({
 })
 export const metadata: Metadata = {
   metadataBase: new URL('https://matelabai.vercel.app'),
-  title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — Matelab',
+  title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — matelabai',
   description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
   keywords: ['AI automation consulting', 'AI automation agency Sydney', 'custom AI solutions', 'n8n consulting', 'AI agents for business', 'chatbots for business', 'corporate AI workshops', 'automation consulting Australia'],
   authors: [{ name: 'Matelab AI' }],
