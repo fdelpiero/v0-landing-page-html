@@ -4,7 +4,7 @@ const steps = [
   {
     n: "01",
     title: "Strategy call",
-    body: "Free 45 minutes. We map your workflows and spot the highest-value automation opportunities."
+    body: "Initial 45 minutes call at no cost. We map your workflows and spot the highest-value automation opportunities."
   },
   {
     n: "02",
