@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 
 const steps = [
-  { title: "New sales leed received", sub: "via website form · 9:41 am" },
+  { title: "New sales lead received", sub: "via website form · 9:41 am" },
   { title: "AI agent qualifies & drafts reply", sub: "tone-matched, ready to send" },
   { title: "CRM updated, call booked", sub: "no human touch · 14 min saved" },
 ]
