@@ -1,14 +1,14 @@
 const tools = [
-  "n8n",
+  "Copilot",
   "Claude Code",
   "OpenAI Codex",
-  "OpenClaw",
+  "n8n",
   "Antigravity",
-  "Cursor",
+  "Open Claw",
   "WhatsApp API",
   "Slack Bots",
   "Notion AI",
-  "Hermes Agent"
+  "Cursor"
 ]
 
 export function ToolsSection() {
