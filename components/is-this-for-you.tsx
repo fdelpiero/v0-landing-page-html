@@ -29,7 +29,7 @@ export function IsThisForYou() {
             Your team is doing work <span className="text-primary">a robot should do.</span>
           </h2>
           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
-            If any of these hit close to home, a strategy call will pay for itself. (It&apos;s free anyway.)
+            If any of these hit close to home, a strategy call will pay for itself.
           </p>
         </Reveal>
 
