@@ -222,7 +222,7 @@ export default function RegisterPage() {
                   Contact us
                 </div>
                 <h1 className="font-sans font-extrabold text-[clamp(28px,5vw,38px)] tracking-[-0.02em] leading-[1.1]">
-                  Let us know how we can boost{" "}
+                  Let us know how we can help boost{" "}
                   <em className="text-primary italic font-serif font-normal tracking-normal">your business</em>
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
@@ -257,7 +257,7 @@ export default function RegisterPage() {
                 {/* Phone (optional): country code + number */}
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="phone" className={labelClass}>Phone Number <span className="normal-case text-[#B4B1A4]">(optional)</span></label>
-                  <div className="grid grid-cols-[150px_1fr] gap-3">
+                  <div className="grid grid-cols-[200px_1fr] gap-3">
                     <select
                       id="countryCode"
                       name="countryCode"
