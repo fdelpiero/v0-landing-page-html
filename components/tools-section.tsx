@@ -4,11 +4,11 @@ const tools = [
   "OpenAI Codex",
   "OpenClaw",
   "Antigravity",
-  "Composio",
+  "Cursor",
   "WhatsApp API",
   "Slack Bots",
   "Notion AI",
-  "Fireflies"
+  "Hermes Agent"
 ]
 
 export function ToolsSection() {
