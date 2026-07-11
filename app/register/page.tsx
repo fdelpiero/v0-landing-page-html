@@ -4,6 +4,17 @@ import Link from "next/link"
 import { useState } from "react"
 import { MatelabLogoSmall } from "@/components/matelab-logo"
 
+// ─────────────────────────────────────────────────────────────
+// GOOGLE FORM LINKING
+// After adding "Phone number" and "How can we assist?" questions
+// to your Google Form, replace the two placeholder IDs below with
+// the real entry IDs (see UPDATE-INSTRUCTIONS.md for how to get them).
+// Until replaced, those two answers are simply not sent — the form
+// still submits the original four fields without errors.
+// ─────────────────────────────────────────────────────────────
+const ENTRY_PHONE = "entry.REPLACE_PHONE_ID"
+const ENTRY_ASSIST = "entry.REPLACE_ASSIST_ID"
+
 const IconBolt = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
@@ -35,6 +46,63 @@ const featureItems = [
   { icon: <IconCheck />, label: "We're here to help" },
 ]
 
+const countryCodes = [
+  { code: "+61", label: "🇦🇺 Australia +61" },
+  { code: "+64", label: "🇳🇿 New Zealand +64" },
+  { code: "+1", label: "🇺🇸 USA / Canada +1" },
+  { code: "+44", label: "🇬🇧 UK +44" },
+  { code: "+353", label: "🇮🇪 Ireland +353" },
+  { code: "+65", label: "🇸🇬 Singapore +65" },
+  { code: "+852", label: "🇭🇰 Hong Kong +852" },
+  { code: "+81", label: "🇯🇵 Japan +81" },
+  { code: "+82", label: "🇰🇷 South Korea +82" },
+  { code: "+86", label: "🇨🇳 China +86" },
+  { code: "+91", label: "🇮🇳 India +91" },
+  { code: "+62", label: "🇮🇩 Indonesia +62" },
+  { code: "+60", label: "🇲🇾 Malaysia +60" },
+  { code: "+63", label: "🇵🇭 Philippines +63" },
+  { code: "+66", label: "🇹🇭 Thailand +66" },
+  { code: "+84", label: "🇻🇳 Vietnam +84" },
+  { code: "+971", label: "🇦🇪 UAE +971" },
+  { code: "+966", label: "🇸🇦 Saudi Arabia +966" },
+  { code: "+972", label: "🇮🇱 Israel +972" },
+  { code: "+90", label: "🇹🇷 Turkey +90" },
+  { code: "+27", label: "🇿🇦 South Africa +27" },
+  { code: "+234", label: "🇳🇬 Nigeria +234" },
+  { code: "+254", label: "🇰🇪 Kenya +254" },
+  { code: "+20", label: "🇪🇬 Egypt +20" },
+  { code: "+33", label: "🇫🇷 France +33" },
+  { code: "+49", label: "🇩🇪 Germany +49" },
+  { code: "+34", label: "🇪🇸 Spain +34" },
+  { code: "+39", label: "🇮🇹 Italy +39" },
+  { code: "+351", label: "🇵🇹 Portugal +351" },
+  { code: "+31", label: "🇳🇱 Netherlands +31" },
+  { code: "+32", label: "🇧🇪 Belgium +32" },
+  { code: "+41", label: "🇨🇭 Switzerland +41" },
+  { code: "+43", label: "🇦🇹 Austria +43" },
+  { code: "+46", label: "🇸🇪 Sweden +46" },
+  { code: "+47", label: "🇳🇴 Norway +47" },
+  { code: "+45", label: "🇩🇰 Denmark +45" },
+  { code: "+358", label: "🇫🇮 Finland +358" },
+  { code: "+48", label: "🇵🇱 Poland +48" },
+  { code: "+420", label: "🇨🇿 Czechia +420" },
+  { code: "+30", label: "🇬🇷 Greece +30" },
+  { code: "+40", label: "🇷🇴 Romania +40" },
+  { code: "+36", label: "🇭🇺 Hungary +36" },
+  { code: "+380", label: "🇺🇦 Ukraine +380" },
+  { code: "+52", label: "🇲🇽 Mexico +52" },
+  { code: "+55", label: "🇧🇷 Brazil +55" },
+  { code: "+54", label: "🇦🇷 Argentina +54" },
+  { code: "+56", label: "🇨🇱 Chile +56" },
+  { code: "+57", label: "🇨🇴 Colombia +57" },
+  { code: "+51", label: "🇵🇪 Peru +51" },
+  { code: "+598", label: "🇺🇾 Uruguay +598" },
+  { code: "+593", label: "🇪🇨 Ecuador +593" },
+  { code: "+506", label: "🇨🇷 Costa Rica +506" },
+]
+
+const ASSIST_MAX = 400
+
 const inputClass = (error: boolean) =>
   `w-full bg-card border rounded-lg text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors focus:border-primary ${
     error ? "border-[#C0392B]" : "border-[#D4D2C6]"
@@ -46,6 +114,7 @@ export default function RegisterPage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Record<string, boolean>>({})
+  const [assistText, setAssistText] = useState("")
 
   const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeOw0Vu6Rnv41kIs67wgrxmrhNVngquBFID1m9_i-Ta9nT2WA/formResponse"
 
@@ -57,6 +126,9 @@ export default function RegisterPage() {
     const firstName = data.get("firstName") as string
     const lastName = data.get("lastName") as string
     const email = data.get("email") as string
+    const countryCode = data.get("countryCode") as string
+    const phone = (data.get("phone") as string) || ""
+    const assist = (data.get("assist") as string) || ""
 
     const newErrors: Record<string, boolean> = {}
     if (!firstName.trim()) newErrors.firstName = true
@@ -76,6 +148,14 @@ export default function RegisterPage() {
     params.append("entry.700943531", lastName)
     params.append("entry.355061805", email)
     params.append("entry.700825334", data.get("type") as string)
+
+    // Optional fields — only sent once the real Google Form entry IDs are set
+    if (phone.trim() && !ENTRY_PHONE.includes("REPLACE")) {
+      params.append(ENTRY_PHONE, `${countryCode} ${phone.trim()}`)
+    }
+    if (assist.trim() && !ENTRY_ASSIST.includes("REPLACE")) {
+      params.append(ENTRY_ASSIST, assist.trim().slice(0, ASSIST_MAX))
+    }
 
     try {
       const iframe = document.createElement("iframe")
@@ -142,8 +222,8 @@ export default function RegisterPage() {
                   Contact us
                 </div>
                 <h1 className="font-sans font-extrabold text-[clamp(28px,5vw,38px)] tracking-[-0.02em] leading-[1.1]">
-                  Tell us what you&apos;re{" "}
-                  <em className="text-primary italic font-serif font-normal tracking-normal">trying to automate.</em>
+                  Let us know how we can boost{" "}
+                  <em className="text-primary italic font-serif font-normal tracking-normal">your business</em>
                 </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
                   {featureItems.map((item) => (
@@ -173,6 +253,33 @@ export default function RegisterPage() {
                   <label htmlFor="email" className={labelClass}>Email *</label>
                   <input id="email" name="email" type="email" placeholder="hello@yourcompany.com" className={inputClass(!!errors.email)} />
                 </div>
+
+                {/* Phone (optional): country code + number */}
+                <div className="flex flex-col gap-1.5">
+                  <label htmlFor="phone" className={labelClass}>Phone Number <span className="normal-case text-[#B4B1A4]">(optional)</span></label>
+                  <div className="grid grid-cols-[150px_1fr] gap-3">
+                    <select
+                      id="countryCode"
+                      name="countryCode"
+                      defaultValue="+61"
+                      aria-label="Country code"
+                      className={`${inputClass(false)} appearance-none pr-2`}
+                    >
+                      {countryCodes.map((c) => (
+                        <option key={c.label} value={c.code}>{c.label}</option>
+                      ))}
+                    </select>
+                    <input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      placeholder="412 345 678"
+                      className={inputClass(false)}
+                    />
+                  </div>
+                </div>
+
                 <div className="flex flex-col gap-1.5">
                   <label htmlFor="type" className={labelClass}>I am a… *</label>
                   <select id="type" name="type" defaultValue="" className={`${inputClass(!!errors.type)} appearance-none`}>
@@ -184,6 +291,25 @@ export default function RegisterPage() {
                     <option>Just curious</option>
                   </select>
                 </div>
+
+                {/* How can we assist? (optional, 400 chars) */}
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex justify-between items-baseline">
+                    <label htmlFor="assist" className={labelClass}>How can we assist? <span className="normal-case text-[#B4B1A4]">(optional)</span></label>
+                    <span className="font-mono text-[10px] text-[#B4B1A4]">{assistText.length}/{ASSIST_MAX}</span>
+                  </div>
+                  <textarea
+                    id="assist"
+                    name="assist"
+                    rows={4}
+                    maxLength={ASSIST_MAX}
+                    value={assistText}
+                    onChange={(e) => setAssistText(e.target.value)}
+                    placeholder="Tell us briefly about your business and what you'd like to automate…"
+                    className={`${inputClass(false)} resize-none leading-[1.6]`}
+                  />
+                </div>
+
                 <button
                   type="submit"
                   disabled={loading}
