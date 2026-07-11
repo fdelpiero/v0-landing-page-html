@@ -12,8 +12,8 @@ import { MatelabLogoSmall } from "@/components/matelab-logo"
 // Until replaced, those two answers are simply not sent — the form
 // still submits the original four fields without errors.
 // ─────────────────────────────────────────────────────────────
-const ENTRY_PHONE = "entry.REPLACE_PHONE_ID"
-const ENTRY_ASSIST = "entry.REPLACE_ASSIST_ID"
+const ENTRY_PHONE = "entry.1329920861"
+const ENTRY_ASSIST = "entry.829308819"
 
 const IconBolt = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
