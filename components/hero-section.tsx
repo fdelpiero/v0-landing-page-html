@@ -16,7 +16,7 @@ export function HeroSection() {
         <div className="animate-fade-up inline-flex self-start items-center gap-1.5 sm:gap-2 bg-card border border-[#DEDCD0] rounded-full px-2.5 sm:px-3.5 py-[6px] sm:py-[7px] max-w-full">
           <span className="w-1.5 h-1.5 shrink-0 bg-primary rounded-full animate-blink" />
           <span className="font-mono text-[8.5px] sm:text-[11px] tracking-[0.06em] sm:tracking-[0.15em] uppercase text-muted-foreground whitespace-nowrap">
-            AI Automation · Sydney → Worldwide
+            AI Automation lab · Sydney → Worldwide
           </span>
         </div>
 
