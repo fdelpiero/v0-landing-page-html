@@ -107,7 +107,7 @@ export function Footer() {
             © 2026 matelab.ai
           </div>
           <div className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
-            No code. No excuses. Just automation.
+            No code experience needed. No excuses. Just automation.
           </div>
         </div>
 
