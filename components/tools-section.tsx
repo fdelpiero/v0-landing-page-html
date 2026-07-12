@@ -1,8 +1,8 @@
 const tools = [
-  "Copilot",
+  "n8n",
   "Claude Code",
   "OpenAI Codex",
-  "n8n",
+  "Copilot",
   "Antigravity",
   "Open Claw",
   "WhatsApp API",
