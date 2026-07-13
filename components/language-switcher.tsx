@@ -1,6 +1,5 @@
 "use client"
 
-import { Globe2 } from "lucide-react"
 import { usePathname, useRouter } from "next/navigation"
 import { useEffect } from "react"
 import type { Locale } from "@/lib/i18n"
@@ -31,10 +30,19 @@ export function LanguageSwitcher({ locale, compact = false }: { locale: Locale; 
       onClick={switchLanguage}
       aria-label={messages.language.switchTo}
       title={messages.language.switchTo}
-      className={`inline-flex items-center justify-center gap-1.5 rounded-md border border-[#D4D2C6] bg-card font-mono font-semibold tracking-[0.08em] text-foreground hover:border-primary hover:text-primary transition-colors ${compact ? "px-3 py-2.5 text-[11px]" : "px-3 py-2 text-[10px]"}`}
+      className={`inline-flex items-center rounded-md border border-[#D4D2C6] bg-card p-0.5 font-mono font-semibold tracking-[0.08em] text-foreground transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${compact ? "text-[11px]" : "text-[10px]"}`}
     >
-      <Globe2 aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.8} />
-      <span>{locale === "en" ? "ES" : "EN"}</span>
+      <span
+        className={`rounded-[4px] px-2 py-1.5 transition-colors ${locale === "en" ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
+      >
+        EN
+      </span>
+      <span aria-hidden="true" className="mx-0.5 text-[#B8B5A8]">|</span>
+      <span
+        className={`rounded-[4px] px-2 py-1.5 transition-colors ${locale === "es" ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}
+      >
+        ES
+      </span>
     </button>
   )
 }
