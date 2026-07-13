@@ -2,13 +2,14 @@
 
 import { useState } from "react"
 import { Reveal } from "./reveal"
+import { getMessages, type Locale } from "@/lib/i18n"
 
 interface ServiceCardProps {
   num: string
   badge?: string
   title: string
   body: string
-  tags: { label: string }[]
+  tags: readonly string[]
   includes: string
   active: boolean
   onClick: () => void
@@ -50,10 +51,10 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
       <div className="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
           <span
-            key={tag.label}
+            key={tag}
             className="font-mono text-[10px] px-2.5 py-[3px] tracking-[0.08em] border border-[#D4D2C6] rounded-full text-muted-foreground whitespace-nowrap"
           >
-            {tag.label}
+            {tag}
           </span>
         ))}
       </div>
@@ -72,57 +73,21 @@ function ServiceCard({ num, badge, title, body, tags, includes, active, onClick 
   )
 }
 
-const services = [
-  {
-    num: "01",
-    badge: "Most popular",
-    title: "Custom AI Solutions",
-    body: "We design and build automations for your business: chatbots, lead capture, calendar agents, CRM flows, internal tools. Scoped fixed, delivered fast, documented and handed over.",
-    tags: [
-      { label: "AI Chatbots" },
-      { label: "Lead Flows" },
-      { label: "Calendar Agents" },
-      { label: "CRM Integrations" }
-    ],
-    includes: "Includes: scoping workshop, fixed quote, build & testing, documentation, handover training and 30 days of post-launch support."
-  },
-  {
-    num: "02",
-    title: "Consulting & Retainers",
-    body: "An automation audit maps where AI saves you the most, with a prioritised roadmap. Monthly retainers keep us embedded as your automation stack grows with the business.",
-    tags: [
-      { label: "Automation Audit" },
-      { label: "AI Strategy" },
-      { label: "Monthly Retainers" }
-    ],
-    includes: "Includes: workflow audit, ROI-ranked roadmap, tool selection, monthly build hours and quarterly strategy reviews."
-  },
-  {
-    num: "03",
-    title: "Corporate Workshops",
-    body: "Practical half-day or full-day hands-on sessions for teams — built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
-    tags: [
-      { label: "Team Workshops" },
-      { label: "Custom Training" },
-      { label: "On-site or Remote" }
-    ],
-    includes: "Includes: pre-workshop skills survey, tailored curriculum, hands-on build session, take-home templates and a follow-up Q&A call."
-  }
-]
-
-export function Services() {
+export function Services({ locale }: { locale: Locale }) {
+  const copy = getMessages(locale).services
+  const services = copy.items
   const [activeIndex, setActiveIndex] = useState(0)
 
   return (
     <section id="services" className="pb-[110px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">What we do</div>
+          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
-            Three ways to work <span className="text-primary">with us.</span>
+            {copy.title} <span className="text-primary">{copy.accent}</span>
           </h2>
           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
-            Start with a build, bring us in for strategy, or upskill your whole team. Tap a card for what&apos;s included.
+            {copy.intro}
           </p>
         </Reveal>
 

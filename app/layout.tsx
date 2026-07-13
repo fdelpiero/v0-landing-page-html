@@ -24,6 +24,10 @@ export const metadata: Metadata = {
   description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
   keywords: ['AI automation consulting', 'AI automation agency Sydney', 'custom AI solutions', 'n8n consulting', 'AI agents for business', 'chatbots for business', 'corporate AI workshops', 'automation consulting Australia'],
   authors: [{ name: 'Matelab AI' }],
+  alternates: {
+    canonical: '/',
+    languages: { en: '/', 'es-419': '/es' },
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

@@ -1,14 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { getMessages, type Locale } from "@/lib/i18n"
 
-const steps = [
-  { title: "New sales lead received", sub: "via website form · 9:41 am" },
-  { title: "AI agent qualifies & drafts reply", sub: "tone-matched, ready to send" },
-  { title: "CRM updated, call booked", sub: "no human touch · 14 min saved" },
-]
-
-export function LiveAutomationCard() {
+export function LiveAutomationCard({ locale }: { locale: Locale }) {
+  const copy = getMessages(locale).live
+  const steps = copy.steps
   const [phase, setPhase] = useState(0)
 
   useEffect(() => {
@@ -56,10 +53,10 @@ export function LiveAutomationCard() {
     <div className="bg-card border border-border rounded-[14px] p-7 flex flex-col w-full max-w-[460px] shadow-[0_2px_16px_rgba(20,32,26,0.06)]">
       {/* Header */}
       <div className="flex justify-between items-center pb-5">
-        <div className="font-mono text-[11px] tracking-[0.12em] text-[#8A887C]">LIVE AUTOMATION</div>
+        <div className="font-mono text-[11px] tracking-[0.12em] text-[#8A887C]">{copy.title}</div>
         <div className="flex items-center gap-1.5">
           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse-dot" />
-          <div className="font-mono text-[11px] tracking-[0.08em] text-primary">RUNNING</div>
+          <div className="font-mono text-[11px] tracking-[0.08em] text-primary">{copy.running}</div>
         </div>
       </div>
 
@@ -89,7 +86,7 @@ export function LiveAutomationCard() {
 
       {/* Footer */}
       <div className="mt-6 pt-5 border-t border-[#E9E7DD] flex justify-between items-center">
-        <div className="text-[13px] font-medium text-muted-foreground">This week, for one client</div>
+        <div className="text-[13px] font-medium text-muted-foreground">{copy.footer}</div>
         <div className="flex items-baseline gap-2.5">
           <div
             className="font-mono text-xs text-primary"
@@ -99,7 +96,7 @@ export function LiveAutomationCard() {
           </div>
           <div className="font-sans font-extrabold text-[22px] text-foreground tracking-[-0.02em]">
             {phase >= 3 ? "11.7" : "11.5"} hrs{" "}
-            <span className="text-[13px] text-[#8A887C] font-medium">back</span>
+            <span className="text-[13px] text-[#8A887C] font-medium">{copy.back}</span>
           </div>
         </div>
       </div>

@@ -1,16 +1,7 @@
-const marqueeItems = [
-  "Custom AI Agents",
-  "n8n Automations",
-  "AI Chatbots",
-  "Lead Capture Flows",
-  "CRM Integrations",
-  "Automation Audits",
-  "AI Strategy",
-  "Corporate Workshops",
-  "Team Training"
-]
+import { getMessages, type Locale } from "@/lib/i18n"
 
-export function Marquee() {
+export function Marquee({ locale }: { locale: Locale }) {
+  const marqueeItems = getMessages(locale).marquee
   return (
     <div className="border-y border-[#E9E7DD] py-3.5 overflow-hidden bg-card">
       <div className="flex w-max animate-marquee">

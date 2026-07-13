@@ -1,3 +1,5 @@
+import { getMessages, type Locale } from "@/lib/i18n"
+
 const tools = [
   "n8n",
   "Claude Code",
@@ -11,13 +13,13 @@ const tools = [
   "Cursor"
 ]
 
-export function ToolsSection() {
+export function ToolsSection({ locale }: { locale: Locale }) {
   return (
     <section id="tools" className="py-[22px] border-y border-[#E9E7DD] bg-card relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <div className="flex items-center gap-7 overflow-x-auto scrollbar-none">
           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#B4B1A4] whitespace-nowrap shrink-0">
-            Built on
+            {getMessages(locale).tools}
           </div>
           <div className="flex gap-2.5 items-center flex-nowrap">
             {tools.map((tool) => (

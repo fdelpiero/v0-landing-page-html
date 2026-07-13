@@ -1,43 +1,19 @@
 import { Reveal } from "./reveal"
+import { getMessages, type Locale } from "@/lib/i18n"
 
-const useCases = [
-  {
-    title: "Lead capture & qualification bot",
-    body: "Every enquiry answered, qualified and booked into your calendar — 24/7."
-  },
-  {
-    title: "Customer support chatbot",
-    body: "Trained on your docs and FAQs. Handles the repeats; escalates the rest."
-  },
-  {
-    title: "Meeting notes → CRM",
-    body: "Calls transcribed, summarised and logged against the right contact automatically."
-  },
-  {
-    title: "Invoice & document processing",
-    body: "Receipts, invoices and forms extracted into your accounting system without typing."
-  },
-  {
-    title: "Reporting on autopilot",
-    body: "Weekly numbers pulled, formatted and delivered to your inbox or Slack."
-  },
-  {
-    title: "Content & social pipelines",
-    body: "From idea to drafted, scheduled posts — with your voice, reviewed by you."
-  }
-]
-
-export function UseCases() {
+export function UseCases({ locale }: { locale: Locale }) {
+  const copy = getMessages(locale).useCases
+  const useCases = copy.items
   return (
     <section id="usecases" className="pb-[110px] relative z-10">
       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
         <Reveal>
-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">What we build</div>
+          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
-            Real automations, <span className="text-primary">real hours back.</span>
+            {copy.title} <span className="text-primary">{copy.accent}</span>
           </h2>
           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
-            A sample of what we build for clients — every one custom-fit to your tools and workflows.
+            {copy.intro}
           </p>
         </Reveal>
 
