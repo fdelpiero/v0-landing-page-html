@@ -1,0 +1,2284 @@
+diff -ruN --exclude=.git --exclude=node_modules a/BILINGUAL-TESTING.md b/BILINGUAL-TESTING.md
+--- a/BILINGUAL-TESTING.md	1970-01-01 10:00:00
++++ b/BILINGUAL-TESTING.md	2026-07-13 13:36:09
+@@ -0,0 +1,21 @@
++# Bilingual preview checklist
++
++This branch adds Latin American Spanish (`es-419`) while keeping English as the default language.
++
++## Routes
++
++| English | Spanish |
++| --- | --- |
++| `/` | `/es` |
++| `/contact` | `/es/contact` |
++| `/register` | `/es/register` |
++
++## What to review
++
++- Use the globe-labelled `EN` / `ES` control in the desktop header and mobile menu.
++- Confirm the language choice is remembered on a return visit.
++- Review Spanish wording in `lib/i18n.ts`; English and Spanish messages are kept side by side.
++- Test all navigation links, section anchors, form validation, success messaging, and mobile layouts.
++- Confirm the Calendly event itself is configured to allow Spanish. The Spanish embed requests the Spanish locale, but Calendly's event settings remain the source of truth.
++
++Nothing from this branch should be merged into `main` until the copy and preview are approved.
+diff -ruN --exclude=.git --exclude=node_modules a/app/contact/page.tsx b/app/contact/page.tsx
+--- a/app/contact/page.tsx	2026-07-13 12:00:19
++++ b/app/contact/page.tsx	2026-07-13 13:06:53
+@@ -1,108 +1,8 @@
+-"use client"
++import type { Metadata } from "next"
++import { ContactPage } from "@/components/contact-page"
+ 
+-import Link from "next/link"
+-import { MatelabLogoSmall } from "@/components/matelab-logo"
++export const metadata: Metadata = { title: "Book a free AI strategy call | mateLab.ai" }
+ 
+-const IconPhone = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+-  </svg>
+-)
+-
+-const IconMap = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+-    <line x1="9" y1="3" x2="9" y2="18"/>
+-    <line x1="15" y1="6" x2="15" y2="21"/>
+-  </svg>
+-)
+-
+-const IconNoCode = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+-    <polyline points="22 4 12 14.01 9 11.01"/>
+-  </svg>
+-)
+-
+-const featureItems = [
+-  { icon: <IconPhone />, label: "45 min call" },
+-  { icon: <IconMap />, label: "Custom roadmap" },
+-  { icon: <IconNoCode />, label: "No coding experience" },
+-]
+-
+-export default function ContactPage() {
+-  return (
+-    <div className="min-h-screen bg-background flex flex-col">
+-
+-      {/* Grid bg */}
+-      <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
+-
+-      {/* Simple nav */}
+-      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] border-b border-[#E9E7DD]">
+-        <Link href="/" className="flex items-center gap-2.5 no-underline">
+-          <MatelabLogoSmall size={28} />
+-          <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
+-            <span className="text-foreground">mate</span>
+-            <span className="text-primary">lab.ai</span>
+-          </div>
+-        </Link>
+-        <Link href="/" className="font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
+-          ← Back to home
+-        </Link>
+-      </nav>
+-
+-      {/* Main Container */}
+-      <main className="flex-1 flex flex-col items-center justify-center px-6 pt-32 pb-20 relative z-10">
+-        <div className="w-full max-w-[900px] flex flex-col items-center">
+-
+-          {/* Header section */}
+-          <div className="mb-9 text-center max-w-[640px] flex flex-col items-center gap-[18px]">
+-            <div className="inline-block bg-primary text-white font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded">
+-              Free · Online · Secure
+-            </div>
+-            <h1 className="font-sans font-extrabold text-[clamp(30px,5vw,46px)] tracking-[-0.03em] leading-[1.08] [text-wrap:balance]">
+-              Book a free{" "}
+-              <em className="text-primary italic font-serif font-normal tracking-normal">AI automation</em>{" "}
+-              strategy session
+-            </h1>
+-            <p className="text-[14.5px] text-muted-foreground leading-[1.7] max-w-[460px] font-medium">
+-              Tell us about you or your business. We&apos;ll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required.
+-            </p>
+-            <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-[520px]">
+-              {featureItems.map((item) => (
+-                <div key={item.label} className="bg-card border border-border rounded-[10px] p-3.5 text-center">
+-                  <div className="text-primary flex justify-center mb-2">
+-                    {item.icon}
+-                  </div>
+-                  <div className="font-mono text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
+-                </div>
+-              ))}
+-            </div>
+-          </div>
+-
+-          {/* Calendly Inline Embed */}
+-          <div className="w-full bg-card border border-border rounded-[14px] p-2 md:p-4 shadow-[0_2px_16px_rgba(20,32,26,0.06)] relative overflow-hidden min-h-[650px]">
+-            <iframe
+-              src="https://calendly.com/matelabai26/30min?embed_domain=matelab.ai&embed_type=Inline"
+-              width="100%"
+-              height="650px"
+-              frameBorder="0"
+-              title="Select a Date & Time - Calendly"
+-              className="w-full rounded-lg"
+-            />
+-          </div>
+-
+-        </div>
+-      </main>
+-
+-      {/* Footer strip */}
+-      <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
+-        <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
+-          © 2026 matelab.ai · Sydney, AU ·{" "}
+-          <Link href="/" className="text-[#B4B1A4] hover:text-primary transition-colors">@matelab.ai</Link>
+-        </p>
+-      </div>
+-
+-    </div>
+-  )
++export default function Contact() {
++  return <ContactPage locale="en" />
+ }
+diff -ruN --exclude=.git --exclude=node_modules a/app/es/contact/page.tsx b/app/es/contact/page.tsx
+--- a/app/es/contact/page.tsx	1970-01-01 10:00:00
++++ b/app/es/contact/page.tsx	2026-07-13 13:06:53
+@@ -0,0 +1,11 @@
++import type { Metadata } from "next"
++import { ContactPage } from "@/components/contact-page"
++
++export const metadata: Metadata = {
++  title: "Agenda una sesión estratégica de IA | mateLab.ai",
++  alternates: { canonical: "/es/contact", languages: { en: "/contact", "es-419": "/es/contact" } },
++}
++
++export default function SpanishContact() {
++  return <ContactPage locale="es" />
++}
+diff -ruN --exclude=.git --exclude=node_modules a/app/es/page.tsx b/app/es/page.tsx
+--- a/app/es/page.tsx	1970-01-01 10:00:00
++++ b/app/es/page.tsx	2026-07-13 13:03:57
+@@ -0,0 +1,12 @@
++import type { Metadata } from "next"
++import { HomePage } from "@/components/home-page"
++
++export const metadata: Metadata = {
++  title: "mateLab.ai | Automatización con IA para tu negocio",
++  description: "Agentes de IA, chatbots, automatizaciones y talleres prácticos diseñados para tu negocio.",
++  alternates: { canonical: "/es", languages: { en: "/", "es-419": "/es" } },
++}
++
++export default function SpanishHome() {
++  return <HomePage locale="es" />
++}
+diff -ruN --exclude=.git --exclude=node_modules a/app/es/register/page.tsx b/app/es/register/page.tsx
+--- a/app/es/register/page.tsx	1970-01-01 10:00:00
++++ b/app/es/register/page.tsx	2026-07-13 13:08:07
+@@ -0,0 +1,11 @@
++import type { Metadata } from "next"
++import { RegisterPage } from "@/components/register-page"
++
++export const metadata: Metadata = {
++  title: "Contáctanos | mateLab.ai",
++  alternates: { canonical: "/es/register", languages: { en: "/register", "es-419": "/es/register" } },
++}
++
++export default function SpanishRegister() {
++  return <RegisterPage locale="es" />
++}
+diff -ruN --exclude=.git --exclude=node_modules a/app/layout.tsx b/app/layout.tsx
+--- a/app/layout.tsx	2026-07-13 12:00:19
++++ b/app/layout.tsx	2026-07-13 13:11:38
+@@ -24,6 +24,10 @@
+   description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
+   keywords: ['AI automation consulting', 'AI automation agency Sydney', 'custom AI solutions', 'n8n consulting', 'AI agents for business', 'chatbots for business', 'corporate AI workshops', 'automation consulting Australia'],
+   authors: [{ name: 'Matelab AI' }],
++  alternates: {
++    canonical: '/',
++    languages: { en: '/', 'es-419': '/es' },
++  },
+   icons: {
+     icon: [
+       { url: '/favicon.ico', sizes: 'any' },
+diff -ruN --exclude=.git --exclude=node_modules a/app/page.tsx b/app/page.tsx
+--- a/app/page.tsx	2026-07-13 12:00:19
++++ b/app/page.tsx	2026-07-13 13:03:57
+@@ -1,39 +1,5 @@
+-import { Navbar } from "@/components/navbar"
+-import { HeroSection } from "@/components/hero-section"
+-import { Marquee } from "@/components/marquee"
+-import { IsThisForYou } from "@/components/is-this-for-you"
+-import { Services } from "@/components/services"
+-import { HowItWorks } from "@/components/how-it-works"
+-import { UseCases } from "@/components/use-cases"
+-import { ToolsSection } from "@/components/tools-section"
+-import { Workshops } from "@/components/workshops"
+-import { WorkshopCTA } from "@/components/workshop-cta"
+-import { Footer } from "@/components/footer"
++import { HomePage } from "@/components/home-page"
+ 
+ export default function Home() {
+-  return (
+-    <>
+-      {/* Grid background */}
+-      <div className="grid-bg" />
+-
+-      {/* Navigation */}
+-      <Navbar />
+-
+-      {/* Main content */}
+-      <main>
+-        <HeroSection />
+-        <Marquee />
+-        <IsThisForYou />
+-        <Services />
+-        <HowItWorks />
+-        <UseCases />
+-        <ToolsSection />
+-        <Workshops />
+-        <WorkshopCTA />
+-      </main>
+-
+-      {/* Footer */}
+-      <Footer />
+-    </>
+-  )
++  return <HomePage locale="en" />
+ }
+diff -ruN --exclude=.git --exclude=node_modules a/app/register/page.tsx b/app/register/page.tsx
+--- a/app/register/page.tsx	2026-07-13 12:00:19
++++ b/app/register/page.tsx	2026-07-13 13:08:07
+@@ -1,359 +1,8 @@
+-"use client"
++import type { Metadata } from "next"
++import { RegisterPage } from "@/components/register-page"
+ 
+-import Link from "next/link"
+-import { useState } from "react"
+-import { MatelabLogoSmall } from "@/components/matelab-logo"
++export const metadata: Metadata = { title: "Contact mateLab.ai" }
+ 
+-// ─────────────────────────────────────────────────────────────
+-// GOOGLE FORM LINKING
+-// After adding "Phone number" and "How can we assist?" questions
+-// to your Google Form, replace the two placeholder IDs below with
+-// the real entry IDs (see UPDATE-INSTRUCTIONS.md for how to get them).
+-// Until replaced, those two answers are simply not sent — the form
+-// still submits the original four fields without errors.
+-// ─────────────────────────────────────────────────────────────
+-const ENTRY_PHONE = "entry.1329920861"
+-const ENTRY_ASSIST = "entry.829308819"
+-
+-const IconBolt = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+-  </svg>
+-)
+-
+-const IconWrench = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+-  </svg>
+-)
+-
+-const IconCheck = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+-    <polyline points="22 4 12 14.01 9 11.01"/>
+-  </svg>
+-)
+-
+-const IconStar = () => (
+-  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+-  </svg>
+-)
+-
+-const featureItems = [
+-  { icon: <IconBolt />, label: "Ask us anything" },
+-  { icon: <IconWrench />, label: "Start automating now" },
+-  { icon: <IconCheck />, label: "We're here to help" },
+-]
+-
+-const countryCodes = [
+-  { code: "+61", label: "🇦🇺 Australia +61" },
+-  { code: "+64", label: "🇳🇿 New Zealand +64" },
+-  { code: "+1", label: "🇺🇸 USA / Canada +1" },
+-  { code: "+44", label: "🇬🇧 UK +44" },
+-  { code: "+353", label: "🇮🇪 Ireland +353" },
+-  { code: "+65", label: "🇸🇬 Singapore +65" },
+-  { code: "+852", label: "🇭🇰 Hong Kong +852" },
+-  { code: "+81", label: "🇯🇵 Japan +81" },
+-  { code: "+82", label: "🇰🇷 South Korea +82" },
+-  { code: "+86", label: "🇨🇳 China +86" },
+-  { code: "+91", label: "🇮🇳 India +91" },
+-  { code: "+62", label: "🇮🇩 Indonesia +62" },
+-  { code: "+60", label: "🇲🇾 Malaysia +60" },
+-  { code: "+63", label: "🇵🇭 Philippines +63" },
+-  { code: "+66", label: "🇹🇭 Thailand +66" },
+-  { code: "+84", label: "🇻🇳 Vietnam +84" },
+-  { code: "+971", label: "🇦🇪 UAE +971" },
+-  { code: "+966", label: "🇸🇦 Saudi Arabia +966" },
+-  { code: "+972", label: "🇮🇱 Israel +972" },
+-  { code: "+90", label: "🇹🇷 Turkey +90" },
+-  { code: "+27", label: "🇿🇦 South Africa +27" },
+-  { code: "+234", label: "🇳🇬 Nigeria +234" },
+-  { code: "+254", label: "🇰🇪 Kenya +254" },
+-  { code: "+20", label: "🇪🇬 Egypt +20" },
+-  { code: "+33", label: "🇫🇷 France +33" },
+-  { code: "+49", label: "🇩🇪 Germany +49" },
+-  { code: "+34", label: "🇪🇸 Spain +34" },
+-  { code: "+39", label: "🇮🇹 Italy +39" },
+-  { code: "+351", label: "🇵🇹 Portugal +351" },
+-  { code: "+31", label: "🇳🇱 Netherlands +31" },
+-  { code: "+32", label: "🇧🇪 Belgium +32" },
+-  { code: "+41", label: "🇨🇭 Switzerland +41" },
+-  { code: "+43", label: "🇦🇹 Austria +43" },
+-  { code: "+46", label: "🇸🇪 Sweden +46" },
+-  { code: "+47", label: "🇳🇴 Norway +47" },
+-  { code: "+45", label: "🇩🇰 Denmark +45" },
+-  { code: "+358", label: "🇫🇮 Finland +358" },
+-  { code: "+48", label: "🇵🇱 Poland +48" },
+-  { code: "+420", label: "🇨🇿 Czechia +420" },
+-  { code: "+30", label: "🇬🇷 Greece +30" },
+-  { code: "+40", label: "🇷🇴 Romania +40" },
+-  { code: "+36", label: "🇭🇺 Hungary +36" },
+-  { code: "+380", label: "🇺🇦 Ukraine +380" },
+-  { code: "+52", label: "🇲🇽 Mexico +52" },
+-  { code: "+55", label: "🇧🇷 Brazil +55" },
+-  { code: "+54", label: "🇦🇷 Argentina +54" },
+-  { code: "+56", label: "🇨🇱 Chile +56" },
+-  { code: "+57", label: "🇨🇴 Colombia +57" },
+-  { code: "+51", label: "🇵🇪 Peru +51" },
+-  { code: "+598", label: "🇺🇾 Uruguay +598" },
+-  { code: "+593", label: "🇪🇨 Ecuador +593" },
+-  { code: "+506", label: "🇨🇷 Costa Rica +506" },
+-]
+-
+-const ASSIST_MAX = 400
+-
+-const inputClass = (error: boolean) =>
+-  `w-full bg-card border rounded-lg text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors focus:border-primary ${
+-    error ? "border-[#C0392B]" : "border-[#D4D2C6]"
+-  }`
+-
+-const labelClass = "font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground"
+-
+-export default function RegisterPage() {
+-  const [submitted, setSubmitted] = useState(false)
+-  const [loading, setLoading] = useState(false)
+-  const [errors, setErrors] = useState<Record<string, boolean>>({})
+-  const [assistText, setAssistText] = useState("")
+-
+-  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeOw0Vu6Rnv41kIs67wgrxmrhNVngquBFID1m9_i-Ta9nT2WA/formResponse"
+-
+-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+-    e.preventDefault()
+-    const form = e.currentTarget
+-    const data = new FormData(form)
+-
+-    const firstName = data.get("firstName") as string
+-    const lastName = data.get("lastName") as string
+-    const email = data.get("email") as string
+-    const countryCode = data.get("countryCode") as string
+-    const phone = (data.get("phone") as string) || ""
+-    const assist = (data.get("assist") as string) || ""
+-
+-    const newErrors: Record<string, boolean> = {}
+-    if (!firstName.trim()) newErrors.firstName = true
+-    if (!lastName.trim()) newErrors.lastName = true
+-    if (!email.trim()) newErrors.email = true
+-    if (!data.get("type") || (data.get("type") as string).trim() === "") newErrors.type = true
+-
+-    if (Object.keys(newErrors).length > 0) {
+-      setErrors(newErrors)
+-      return
+-    }
+-
+-    setLoading(true)
+-
+-    const params = new URLSearchParams()
+-    params.append("entry.1145376415", firstName)
+-    params.append("entry.700943531", lastName)
+-    params.append("entry.355061805", email)
+-    params.append("entry.700825334", data.get("type") as string)
+-
+-    // Optional fields — only sent once the real Google Form entry IDs are set
+-    if (phone.trim() && !ENTRY_PHONE.includes("REPLACE")) {
+-      params.append(ENTRY_PHONE, `${countryCode} ${phone.trim()}`)
+-    }
+-    if (assist.trim() && !ENTRY_ASSIST.includes("REPLACE")) {
+-      params.append(ENTRY_ASSIST, assist.trim().slice(0, ASSIST_MAX))
+-    }
+-
+-    try {
+-      const iframe = document.createElement("iframe")
+-      iframe.style.display = "none"
+-      document.body.appendChild(iframe)
+-
+-      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
+-      if (iframeDoc) {
+-        const form = iframeDoc.createElement("form")
+-        form.method = "POST"
+-        form.action = GOOGLE_FORM_URL
+-
+-        params.forEach((value, key) => {
+-          const input = iframeDoc.createElement("input")
+-          input.type = "hidden"
+-          input.name = key
+-          input.value = value
+-          form.appendChild(input)
+-        })
+-
+-        iframeDoc.body.appendChild(form)
+-        form.submit()
+-      }
+-
+-      setTimeout(() => {
+-        document.body.removeChild(iframe)
+-      }, 2000)
+-
+-    } catch (_) {}
+-
+-    setLoading(false)
+-    setSubmitted(true)
+-  }
+-
+-  return (
+-    <div className="min-h-screen bg-background flex flex-col">
+-
+-      {/* Grid bg */}
+-      <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
+-
+-      {/* Simple nav */}
+-      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] border-b border-[#E9E7DD]">
+-        <Link href="/" className="flex items-center gap-2.5 no-underline">
+-          <MatelabLogoSmall size={28} />
+-          <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
+-            <span className="text-foreground">mate</span>
+-            <span className="text-primary">lab.ai</span>
+-          </div>
+-        </Link>
+-        <Link href="/" className="font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
+-          ← Back to home
+-        </Link>
+-      </nav>
+-
+-      {/* Main Container */}
+-      <main className="flex-1 flex justify-center px-6 pt-32 pb-20 relative z-10">
+-        <div className="w-full max-w-[520px]">
+-
+-          {!submitted ? (
+-            <div className="flex flex-col gap-[22px]">
+-              {/* Header */}
+-              <div className="flex flex-col gap-[18px] items-start">
+-                <div className="inline-block bg-primary text-white font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded">
+-                  Contact us
+-                </div>
+-                <h1 className="font-sans font-extrabold text-[clamp(28px,5vw,38px)] tracking-[-0.02em] leading-[1.1]">
+-                  Let us know how we can help boost{" "}
+-                  <em className="text-primary italic font-serif font-normal tracking-normal">your business</em>
+-                </h1>
+-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
+-                  {featureItems.map((item) => (
+-                    <div key={item.label} className="bg-card border border-border rounded-[10px] p-3.5 text-center">
+-                      <div className="text-primary flex justify-center mb-2">
+-                        {item.icon}
+-                      </div>
+-                      <div className="font-mono text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
+-                    </div>
+-                  ))}
+-                </div>
+-              </div>
+-
+-              {/* Form */}
+-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+-                  <div className="flex flex-col gap-1.5">
+-                    <label htmlFor="firstName" className={labelClass}>First Name *</label>
+-                    <input id="firstName" name="firstName" type="text" placeholder="Mick" className={inputClass(!!errors.firstName)} />
+-                  </div>
+-                  <div className="flex flex-col gap-1.5">
+-                    <label htmlFor="lastName" className={labelClass}>Last Name *</label>
+-                    <input id="lastName" name="lastName" type="text" placeholder="Dundee" className={inputClass(!!errors.lastName)} />
+-                  </div>
+-                </div>
+-                <div className="flex flex-col gap-1.5">
+-                  <label htmlFor="email" className={labelClass}>Email *</label>
+-                  <input id="email" name="email" type="email" placeholder="hello@yourcompany.com" className={inputClass(!!errors.email)} />
+-                </div>
+-
+-                {/* Phone (optional): country code + number */}
+-                <div className="flex flex-col gap-1.5">
+-                  <label htmlFor="phone" className={labelClass}>Phone Number <span className="normal-case text-[#B4B1A4]">(optional)</span></label>
+-                  <div className="grid grid-cols-[200px_1fr] gap-3">
+-                    <select
+-                      id="countryCode"
+-                      name="countryCode"
+-                      defaultValue="+61"
+-                      aria-label="Country code"
+-                      className={`${inputClass(false)} appearance-none pr-2`}
+-                    >
+-                      {countryCodes.map((c) => (
+-                        <option key={c.label} value={c.code}>{c.label}</option>
+-                      ))}
+-                    </select>
+-                    <input
+-                      id="phone"
+-                      name="phone"
+-                      type="tel"
+-                      inputMode="tel"
+-                      placeholder="412 345 678"
+-                      className={inputClass(false)}
+-                    />
+-                  </div>
+-                </div>
+-
+-                <div className="flex flex-col gap-1.5">
+-                  <label htmlFor="type" className={labelClass}>I am a… *</label>
+-                  <select id="type" name="type" defaultValue="" className={`${inputClass(!!errors.type)} appearance-none`}>
+-                    <option value="">Select one</option>
+-                    <option>Business owner / Founder</option>
+-                    <option>Self Employed</option>
+-                    <option>Corporate team member</option>
+-                    <option>Freelancer / Consultant</option>
+-                    <option>Just curious</option>
+-                  </select>
+-                </div>
+-
+-                {/* How can we assist? (optional, 400 chars) */}
+-                <div className="flex flex-col gap-1.5">
+-                  <div className="flex justify-between items-baseline">
+-                    <label htmlFor="assist" className={labelClass}>How can we assist? <span className="normal-case text-[#B4B1A4]">(optional)</span></label>
+-                    <span className="font-mono text-[10px] text-[#B4B1A4]">{assistText.length}/{ASSIST_MAX}</span>
+-                  </div>
+-                  <textarea
+-                    id="assist"
+-                    name="assist"
+-                    rows={4}
+-                    maxLength={ASSIST_MAX}
+-                    value={assistText}
+-                    onChange={(e) => setAssistText(e.target.value)}
+-                    placeholder="Tell us briefly about your business and what you'd like to automate…"
+-                    className={`${inputClass(false)} resize-none leading-[1.6]`}
+-                  />
+-                </div>
+-
+-                <button
+-                  type="submit"
+-                  disabled={loading}
+-                  className="mt-2 bg-primary text-white border-none cursor-pointer font-sans font-bold text-[15px] px-7 py-[15px] rounded-lg text-left hover:bg-foreground transition-colors disabled:opacity-60"
+-                >
+-                  {loading ? "Sending…" : "Submit my query →"}
+-                </button>
+-                <p className="font-mono text-[11px] tracking-[0.05em] text-[#B4B1A4]">
+-                  We will contact you within 48 hours
+-                </p>
+-              </form>
+-            </div>
+-          ) : (
+-            /* Success state */
+-            <div className="text-center py-16 flex flex-col items-center gap-5">
+-              <div className="text-primary">
+-                <IconStar />
+-              </div>
+-              <h2 className="font-sans font-extrabold text-[30px] tracking-[-0.02em]">
+-                We&apos;ve got you!
+-              </h2>
+-              <p className="text-sm text-muted-foreground leading-[1.7] max-w-[360px]">
+-                Thanks for submitting your query! We&apos;ll be in touch within 48 hours.
+-              </p>
+-              <Link
+-                href="/"
+-                className="inline-block bg-primary text-white font-sans font-bold text-sm px-6 py-[13px] rounded-lg hover:bg-foreground transition-colors"
+-              >
+-                ← Back to Matelab.ai
+-              </Link>
+-            </div>
+-          )}
+-
+-        </div>
+-      </main>
+-
+-      {/* Footer strip */}
+-      <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
+-        <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
+-          © 2026 matelab.ai · Sydney, AU ·{" "}
+-          <Link href="/" className="text-[#B4B1A4] hover:text-primary transition-colors">matelab.ai</Link>
+-        </p>
+-      </div>
+-
+-    </div>
+-  )
++export default function Register() {
++  return <RegisterPage locale="en" />
+ }
+diff -ruN --exclude=.git --exclude=node_modules a/components/contact-page.tsx b/components/contact-page.tsx
+--- a/components/contact-page.tsx	1970-01-01 10:00:00
++++ b/components/contact-page.tsx	2026-07-13 13:10:29
+@@ -0,0 +1,116 @@
++"use client"
++
++import Link from "next/link"
++import { MatelabLogoSmall } from "@/components/matelab-logo"
++import { LanguageSwitcher } from "@/components/language-switcher"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
++import { LocalePreferenceRedirect } from "@/components/locale-preference-redirect"
++
++const IconPhone = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
++  </svg>
++)
++
++const IconMap = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
++    <line x1="9" y1="3" x2="9" y2="18"/>
++    <line x1="15" y1="6" x2="15" y2="21"/>
++  </svg>
++)
++
++const IconNoCode = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
++    <polyline points="22 4 12 14.01 9 11.01"/>
++  </svg>
++)
++
++export function ContactPage({ locale }: { locale: Locale }) {
++  const messages = getMessages(locale)
++  const copy = messages.contact
++  const featureItems = [
++    { icon: <IconPhone />, label: copy.features[0] },
++    { icon: <IconMap />, label: copy.features[1] },
++    { icon: <IconNoCode />, label: copy.features[2] },
++  ]
++  return (
++    <div className="min-h-screen bg-background flex flex-col">
++      {locale === "en" && <LocalePreferenceRedirect />}
++
++      {/* Grid bg */}
++      <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
++
++      {/* Simple nav */}
++      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] border-b border-[#E9E7DD]">
++        <Link href={localizedPath(locale, "/")} className="flex items-center gap-2.5 no-underline">
++          <MatelabLogoSmall size={28} />
++          <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
++            <span className="text-foreground">mate</span>
++            <span className="text-primary">lab.ai</span>
++          </div>
++        </Link>
++        <div className="flex items-center gap-3">
++          <LanguageSwitcher locale={locale} />
++          <Link href={localizedPath(locale, "/")} className="hidden sm:inline font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
++            ← {messages.common.backHome}
++          </Link>
++        </div>
++      </nav>
++
++      {/* Main Container */}
++      <main className="flex-1 flex flex-col items-center justify-center px-6 pt-32 pb-20 relative z-10">
++        <div className="w-full max-w-[900px] flex flex-col items-center">
++
++          {/* Header section */}
++          <div className="mb-9 text-center max-w-[640px] flex flex-col items-center gap-[18px]">
++            <div className="inline-block bg-primary text-white font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded">
++              {copy.badge}
++            </div>
++            <h1 className="font-sans font-extrabold text-[clamp(30px,5vw,46px)] tracking-[-0.03em] leading-[1.08] [text-wrap:balance]">
++              {copy.title}{" "}
++              <em className="text-primary italic font-serif font-normal tracking-normal">{copy.accent}</em>{" "}
++              {copy.titleEnd}
++            </h1>
++            <p className="text-[14.5px] text-muted-foreground leading-[1.7] max-w-[460px] font-medium">
++              {copy.body}
++            </p>
++            <div className="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-3 w-full max-w-[520px]">
++              {featureItems.map((item) => (
++                <div key={item.label} className="bg-card border border-border rounded-[10px] p-3.5 text-center">
++                  <div className="text-primary flex justify-center mb-2">
++                    {item.icon}
++                  </div>
++                  <div className="font-mono text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
++                </div>
++              ))}
++            </div>
++          </div>
++
++          {/* Calendly Inline Embed */}
++          <div className="w-full bg-card border border-border rounded-[14px] p-2 md:p-4 shadow-[0_2px_16px_rgba(20,32,26,0.06)] relative overflow-hidden min-h-[650px]">
++            <iframe
++              src={`https://calendly.com/matelabai26/30min?embed_domain=matelab.ai&embed_type=Inline${locale === "es" ? "&locale=es" : ""}`}
++              width="100%"
++              height="650px"
++              frameBorder="0"
++              title={copy.frameTitle}
++              className="w-full rounded-lg"
++            />
++          </div>
++
++        </div>
++      </main>
++
++      {/* Footer strip */}
++      <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
++        <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
++          © 2026 matelab.ai · Sydney, AU ·{" "}
++          <Link href={localizedPath(locale, "/")} className="text-[#B4B1A4] hover:text-primary transition-colors">@matelab.ai</Link>
++        </p>
++      </div>
++
++    </div>
++  )
++}
+diff -ruN --exclude=.git --exclude=node_modules a/components/footer.tsx b/components/footer.tsx
+--- a/components/footer.tsx	2026-07-13 12:00:19
++++ b/components/footer.tsx	2026-07-13 13:06:19
+@@ -1,7 +1,11 @@
+ import Link from "next/link"
+ import { MatelabLogoSmall } from "./matelab-logo"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
+ 
+-export function Footer() {
++export function Footer({ locale }: { locale: Locale }) {
++  const messages = getMessages(locale)
++  const copy = messages.footer
++  const navLinks = messages.nav.links
+   return (
+     <footer className="border-t border-[#E9E7DD] py-12 relative z-10 bg-background">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+@@ -11,7 +15,7 @@
+ 
+           {/* Logo */}
+           <div className="flex flex-col gap-3.5">
+-            <Link href="#" className="flex items-center gap-2.5 no-underline">
++            <Link href={localizedPath(locale, "/")} className="flex items-center gap-2.5 no-underline">
+               <MatelabLogoSmall size={28} />
+               <div className="font-sans font-extrabold text-[17px] tracking-[-0.04em]">
+                 <span className="text-foreground">mate</span>
+@@ -22,37 +26,24 @@
+ 
+           {/* Nav links */}
+           <ul className="flex flex-col gap-2.5 list-none">
+-            <li className="font-mono text-[10px] text-[#B4B1A4] tracking-[0.15em] uppercase mb-1">Navigation</li>
++            <li className="font-mono text-[10px] text-[#B4B1A4] tracking-[0.15em] uppercase mb-1">{copy.navigation}</li>
++            {navLinks.map((link) => (
++              <li key={link.href}>
++                <Link href={link.href} className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
++                  {link.label}
++                </Link>
++              </li>
++            ))}
+             <li>
+-              <Link href="#services" className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+-                What we do
++              <Link href={localizedPath(locale, "/contact")} className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
++                {messages.nav.book}
+               </Link>
+             </li>
+-            <li>
+-              <Link href="#how" className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+-                How it works
+-              </Link>
+-            </li>
+-            <li>
+-              <Link href="#usecases" className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+-                What we build
+-              </Link>
+-            </li>
+-            <li>
+-              <Link href="#workshops" className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+-                Workshops
+-              </Link>
+-            </li>
+-            <li>
+-              <Link href="/contact" className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] uppercase hover:text-primary transition-colors">
+-                Book a Call
+-              </Link>
+-            </li>
+           </ul>
+ 
+           {/* Connect */}
+           <div className="flex flex-col gap-2.5">
+-            <div className="font-mono text-[10px] text-[#B4B1A4] tracking-[0.15em] uppercase mb-1">Connect</div>
++            <div className="font-mono text-[10px] text-[#B4B1A4] tracking-[0.15em] uppercase mb-1">{copy.connect}</div>
+ 
+             {/* Instagram */}
+             <Link
+@@ -73,7 +64,7 @@
+ 
+             {/* Contact form */}
+             <Link
+-              href="/register"
++              href={localizedPath(locale, "/register")}
+               className="flex items-center gap-2.5 no-underline group"
+             >
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground group-hover:text-primary transition-colors">
+@@ -81,20 +72,20 @@
+                 <polyline points="22,6 12,13 2,6"/>
+               </svg>
+               <span className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] group-hover:text-primary transition-colors">
+-                Contact form
++                {copy.contactForm}
+               </span>
+             </Link>
+ 
+             {/* Book a call */}
+             <Link
+-              href="/contact"
++              href={localizedPath(locale, "/contact")}
+               className="flex items-center gap-2.5 no-underline group"
+             >
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground group-hover:text-primary transition-colors">
+                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+               </svg>
+               <span className="font-mono text-[11px] text-muted-foreground tracking-[0.08em] group-hover:text-primary transition-colors">
+-                Book a free call
++                {copy.freeCall}
+               </span>
+             </Link>
+           </div>
+@@ -107,7 +98,7 @@
+             © 2026 matelab.ai
+           </div>
+           <div className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
+-            No code experience needed. No excuses. Just automation.
++            {copy.closing}
+           </div>
+         </div>
+ 
+diff -ruN --exclude=.git --exclude=node_modules a/components/hero-section.tsx b/components/hero-section.tsx
+--- a/components/hero-section.tsx	2026-07-13 12:00:19
++++ b/components/hero-section.tsx	2026-07-13 13:04:47
+@@ -1,5 +1,6 @@
+ import Link from "next/link"
+ import { LiveAutomationCard } from "./live-automation-card"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
+ 
+ const Check = () => (
+   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1E8A55" strokeWidth="2" strokeLinecap="round">
+@@ -7,7 +8,9 @@
+   </svg>
+ )
+ 
+-export function HeroSection() {
++export function HeroSection({ locale }: { locale: Locale }) {
++  const messages = getMessages(locale)
++  const copy = messages.hero
+   return (
+     <section id="hero" className="relative overflow-hidden pt-[130px] pb-[88px]">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12 relative z-10 flex flex-col gap-[26px]">
+@@ -16,56 +19,56 @@
+         <div className="animate-fade-up inline-flex self-start items-center gap-1.5 sm:gap-2 bg-card border border-[#DEDCD0] rounded-full px-2.5 sm:px-3.5 py-[6px] sm:py-[7px] max-w-full">
+           <span className="w-1.5 h-1.5 shrink-0 bg-primary rounded-full animate-blink" />
+           <span className="font-mono text-[8.5px] sm:text-[11px] tracking-[0.06em] sm:tracking-[0.15em] uppercase text-muted-foreground whitespace-nowrap">
+-            AI Automation lab · Sydney → Worldwide
++            {copy.badge}
+           </span>
+         </div>
+ 
+         {/* Full-width headline */}
+         <h1 className="animate-fade-up animation-delay-100 font-sans text-[clamp(34px,6vw,54px)] font-extrabold leading-[1.05] tracking-[-0.02em] [text-wrap:balance]">
+-          Save 10+ hours a week.<br/>
+-          Start <em className="font-serif italic text-primary font-normal tracking-normal">automating with AI.</em>
++          {copy.headline}<br/>
++          {copy.headlineLead} <em className="font-serif italic text-primary font-normal tracking-normal">{copy.headlineAccent}</em>
+         </h1>
+ 
+         {/* Two-column row: copy + live card */}
+         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mt-3">
+           <div className="flex flex-col gap-[26px]">
+             <p className="animate-fade-up animation-delay-200 text-base leading-[1.7] text-[#55584E] font-medium max-w-[480px]">
+-              Custom AI agents, chatbots and automation flows —{" "}
+-              <strong className="text-foreground font-bold">designed, built and deployed for your business in days, not months.</strong>{" "}
+-              Then we train your team to run them. No developers needed on your side.
++              {copy.intro}{" "}
++              <strong className="text-foreground font-bold">{copy.introStrong}</strong>{" "}
++              {copy.introEnd}
+             </p>
+ 
+             <div className="animate-fade-up animation-delay-300 flex flex-wrap gap-3.5">
+               <Link
+-                href="/contact"
++                href={localizedPath(locale, "/contact")}
+                 className="bg-primary text-white px-7 py-[15px] rounded-lg font-sans font-bold text-[15px] hover:bg-foreground transition-colors"
+               >
+-                Book a free strategy call &rarr;
++                {copy.primary} &rarr;
+               </Link>
+               <Link
+                 href="#services"
+                 className="bg-card text-foreground px-7 py-[15px] rounded-lg font-sans font-semibold text-[15px] border border-[#D4D2C6] hover:border-primary hover:text-primary transition-colors"
+               >
+-                See what we do
++                {copy.secondary}
+               </Link>
+             </div>
+ 
+             <div className="animate-fade-up animation-delay-400 flex flex-wrap gap-[26px]">
+               <div className="flex items-center gap-2 font-mono text-xs tracking-[0.05em] text-muted-foreground">
+-                <Check /> Fixed-scope builds
++                <Check /> {copy.checks[0]}
+               </div>
+               <div className="flex items-center gap-2 font-mono text-xs tracking-[0.05em] text-muted-foreground">
+-                <Check /> Yours to keep — no lock-in
++                <Check /> {copy.checks[1]}
+               </div>
+               <div className="flex items-center gap-2 font-mono text-xs tracking-[0.05em] text-muted-foreground">
+-                <Check /> Team trained on handover
++                <Check /> {copy.checks[2]}
+               </div>
+             </div>
+           </div>
+ 
+           {/* Animated Live Automation card */}
+           <div className="animate-fade-up animation-delay-350 flex items-center justify-center lg:justify-end">
+-            <LiveAutomationCard />
++            <LiveAutomationCard locale={locale} />
+           </div>
+         </div>
+       </div>
+diff -ruN --exclude=.git --exclude=node_modules a/components/home-page.tsx b/components/home-page.tsx
+--- a/components/home-page.tsx	1970-01-01 10:00:00
++++ b/components/home-page.tsx	2026-07-13 13:10:29
+@@ -0,0 +1,35 @@
++import { Navbar } from "@/components/navbar"
++import { HeroSection } from "@/components/hero-section"
++import { Marquee } from "@/components/marquee"
++import { IsThisForYou } from "@/components/is-this-for-you"
++import { Services } from "@/components/services"
++import { HowItWorks } from "@/components/how-it-works"
++import { UseCases } from "@/components/use-cases"
++import { ToolsSection } from "@/components/tools-section"
++import { Workshops } from "@/components/workshops"
++import { WorkshopCTA } from "@/components/workshop-cta"
++import { Footer } from "@/components/footer"
++import type { Locale } from "@/lib/i18n"
++import { LocalePreferenceRedirect } from "@/components/locale-preference-redirect"
++
++export function HomePage({ locale }: { locale: Locale }) {
++  return (
++    <>
++      {locale === "en" && <LocalePreferenceRedirect />}
++      <div className="grid-bg" />
++      <Navbar locale={locale} />
++      <main>
++        <HeroSection locale={locale} />
++        <Marquee locale={locale} />
++        <IsThisForYou locale={locale} />
++        <Services locale={locale} />
++        <HowItWorks locale={locale} />
++        <UseCases locale={locale} />
++        <ToolsSection locale={locale} />
++        <Workshops locale={locale} />
++        <WorkshopCTA locale={locale} />
++      </main>
++      <Footer locale={locale} />
++    </>
++  )
++}
+diff -ruN --exclude=.git --exclude=node_modules a/components/how-it-works.tsx b/components/how-it-works.tsx
+--- a/components/how-it-works.tsx	2026-07-13 12:00:19
++++ b/components/how-it-works.tsx	2026-07-13 13:05:35
+@@ -1,39 +1,19 @@
+ import { Reveal } from "./reveal"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-const steps = [
+-  {
+-    n: "01",
+-    title: "Strategy call",
+-    body: "Initial 45 minutes call at no cost. We map your workflows and spot the highest-value automation opportunities."
+-  },
+-  {
+-    n: "02",
+-    title: "Automation audit",
+-    body: "A prioritised roadmap: what to automate first, what it saves, and a fixed quote for each build."
+-  },
+-  {
+-    n: "03",
+-    title: "Build & deploy",
+-    body: "We build on proven tools — n8n, Make, Claude — and ship working automations in days, not months."
+-  },
+-  {
+-    n: "04",
+-    title: "Handover & training",
+-    body: "Documentation plus training so your team owns it. No lock-in — everything we build is yours."
+-  }
+-]
+-
+-export function HowItWorks() {
++export function HowItWorks({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).how
++  const steps = copy.steps
+   return (
+     <section id="how" className="pb-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <Reveal>
+-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">How it works</div>
++          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
+           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+-            From first call to live automation <span className="text-primary">in four steps.</span>
++            {copy.title} <span className="text-primary">{copy.accent}</span>
+           </h2>
+           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+-            No six-month projects. No black boxes. You see exactly what&apos;s being built and why.
++            {copy.intro}
+           </p>
+         </Reveal>
+ 
+diff -ruN --exclude=.git --exclude=node_modules a/components/is-this-for-you.tsx b/components/is-this-for-you.tsx
+--- a/components/is-this-for-you.tsx	2026-07-13 12:00:19
++++ b/components/is-this-for-you.tsx	2026-07-13 13:04:47
+@@ -1,42 +1,27 @@
+ import { Clock, Sparkles, Zap } from "lucide-react"
+ import { Reveal } from "./reveal"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-const pains = [
+-  {
+-    icon: Clock,
+-    title: "Hours lost to tasks that should take minutes",
+-    body: "Manual reports, copy-pasting between spreadsheets, chasing bookings, answering the same customer questions daily. That's payroll spent on work software should do."
+-  },
+-  {
+-    icon: Sparkles,
+-    title: "You know AI could help — but no one has time to figure it out",
+-    body: "Everyone's talking about AI agents. You've tried ChatGPT. But turning that into systems that actually run parts of your business? That's where we come in."
+-  },
+-  {
+-    icon: Zap,
+-    title: "Hiring developers is slow and expensive",
+-    body: "You don't need a six-month software project. Most business automations can be scoped, built and live within weeks — on tools your team can maintain themselves."
+-  }
+-]
+-
+-export function IsThisForYou() {
++export function IsThisForYou({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).pains
++  const icons = [Clock, Sparkles, Zap]
+   return (
+     <section id="is-this-for-you" className="py-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <Reveal>
+-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">Sound familiar?</div>
++          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
+           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+-            Your team is doing work <span className="text-primary">a robot should do.</span>
++            {copy.title} <span className="text-primary">{copy.accent}</span>
+           </h2>
+           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+-            If any of these hit close to home, a strategy call will pay for itself.
++            {copy.intro}
+           </p>
+         </Reveal>
+ 
+         <Reveal>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+-            {pains.map((pain, i) => {
+-              const Icon = pain.icon
++            {copy.items.map((pain, i) => {
++              const Icon = icons[i]
+               return (
+                 <div
+                   key={i}
+diff -ruN --exclude=.git --exclude=node_modules a/components/language-switcher.tsx b/components/language-switcher.tsx
+--- a/components/language-switcher.tsx	1970-01-01 10:00:00
++++ b/components/language-switcher.tsx	2026-07-13 13:10:29
+@@ -0,0 +1,40 @@
++"use client"
++
++import { Globe2 } from "lucide-react"
++import { usePathname, useRouter } from "next/navigation"
++import { useEffect } from "react"
++import type { Locale } from "@/lib/i18n"
++import { getMessages } from "@/lib/i18n"
++
++export function LanguageSwitcher({ locale, compact = false }: { locale: Locale; compact?: boolean }) {
++  const router = useRouter()
++  const pathname = usePathname()
++  const messages = getMessages(locale)
++  const targetLocale: Locale = locale === "en" ? "es" : "en"
++
++  useEffect(() => {
++    document.documentElement.lang = locale === "es" ? "es-419" : "en"
++  }, [locale])
++
++  function switchLanguage() {
++    const withoutSpanish = pathname.replace(/^\/es(?=\/|$)/, "") || "/"
++    const target = targetLocale === "es"
++      ? withoutSpanish === "/" ? "/es" : `/es${withoutSpanish}`
++      : withoutSpanish
++    window.localStorage.setItem("matelab-locale", targetLocale)
++    router.push(`${target}${window.location.hash}`)
++  }
++
++  return (
++    <button
++      type="button"
++      onClick={switchLanguage}
++      aria-label={messages.language.switchTo}
++      title={messages.language.switchTo}
++      className={`inline-flex items-center justify-center gap-1.5 rounded-md border border-[#D4D2C6] bg-card font-mono font-semibold tracking-[0.08em] text-foreground hover:border-primary hover:text-primary transition-colors ${compact ? "px-3 py-2.5 text-[11px]" : "px-3 py-2 text-[10px]"}`}
++    >
++      <Globe2 aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={1.8} />
++      <span>{locale === "en" ? "ES" : "EN"}</span>
++    </button>
++  )
++}
+diff -ruN --exclude=.git --exclude=node_modules a/components/live-automation-card.tsx b/components/live-automation-card.tsx
+--- a/components/live-automation-card.tsx	2026-07-13 12:00:19
++++ b/components/live-automation-card.tsx	2026-07-13 13:04:47
+@@ -1,14 +1,11 @@
+ "use client"
+ 
+ import { useEffect, useState } from "react"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-const steps = [
+-  { title: "New sales lead received", sub: "via website form · 9:41 am" },
+-  { title: "AI agent qualifies & drafts reply", sub: "tone-matched, ready to send" },
+-  { title: "CRM updated, call booked", sub: "no human touch · 14 min saved" },
+-]
+-
+-export function LiveAutomationCard() {
++export function LiveAutomationCard({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).live
++  const steps = copy.steps
+   const [phase, setPhase] = useState(0)
+ 
+   useEffect(() => {
+@@ -56,10 +53,10 @@
+     <div className="bg-card border border-border rounded-[14px] p-7 flex flex-col w-full max-w-[460px] shadow-[0_2px_16px_rgba(20,32,26,0.06)]">
+       {/* Header */}
+       <div className="flex justify-between items-center pb-5">
+-        <div className="font-mono text-[11px] tracking-[0.12em] text-[#8A887C]">LIVE AUTOMATION</div>
++        <div className="font-mono text-[11px] tracking-[0.12em] text-[#8A887C]">{copy.title}</div>
+         <div className="flex items-center gap-1.5">
+           <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse-dot" />
+-          <div className="font-mono text-[11px] tracking-[0.08em] text-primary">RUNNING</div>
++          <div className="font-mono text-[11px] tracking-[0.08em] text-primary">{copy.running}</div>
+         </div>
+       </div>
+ 
+@@ -89,7 +86,7 @@
+ 
+       {/* Footer */}
+       <div className="mt-6 pt-5 border-t border-[#E9E7DD] flex justify-between items-center">
+-        <div className="text-[13px] font-medium text-muted-foreground">This week, for one client</div>
++        <div className="text-[13px] font-medium text-muted-foreground">{copy.footer}</div>
+         <div className="flex items-baseline gap-2.5">
+           <div
+             className="font-mono text-xs text-primary"
+@@ -99,7 +96,7 @@
+           </div>
+           <div className="font-sans font-extrabold text-[22px] text-foreground tracking-[-0.02em]">
+             {phase >= 3 ? "11.7" : "11.5"} hrs{" "}
+-            <span className="text-[13px] text-[#8A887C] font-medium">back</span>
++            <span className="text-[13px] text-[#8A887C] font-medium">{copy.back}</span>
+           </div>
+         </div>
+       </div>
+diff -ruN --exclude=.git --exclude=node_modules a/components/locale-preference-redirect.tsx b/components/locale-preference-redirect.tsx
+--- a/components/locale-preference-redirect.tsx	1970-01-01 10:00:00
++++ b/components/locale-preference-redirect.tsx	2026-07-13 13:10:29
+@@ -0,0 +1,18 @@
++"use client"
++
++import { usePathname, useRouter } from "next/navigation"
++import { useEffect } from "react"
++
++export function LocalePreferenceRedirect() {
++  const pathname = usePathname()
++  const router = useRouter()
++
++  useEffect(() => {
++    if (window.localStorage.getItem("matelab-locale") !== "es") return
++    if (pathname.startsWith("/es")) return
++    const target = pathname === "/" ? "/es" : `/es${pathname}`
++    router.replace(`${target}${window.location.hash}`)
++  }, [pathname, router])
++
++  return null
++}
+diff -ruN --exclude=.git --exclude=node_modules a/components/marquee.tsx b/components/marquee.tsx
+--- a/components/marquee.tsx	2026-07-13 12:00:19
++++ b/components/marquee.tsx	2026-07-13 13:04:47
+@@ -1,16 +1,7 @@
+-const marqueeItems = [
+-  "Custom AI Agents",
+-  "n8n Automations",
+-  "AI Chatbots",
+-  "Lead Capture Flows",
+-  "CRM Integrations",
+-  "Automation Audits",
+-  "AI Strategy",
+-  "Corporate Workshops",
+-  "Team Training"
+-]
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-export function Marquee() {
++export function Marquee({ locale }: { locale: Locale }) {
++  const marqueeItems = getMessages(locale).marquee
+   return (
+     <div className="border-y border-[#E9E7DD] py-3.5 overflow-hidden bg-card">
+       <div className="flex w-max animate-marquee">
+diff -ruN --exclude=.git --exclude=node_modules a/components/navbar.tsx b/components/navbar.tsx
+--- a/components/navbar.tsx	2026-07-13 12:00:19
++++ b/components/navbar.tsx	2026-07-13 13:35:45
+@@ -3,15 +3,12 @@
+ import Link from "next/link"
+ import { useState, useEffect } from "react"
+ import { MatelabLogo } from "./matelab-logo"
++import { LanguageSwitcher } from "./language-switcher"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
+ 
+-const navLinks = [
+-  { href: "#services", label: "What we do" },
+-  { href: "#how", label: "How it works" },
+-  { href: "#usecases", label: "What we build" },
+-  { href: "#workshops", label: "Workshops" },
+-]
+-
+-export function Navbar() {
++export function Navbar({ locale }: { locale: Locale }) {
++  const messages = getMessages(locale)
++  const navLinks = messages.nav.links
+   const [scrolled, setScrolled] = useState(false)
+   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+ 
+@@ -28,7 +25,7 @@
+       className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] transition-colors"
+       style={{ borderBottom: `1px solid ${scrolled ? 'rgba(30,138,85,0.25)' : '#E9E7DD'}` }}
+     >
+-      <Link href="#" className="flex items-center gap-2.5 no-underline">
++      <Link href={localizedPath(locale, "/")} className="flex items-center gap-2.5 no-underline">
+         <MatelabLogo size={32} />
+         <div className="font-sans font-extrabold text-xl tracking-[-0.04em]">
+           <span className="text-foreground">mate</span>
+@@ -37,7 +34,7 @@
+       </Link>
+ 
+       {/* Desktop nav */}
+-      <ul className="hidden md:flex items-center gap-7 list-none">
++      <ul className="hidden lg:flex items-center gap-4 xl:gap-7 list-none">
+         {navLinks.map((link) => (
+           <li key={link.href}>
+             <Link href={link.href} className="font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
+@@ -45,12 +42,13 @@
+             </Link>
+           </li>
+         ))}
++        <li><LanguageSwitcher locale={locale} /></li>
+         <li>
+           <Link
+-            href="/contact"
++            href={localizedPath(locale, "/contact")}
+             className="bg-foreground text-background font-mono text-xs tracking-[0.1em] uppercase px-[18px] py-2.5 rounded-md font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap"
+           >
+-            Book a Call &rarr;
++            {messages.nav.book} &rarr;
+           </Link>
+         </li>
+       </ul>
+@@ -58,8 +56,8 @@
+       {/* Mobile hamburger — three ink bars */}
+       <button
+         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+-        className="md:hidden flex flex-col gap-[5px] p-2.5 cursor-pointer bg-transparent border-none"
+-        aria-label="Toggle menu"
++        className="lg:hidden flex flex-col gap-[5px] p-2.5 cursor-pointer bg-transparent border-none"
++        aria-label={messages.nav.menu}
+         aria-expanded={mobileMenuOpen}
+       >
+         <span className="block w-[22px] h-[2px] bg-foreground" />
+@@ -69,7 +67,7 @@
+ 
+       {/* Mobile menu */}
+       {mobileMenuOpen && (
+-        <div className="absolute top-full left-0 right-0 bg-[rgba(247,246,240,0.98)] backdrop-blur-[20px] border-b border-[#E9E7DD] px-6 pt-5 pb-6 md:hidden flex flex-col items-start gap-[18px]">
++        <div className="absolute top-full left-0 right-0 bg-[rgba(247,246,240,0.98)] backdrop-blur-[20px] border-b border-[#E9E7DD] px-6 pt-5 pb-6 lg:hidden flex flex-col items-start gap-[18px]">
+           {navLinks.map((link) => (
+             <Link
+               key={link.href}
+@@ -80,12 +78,13 @@
+               {link.label}
+             </Link>
+           ))}
++          <LanguageSwitcher locale={locale} compact />
+           <Link
+-            href="/contact"
++            href={localizedPath(locale, "/contact")}
+             className="bg-primary text-white font-mono text-[13px] tracking-[0.1em] uppercase px-5 py-3 rounded-md whitespace-nowrap"
+             onClick={() => setMobileMenuOpen(false)}
+           >
+-            Book a Call &rarr;
++            {messages.nav.book} &rarr;
+           </Link>
+         </div>
+       )}
+diff -ruN --exclude=.git --exclude=node_modules a/components/register-page.tsx b/components/register-page.tsx
+--- a/components/register-page.tsx	1970-01-01 10:00:00
++++ b/components/register-page.tsx	2026-07-13 13:10:29
+@@ -0,0 +1,366 @@
++"use client"
++
++import Link from "next/link"
++import { useState } from "react"
++import { MatelabLogoSmall } from "@/components/matelab-logo"
++import { LanguageSwitcher } from "@/components/language-switcher"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
++import { LocalePreferenceRedirect } from "@/components/locale-preference-redirect"
++
++// ─────────────────────────────────────────────────────────────
++// GOOGLE FORM LINKING
++// After adding "Phone number" and "How can we assist?" questions
++// to your Google Form, replace the two placeholder IDs below with
++// the real entry IDs (see UPDATE-INSTRUCTIONS.md for how to get them).
++// Until replaced, those two answers are simply not sent — the form
++// still submits the original four fields without errors.
++// ─────────────────────────────────────────────────────────────
++const ENTRY_PHONE = "entry.1329920861"
++const ENTRY_ASSIST = "entry.829308819"
++
++const IconBolt = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
++  </svg>
++)
++
++const IconWrench = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
++  </svg>
++)
++
++const IconCheck = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
++    <polyline points="22 4 12 14.01 9 11.01"/>
++  </svg>
++)
++
++const IconStar = () => (
++  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
++    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
++  </svg>
++)
++
++const countryCodes = [
++  { code: "+61", label: "🇦🇺 Australia +61" },
++  { code: "+64", label: "🇳🇿 New Zealand +64" },
++  { code: "+1", label: "🇺🇸 USA / Canada +1" },
++  { code: "+44", label: "🇬🇧 UK +44" },
++  { code: "+353", label: "🇮🇪 Ireland +353" },
++  { code: "+65", label: "🇸🇬 Singapore +65" },
++  { code: "+852", label: "🇭🇰 Hong Kong +852" },
++  { code: "+81", label: "🇯🇵 Japan +81" },
++  { code: "+82", label: "🇰🇷 South Korea +82" },
++  { code: "+86", label: "🇨🇳 China +86" },
++  { code: "+91", label: "🇮🇳 India +91" },
++  { code: "+62", label: "🇮🇩 Indonesia +62" },
++  { code: "+60", label: "🇲🇾 Malaysia +60" },
++  { code: "+63", label: "🇵🇭 Philippines +63" },
++  { code: "+66", label: "🇹🇭 Thailand +66" },
++  { code: "+84", label: "🇻🇳 Vietnam +84" },
++  { code: "+971", label: "🇦🇪 UAE +971" },
++  { code: "+966", label: "🇸🇦 Saudi Arabia +966" },
++  { code: "+972", label: "🇮🇱 Israel +972" },
++  { code: "+90", label: "🇹🇷 Turkey +90" },
++  { code: "+27", label: "🇿🇦 South Africa +27" },
++  { code: "+234", label: "🇳🇬 Nigeria +234" },
++  { code: "+254", label: "🇰🇪 Kenya +254" },
++  { code: "+20", label: "🇪🇬 Egypt +20" },
++  { code: "+33", label: "🇫🇷 France +33" },
++  { code: "+49", label: "🇩🇪 Germany +49" },
++  { code: "+34", label: "🇪🇸 Spain +34" },
++  { code: "+39", label: "🇮🇹 Italy +39" },
++  { code: "+351", label: "🇵🇹 Portugal +351" },
++  { code: "+31", label: "🇳🇱 Netherlands +31" },
++  { code: "+32", label: "🇧🇪 Belgium +32" },
++  { code: "+41", label: "🇨🇭 Switzerland +41" },
++  { code: "+43", label: "🇦🇹 Austria +43" },
++  { code: "+46", label: "🇸🇪 Sweden +46" },
++  { code: "+47", label: "🇳🇴 Norway +47" },
++  { code: "+45", label: "🇩🇰 Denmark +45" },
++  { code: "+358", label: "🇫🇮 Finland +358" },
++  { code: "+48", label: "🇵🇱 Poland +48" },
++  { code: "+420", label: "🇨🇿 Czechia +420" },
++  { code: "+30", label: "🇬🇷 Greece +30" },
++  { code: "+40", label: "🇷🇴 Romania +40" },
++  { code: "+36", label: "🇭🇺 Hungary +36" },
++  { code: "+380", label: "🇺🇦 Ukraine +380" },
++  { code: "+52", label: "🇲🇽 Mexico +52" },
++  { code: "+55", label: "🇧🇷 Brazil +55" },
++  { code: "+54", label: "🇦🇷 Argentina +54" },
++  { code: "+56", label: "🇨🇱 Chile +56" },
++  { code: "+57", label: "🇨🇴 Colombia +57" },
++  { code: "+51", label: "🇵🇪 Peru +51" },
++  { code: "+598", label: "🇺🇾 Uruguay +598" },
++  { code: "+593", label: "🇪🇨 Ecuador +593" },
++  { code: "+506", label: "🇨🇷 Costa Rica +506" },
++]
++
++const ASSIST_MAX = 400
++
++const inputClass = (error: boolean) =>
++  `w-full bg-card border rounded-lg text-foreground font-mono text-sm px-3.5 py-3 outline-none transition-colors focus:border-primary ${
++    error ? "border-[#C0392B]" : "border-[#D4D2C6]"
++  }`
++
++const labelClass = "font-mono text-[10px] tracking-[0.12em] uppercase text-muted-foreground"
++
++export function RegisterPage({ locale }: { locale: Locale }) {
++  const messages = getMessages(locale)
++  const copy = messages.register
++  const featureItems = [
++    { icon: <IconBolt />, label: copy.features[0] },
++    { icon: <IconWrench />, label: copy.features[1] },
++    { icon: <IconCheck />, label: copy.features[2] },
++  ]
++  const [submitted, setSubmitted] = useState(false)
++  const [loading, setLoading] = useState(false)
++  const [errors, setErrors] = useState<Record<string, boolean>>({})
++  const [assistText, setAssistText] = useState("")
++
++  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeOw0Vu6Rnv41kIs67wgrxmrhNVngquBFID1m9_i-Ta9nT2WA/formResponse"
++
++  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
++    e.preventDefault()
++    const form = e.currentTarget
++    const data = new FormData(form)
++
++    const firstName = data.get("firstName") as string
++    const lastName = data.get("lastName") as string
++    const email = data.get("email") as string
++    const countryCode = data.get("countryCode") as string
++    const phone = (data.get("phone") as string) || ""
++    const assist = (data.get("assist") as string) || ""
++
++    const newErrors: Record<string, boolean> = {}
++    if (!firstName.trim()) newErrors.firstName = true
++    if (!lastName.trim()) newErrors.lastName = true
++    if (!email.trim()) newErrors.email = true
++    if (!data.get("type") || (data.get("type") as string).trim() === "") newErrors.type = true
++
++    if (Object.keys(newErrors).length > 0) {
++      setErrors(newErrors)
++      return
++    }
++
++    setLoading(true)
++
++    const params = new URLSearchParams()
++    params.append("entry.1145376415", firstName)
++    params.append("entry.700943531", lastName)
++    params.append("entry.355061805", email)
++    params.append("entry.700825334", data.get("type") as string)
++
++    // Optional fields — only sent once the real Google Form entry IDs are set
++    if (phone.trim() && !ENTRY_PHONE.includes("REPLACE")) {
++      params.append(ENTRY_PHONE, `${countryCode} ${phone.trim()}`)
++    }
++    if (assist.trim() && !ENTRY_ASSIST.includes("REPLACE")) {
++      params.append(ENTRY_ASSIST, assist.trim().slice(0, ASSIST_MAX))
++    }
++
++    try {
++      const iframe = document.createElement("iframe")
++      iframe.style.display = "none"
++      document.body.appendChild(iframe)
++
++      const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document
++      if (iframeDoc) {
++        const form = iframeDoc.createElement("form")
++        form.method = "POST"
++        form.action = GOOGLE_FORM_URL
++
++        params.forEach((value, key) => {
++          const input = iframeDoc.createElement("input")
++          input.type = "hidden"
++          input.name = key
++          input.value = value
++          form.appendChild(input)
++        })
++
++        iframeDoc.body.appendChild(form)
++        form.submit()
++      }
++
++      setTimeout(() => {
++        document.body.removeChild(iframe)
++      }, 2000)
++
++    } catch (_) {}
++
++    setLoading(false)
++    setSubmitted(true)
++  }
++
++  return (
++    <div className="min-h-screen bg-background flex flex-col">
++      {locale === "en" && <LocalePreferenceRedirect />}
++
++      {/* Grid bg */}
++      <div className="grid-bg fixed inset-0 pointer-events-none z-0" />
++
++      {/* Simple nav */}
++      <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 py-3.5 md:px-12 bg-[rgba(247,246,240,0.88)] backdrop-blur-[20px] border-b border-[#E9E7DD]">
++        <Link href={localizedPath(locale, "/")} className="flex items-center gap-2.5 no-underline">
++          <MatelabLogoSmall size={28} />
++          <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
++            <span className="text-foreground">mate</span>
++            <span className="text-primary">lab.ai</span>
++          </div>
++        </Link>
++        <div className="flex items-center gap-3">
++          <LanguageSwitcher locale={locale} />
++          <Link href={localizedPath(locale, "/")} className="hidden sm:inline font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">
++            ← {messages.common.backHome}
++          </Link>
++        </div>
++      </nav>
++
++      {/* Main Container */}
++      <main className="flex-1 flex justify-center px-6 pt-32 pb-20 relative z-10">
++        <div className="w-full max-w-[520px]">
++
++          {!submitted ? (
++            <div className="flex flex-col gap-[22px]">
++              {/* Header */}
++              <div className="flex flex-col gap-[18px] items-start">
++                <div className="inline-block bg-primary text-white font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded">
++                  {copy.badge}
++                </div>
++                <h1 className="font-sans font-extrabold text-[clamp(28px,5vw,38px)] tracking-[-0.02em] leading-[1.1]">
++                  {copy.title}{" "}
++                  <em className="text-primary italic font-serif font-normal tracking-normal">{copy.accent}</em>
++                </h1>
++                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
++                  {featureItems.map((item) => (
++                    <div key={item.label} className="bg-card border border-border rounded-[10px] p-3.5 text-center">
++                      <div className="text-primary flex justify-center mb-2">
++                        {item.icon}
++                      </div>
++                      <div className="font-mono text-[10px] text-muted-foreground tracking-[0.08em] uppercase">{item.label}</div>
++                    </div>
++                  ))}
++                </div>
++              </div>
++
++              {/* Form */}
++              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
++                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
++                  <div className="flex flex-col gap-1.5">
++                    <label htmlFor="firstName" className={labelClass}>{copy.firstName} *</label>
++                    <input id="firstName" name="firstName" type="text" placeholder="Mick" className={inputClass(!!errors.firstName)} />
++                  </div>
++                  <div className="flex flex-col gap-1.5">
++                    <label htmlFor="lastName" className={labelClass}>{copy.lastName} *</label>
++                    <input id="lastName" name="lastName" type="text" placeholder="Dundee" className={inputClass(!!errors.lastName)} />
++                  </div>
++                </div>
++                <div className="flex flex-col gap-1.5">
++                  <label htmlFor="email" className={labelClass}>{copy.email} *</label>
++                  <input id="email" name="email" type="email" placeholder="hello@yourcompany.com" className={inputClass(!!errors.email)} />
++                </div>
++
++                {/* Phone (optional): country code + number */}
++                <div className="flex flex-col gap-1.5">
++                  <label htmlFor="phone" className={labelClass}>{copy.phone} <span className="normal-case text-[#B4B1A4]">({copy.optional})</span></label>
++                  <div className="grid grid-cols-[200px_1fr] gap-3">
++                    <select
++                      id="countryCode"
++                      name="countryCode"
++                      defaultValue="+61"
++                      aria-label={locale === "es" ? "Código de país" : "Country code"}
++                      className={`${inputClass(false)} appearance-none pr-2`}
++                    >
++                      {countryCodes.map((c) => (
++                        <option key={c.label} value={c.code}>{c.label}</option>
++                      ))}
++                    </select>
++                    <input
++                      id="phone"
++                      name="phone"
++                      type="tel"
++                      inputMode="tel"
++                      placeholder="412 345 678"
++                      className={inputClass(false)}
++                    />
++                  </div>
++                </div>
++
++                <div className="flex flex-col gap-1.5">
++                  <label htmlFor="type" className={labelClass}>{copy.type} *</label>
++                  <select id="type" name="type" defaultValue="" className={`${inputClass(!!errors.type)} appearance-none`}>
++                    <option value="">{copy.typePlaceholder}</option>
++                    {copy.typeOptions.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
++                  </select>
++                </div>
++
++                {/* How can we assist? (optional, 400 chars) */}
++                <div className="flex flex-col gap-1.5">
++                  <div className="flex justify-between items-baseline">
++                    <label htmlFor="assist" className={labelClass}>{copy.assist} <span className="normal-case text-[#B4B1A4]">({copy.optional})</span></label>
++                    <span className="font-mono text-[10px] text-[#B4B1A4]">{assistText.length}/{ASSIST_MAX}</span>
++                  </div>
++                  <textarea
++                    id="assist"
++                    name="assist"
++                    rows={4}
++                    maxLength={ASSIST_MAX}
++                    value={assistText}
++                    onChange={(e) => setAssistText(e.target.value)}
++                    placeholder={copy.assistPlaceholder}
++                    className={`${inputClass(false)} resize-none leading-[1.6]`}
++                  />
++                </div>
++
++                <button
++                  type="submit"
++                  disabled={loading}
++                  className="mt-2 bg-primary text-white border-none cursor-pointer font-sans font-bold text-[15px] px-7 py-[15px] rounded-lg text-left hover:bg-foreground transition-colors disabled:opacity-60"
++                >
++                  {loading ? copy.submitting : `${copy.submit} →`}
++                </button>
++                {Object.keys(errors).length > 0 && (
++                  <p role="alert" className="font-mono text-[11px] text-[#C0392B]">{copy.required}</p>
++                )}
++                <p className="font-mono text-[11px] tracking-[0.05em] text-[#B4B1A4]">
++                  {copy.responseTime}
++                </p>
++              </form>
++            </div>
++          ) : (
++            /* Success state */
++            <div className="text-center py-16 flex flex-col items-center gap-5">
++              <div className="text-primary">
++                <IconStar />
++              </div>
++              <h2 className="font-sans font-extrabold text-[30px] tracking-[-0.02em]">
++                {copy.successTitle}
++              </h2>
++              <p className="text-sm text-muted-foreground leading-[1.7] max-w-[360px]">
++                {copy.successBody}
++              </p>
++              <Link
++                href={localizedPath(locale, "/")}
++                className="inline-block bg-primary text-white font-sans font-bold text-sm px-6 py-[13px] rounded-lg hover:bg-foreground transition-colors"
++              >
++                ← {copy.successHome}
++              </Link>
++            </div>
++          )}
++
++        </div>
++      </main>
++
++      {/* Footer strip */}
++      <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
++        <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
++          © 2026 matelab.ai · Sydney, AU ·{" "}
++          <Link href={localizedPath(locale, "/")} className="text-[#B4B1A4] hover:text-primary transition-colors">matelab.ai</Link>
++        </p>
++      </div>
++
++    </div>
++  )
++}
+diff -ruN --exclude=.git --exclude=node_modules a/components/services.tsx b/components/services.tsx
+--- a/components/services.tsx	2026-07-13 12:00:19
++++ b/components/services.tsx	2026-07-13 13:05:35
+@@ -2,13 +2,14 @@
+ 
+ import { useState } from "react"
+ import { Reveal } from "./reveal"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+ interface ServiceCardProps {
+   num: string
+   badge?: string
+   title: string
+   body: string
+-  tags: { label: string }[]
++  tags: readonly string[]
+   includes: string
+   active: boolean
+   onClick: () => void
+@@ -50,10 +51,10 @@
+       <div className="flex flex-wrap gap-1.5">
+         {tags.map((tag) => (
+           <span
+-            key={tag.label}
++            key={tag}
+             className="font-mono text-[10px] px-2.5 py-[3px] tracking-[0.08em] border border-[#D4D2C6] rounded-full text-muted-foreground whitespace-nowrap"
+           >
+-            {tag.label}
++            {tag}
+           </span>
+         ))}
+       </div>
+@@ -72,57 +73,21 @@
+   )
+ }
+ 
+-const services = [
+-  {
+-    num: "01",
+-    badge: "Most popular",
+-    title: "Custom AI Solutions",
+-    body: "We design and build automations for your business: chatbots, lead capture, calendar agents, CRM flows, internal tools. Scoped fixed, delivered fast, documented and handed over.",
+-    tags: [
+-      { label: "AI Chatbots" },
+-      { label: "Lead Flows" },
+-      { label: "Calendar Agents" },
+-      { label: "CRM Integrations" }
+-    ],
+-    includes: "Includes: scoping workshop, fixed quote, build & testing, documentation, handover training and 30 days of post-launch support."
+-  },
+-  {
+-    num: "02",
+-    title: "Consulting & Retainers",
+-    body: "An automation audit maps where AI saves you the most, with a prioritised roadmap. Monthly retainers keep us embedded as your automation stack grows with the business.",
+-    tags: [
+-      { label: "Automation Audit" },
+-      { label: "AI Strategy" },
+-      { label: "Monthly Retainers" }
+-    ],
+-    includes: "Includes: workflow audit, ROI-ranked roadmap, tool selection, monthly build hours and quarterly strategy reviews."
+-  },
+-  {
+-    num: "03",
+-    title: "Corporate Workshops",
+-    body: "Practical half-day or full-day hands-on sessions for teams — built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.",
+-    tags: [
+-      { label: "Team Workshops" },
+-      { label: "Custom Training" },
+-      { label: "On-site or Remote" }
+-    ],
+-    includes: "Includes: pre-workshop skills survey, tailored curriculum, hands-on build session, take-home templates and a follow-up Q&A call."
+-  }
+-]
+-
+-export function Services() {
++export function Services({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).services
++  const services = copy.items
+   const [activeIndex, setActiveIndex] = useState(0)
+ 
+   return (
+     <section id="services" className="pb-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <Reveal>
+-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">What we do</div>
++          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
+           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+-            Three ways to work <span className="text-primary">with us.</span>
++            {copy.title} <span className="text-primary">{copy.accent}</span>
+           </h2>
+           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+-            Start with a build, bring us in for strategy, or upskill your whole team. Tap a card for what&apos;s included.
++            {copy.intro}
+           </p>
+         </Reveal>
+ 
+diff -ruN --exclude=.git --exclude=node_modules a/components/tools-section.tsx b/components/tools-section.tsx
+--- a/components/tools-section.tsx	2026-07-13 12:00:19
++++ b/components/tools-section.tsx	2026-07-13 13:35:45
+@@ -1,3 +1,5 @@
++import { getMessages, type Locale } from "@/lib/i18n"
++
+ const tools = [
+   "n8n",
+   "Claude Code",
+@@ -11,13 +13,13 @@
+   "Cursor"
+ ]
+ 
+-export function ToolsSection() {
++export function ToolsSection({ locale }: { locale: Locale }) {
+   return (
+     <section id="tools" className="py-[22px] border-y border-[#E9E7DD] bg-card relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <div className="flex items-center gap-7 overflow-x-auto scrollbar-none">
+           <div className="font-mono text-[11px] tracking-[0.18em] uppercase text-[#B4B1A4] whitespace-nowrap shrink-0">
+-            Built on
++            {getMessages(locale).tools}
+           </div>
+           <div className="flex gap-2.5 items-center flex-nowrap">
+             {tools.map((tool) => (
+diff -ruN --exclude=.git --exclude=node_modules a/components/use-cases.tsx b/components/use-cases.tsx
+--- a/components/use-cases.tsx	2026-07-13 12:00:19
++++ b/components/use-cases.tsx	2026-07-13 13:05:35
+@@ -1,43 +1,19 @@
+ import { Reveal } from "./reveal"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-const useCases = [
+-  {
+-    title: "Lead capture & qualification bot",
+-    body: "Every enquiry answered, qualified and booked into your calendar — 24/7."
+-  },
+-  {
+-    title: "Customer support chatbot",
+-    body: "Trained on your docs and FAQs. Handles the repeats; escalates the rest."
+-  },
+-  {
+-    title: "Meeting notes → CRM",
+-    body: "Calls transcribed, summarised and logged against the right contact automatically."
+-  },
+-  {
+-    title: "Invoice & document processing",
+-    body: "Receipts, invoices and forms extracted into your accounting system without typing."
+-  },
+-  {
+-    title: "Reporting on autopilot",
+-    body: "Weekly numbers pulled, formatted and delivered to your inbox or Slack."
+-  },
+-  {
+-    title: "Content & social pipelines",
+-    body: "From idea to drafted, scheduled posts — with your voice, reviewed by you."
+-  }
+-]
+-
+-export function UseCases() {
++export function UseCases({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).useCases
++  const useCases = copy.items
+   return (
+     <section id="usecases" className="pb-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <Reveal>
+-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">What we build</div>
++          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
+           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+-            Real automations, <span className="text-primary">real hours back.</span>
++            {copy.title} <span className="text-primary">{copy.accent}</span>
+           </h2>
+           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+-            A sample of what we build for clients — every one custom-fit to your tools and workflows.
++            {copy.intro}
+           </p>
+         </Reveal>
+ 
+diff -ruN --exclude=.git --exclude=node_modules a/components/workshop-cta.tsx b/components/workshop-cta.tsx
+--- a/components/workshop-cta.tsx	2026-07-13 12:00:19
++++ b/components/workshop-cta.tsx	2026-07-13 13:06:19
+@@ -1,7 +1,9 @@
+ import Link from "next/link"
+ import { Reveal } from "./reveal"
++import { getMessages, localizedPath, type Locale } from "@/lib/i18n"
+ 
+-export function WorkshopCTA() {
++export function WorkshopCTA({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).cta
+   return (
+     <section id="workshop" className="pb-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+@@ -10,27 +12,27 @@
+           <div className="bg-[#14201A] rounded-2xl p-9 md:p-[72px_64px] flex flex-wrap gap-12 items-center justify-between">
+             <div>
+               <div className="inline-block bg-[#2BB673] text-[#06110B] font-mono text-[10px] font-medium tracking-[0.15em] uppercase px-3 py-[5px] rounded mb-[22px]">
+-                Free · 45 min · No obligation
++                {copy.badge}
+               </div>
+               <h2 className="font-sans font-extrabold text-[clamp(32px,5vw,46px)] tracking-[-0.03em] leading-[1.05] mb-4 text-[#F7F6F0]">
+-                Book a free{" "}
+-                <em className="font-serif italic font-normal tracking-normal text-[#2BB673]">AI strategy</em>{" "}
+-                session
++                {copy.title}{" "}
++                <em className="font-serif italic font-normal tracking-normal text-[#2BB673]">{copy.accent}</em>{" "}
++                {copy.titleEnd}
+               </h2>
+               <p className="text-[15px] text-[#A9B4AD] max-w-[480px] leading-[1.7]">
+-                Tell us about your business. We&apos;ll map out exactly where automation saves you time and money — and if we&apos;re not the right fit, we&apos;ll tell you that too.
++                {copy.body}
+               </p>
+             </div>
+ 
+             <div className="flex flex-col gap-3 items-start">
+               <Link
+-                href="/contact"
++                href={localizedPath(locale, "/contact")}
+                 className="bg-[#2BB673] text-[#06110B] px-[30px] py-[15px] rounded-lg font-sans font-bold text-[15px] hover:bg-[#F7F6F0] hover:text-[#14201A] transition-colors"
+               >
+-                Book a call &rarr;
++                {copy.button} &rarr;
+               </Link>
+               <p className="font-mono text-[11px] text-[#6E7A72] tracking-[0.05em]">
+-                Usually replies within 24h
++                {copy.response}
+               </p>
+             </div>
+           </div>
+diff -ruN --exclude=.git --exclude=node_modules a/components/workshops.tsx b/components/workshops.tsx
+--- a/components/workshops.tsx	2026-07-13 12:00:19
++++ b/components/workshops.tsx	2026-07-13 13:05:36
+@@ -1,31 +1,19 @@
+ import { Reveal } from "./reveal"
++import { getMessages, type Locale } from "@/lib/i18n"
+ 
+-const formats = [
+-  {
+-    title: "Half-day intensive",
+-    body: "AI fundamentals + first automation built live. Best for teams starting from zero."
+-  },
+-  {
+-    title: "Full-day deep dive",
+-    body: "From prompting to production agents. Each participant ships a working automation for their own role."
+-  },
+-  {
+-    title: "Custom programs",
+-    body: "Multi-session programs built around your tools, your data and your security requirements."
+-  }
+-]
+-
+-export function Workshops() {
++export function Workshops({ locale }: { locale: Locale }) {
++  const copy = getMessages(locale).workshops
++  const formats = copy.items
+   return (
+     <section id="workshops" className="py-[110px] relative z-10">
+       <div className="container max-w-[1100px] mx-auto px-6 md:px-12">
+         <Reveal>
+-          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">Corporate workshops</div>
++          <div className="font-mono text-[11px] tracking-[0.25em] uppercase text-primary mb-4">{copy.eyebrow}</div>
+           <h2 className="font-sans text-[clamp(30px,5vw,44px)] font-extrabold tracking-[-0.02em] leading-[1.05] mb-4">
+-            Upskill your team to <span className="text-primary">build their own.</span>
++            {copy.title} <span className="text-primary">{copy.accent}</span>
+           </h2>
+           <p className="text-muted-foreground max-w-[760px] mb-14 text-[15px] font-medium leading-[1.7]">
+-            Banks, law firms, agencies, startups — we run hands-on workshops that leave your team building real automations by the end of the day, not watching slides.
++            {copy.intro}
+           </p>
+         </Reveal>
+ 
+diff -ruN --exclude=.git --exclude=node_modules a/lib/i18n.ts b/lib/i18n.ts
+--- a/lib/i18n.ts	1970-01-01 10:00:00
++++ b/lib/i18n.ts	2026-07-13 13:35:57
+@@ -0,0 +1,321 @@
++export type Locale = "en" | "es"
++
++export const locales: Locale[] = ["en", "es"]
++
++export function localizedPath(locale: Locale, path: string) {
++  if (path.startsWith("#")) return path
++  if (locale === "es") return path === "/" ? "/es" : `/es${path}`
++  return path
++}
++
++const en = {
++  language: { current: "English", switchTo: "Cambiar a español", code: "EN" },
++  nav: {
++    links: [
++      { href: "#services", label: "What we do" },
++      { href: "#how", label: "How it works" },
++      { href: "#usecases", label: "What we build" },
++      { href: "#workshops", label: "Workshops" },
++    ],
++    book: "Book a Call",
++    menu: "Toggle menu",
++  },
++  hero: {
++    badge: "AI Automation lab · Sydney → Worldwide",
++    headline: "Save 10+ hours a week.",
++    headlineAccent: "automating with AI.",
++    headlineLead: "Start",
++    intro: "Custom AI agents, chatbots and automation flows —",
++    introStrong: "designed, built and deployed for your business in days, not months.",
++    introEnd: "Then we train your team to run them. No developers needed on your side.",
++    primary: "Book a free strategy call",
++    secondary: "See what we do",
++    checks: ["Fixed-scope builds", "Yours to keep — no lock-in", "Team trained on handover"],
++  },
++  live: {
++    title: "LIVE AUTOMATION",
++    running: "RUNNING",
++    steps: [
++      { title: "New sales lead received", sub: "via website form · 9:41 am" },
++      { title: "AI agent qualifies & drafts reply", sub: "tone-matched, ready to send" },
++      { title: "CRM updated, call booked", sub: "no human touch · 14 min saved" },
++    ],
++    footer: "This week, for one client",
++    back: "back",
++  },
++  marquee: ["Custom AI Agents", "n8n Automations", "AI Chatbots", "Lead Capture Flows", "CRM Integrations", "Automation Audits", "AI Strategy", "Corporate Workshops", "Team Training"],
++  pains: {
++    eyebrow: "Sound familiar?",
++    title: "Your team is doing work",
++    accent: "a robot should do.",
++    intro: "If any of these hit close to home, a strategy call will pay for itself.",
++    items: [
++      { title: "Hours lost to tasks that should take minutes", body: "Manual reports, copy-pasting between spreadsheets, chasing bookings, answering the same customer questions daily. That's payroll spent on work software should do." },
++      { title: "You know AI could help — but no one has time to figure it out", body: "Everyone's talking about AI agents. You've tried ChatGPT. But turning that into systems that actually run parts of your business? That's where we come in." },
++      { title: "Hiring developers is slow and expensive", body: "You don't need a six-month software project. Most business automations can be scoped, built and live within weeks — on tools your team can maintain themselves." },
++    ],
++  },
++  services: {
++    eyebrow: "What we do",
++    title: "Three ways to work",
++    accent: "with us.",
++    intro: "Start with a build, bring us in for strategy, or upskill your whole team. Tap a card for what's included.",
++    items: [
++      { num: "01", badge: "Most popular", title: "Custom AI Solutions", body: "We design and build automations for your business: chatbots, lead capture, calendar agents, CRM flows, internal tools. Scoped fixed, delivered fast, documented and handed over.", tags: ["AI Chatbots", "Lead Flows", "Calendar Agents", "CRM Integrations"], includes: "Includes: scoping workshop, fixed quote, build & testing, documentation, handover training and 30 days of post-launch support." },
++      { num: "02", title: "Consulting & Retainers", body: "An automation audit maps where AI saves you the most, with a prioritised roadmap. Monthly retainers keep us embedded as your automation stack grows with the business.", tags: ["Automation Audit", "AI Strategy", "Monthly Retainers"], includes: "Includes: workflow audit, ROI-ranked roadmap, tool selection, monthly build hours and quarterly strategy reviews." },
++      { num: "03", title: "Corporate Workshops", body: "Practical half-day or full-day hands-on sessions for teams — built inside your tools, tailored to your workflows, and designed to stick. On-site or remote. Your team leaves able to build and manage their own AI tools — no coding required.", tags: ["Team Workshops", "Custom Training", "On-site or Remote"], includes: "Includes: pre-workshop skills survey, tailored curriculum, hands-on build session, take-home templates and a follow-up Q&A call." },
++    ],
++  },
++  how: {
++    eyebrow: "How it works",
++    title: "From first call to live automation",
++    accent: "in four steps.",
++    intro: "No six-month projects. No black boxes. You see exactly what's being built and why.",
++    steps: [
++      { n: "01", title: "Strategy call", body: "Initial 45 minutes call at no cost. We map your workflows and spot the highest-value automation opportunities." },
++      { n: "02", title: "Automation audit", body: "A prioritised roadmap: what to automate first, what it saves, and a fixed quote for each build." },
++      { n: "03", title: "Build & deploy", body: "We build on proven tools — n8n, Make, Claude — and ship working automations in days, not months." },
++      { n: "04", title: "Handover & training", body: "Documentation plus training so your team owns it. No lock-in — everything we build is yours." },
++    ],
++  },
++  useCases: {
++    eyebrow: "What we build",
++    title: "Real automations,",
++    accent: "real hours back.",
++    intro: "A sample of what we build for clients — every one custom-fit to your tools and workflows.",
++    items: [
++      { title: "Lead capture & qualification bot", body: "Every enquiry answered, qualified and booked into your calendar — 24/7." },
++      { title: "Customer support chatbot", body: "Trained on your docs and FAQs. Handles the repeats; escalates the rest." },
++      { title: "Meeting notes → CRM", body: "Calls transcribed, summarised and logged against the right contact automatically." },
++      { title: "Invoice & document processing", body: "Receipts, invoices and forms extracted into your accounting system without typing." },
++      { title: "Reporting on autopilot", body: "Weekly numbers pulled, formatted and delivered to your inbox or Slack." },
++      { title: "Content & social pipelines", body: "From idea to drafted, scheduled posts — with your voice, reviewed by you." },
++    ],
++  },
++  tools: "Built on",
++  workshops: {
++    eyebrow: "Corporate workshops",
++    title: "Upskill your team to",
++    accent: "build their own.",
++    intro: "Banks, law firms, agencies, startups — we run hands-on workshops that leave your team building real automations by the end of the day, not watching slides.",
++    items: [
++      { title: "Half-day intensive", body: "AI fundamentals + first automation built live. Best for teams starting from zero." },
++      { title: "Full-day deep dive", body: "From prompting to production agents. Each participant ships a working automation for their own role." },
++      { title: "Custom programs", body: "Multi-session programs built around your tools, your data and your security requirements." },
++    ],
++  },
++  cta: {
++    badge: "Free · 45 min · No obligation",
++    title: "Book a free",
++    accent: "AI strategy",
++    titleEnd: "session",
++    body: "Tell us about your business. We'll map out exactly where automation saves you time and money — and if we're not the right fit, we'll tell you that too.",
++    button: "Book a call",
++    response: "Usually replies within 24h",
++  },
++  footer: {
++    navigation: "Navigation",
++    connect: "Connect",
++    contactForm: "Contact form",
++    freeCall: "Book a free call",
++    closing: "No code experience needed. No excuses. Just automation.",
++  },
++  common: { backHome: "Back to home" },
++  contact: {
++    badge: "Free · Online · Secure",
++    title: "Book a free",
++    accent: "AI automation",
++    titleEnd: "strategy session",
++    body: "Tell us about you or your business. We'll map out exactly where AI automation can increase your productivity or save your business time and money — no obligation, no coding experience required.",
++    features: ["45 min call", "Custom roadmap", "No coding experience"],
++    frameTitle: "Select a Date & Time - Calendly",
++  },
++  register: {
++    badge: "Contact us",
++    title: "Let us know how we can help boost",
++    accent: "your business",
++    features: ["Ask us anything", "Start automating now", "We're here to help"],
++    firstName: "First Name",
++    lastName: "Last Name",
++    email: "Email",
++    phone: "Phone number",
++    type: "I am a...",
++    typePlaceholder: "Select one",
++    typeOptions: [
++      { value: "Business owner / Founder", label: "Business owner / Founder" },
++      { value: "Self Employed", label: "Self employed" },
++      { value: "Corporate team member", label: "Corporate team member" },
++      { value: "Freelancer / Consultant", label: "Freelancer / Consultant" },
++      { value: "Just curious", label: "Just curious" },
++    ],
++    assist: "How can we assist?",
++    assistPlaceholder: "Tell us a little about what you'd like to automate or improve...",
++    optional: "optional",
++    submit: "Send enquiry",
++    submitting: "Sending...",
++    required: "Please complete the required fields.",
++    responseTime: "We will contact you within 48 hours",
++    successTitle: "Thank you!",
++    successBody: "Your message has been sent. We'll be in touch shortly.",
++    successHome: "Back to home",
++  },
++}
++
++const es = {
++  language: { current: "Español", switchTo: "Switch to English", code: "ES" },
++  nav: {
++    links: [
++      { href: "#services", label: "Qué hacemos" },
++      { href: "#how", label: "Cómo funciona" },
++      { href: "#usecases", label: "Qué creamos" },
++      { href: "#workshops", label: "Talleres" },
++    ],
++    book: "Agenda una llamada",
++    menu: "Abrir o cerrar el menú",
++  },
++  hero: {
++    badge: "Laboratorio de automatización con IA · Sídney → Todo el mundo",
++    headline: "Recupera más de 10 horas por semana.",
++    headlineAccent: "a automatizar con IA.",
++    headlineLead: "Empieza",
++    intro: "Agentes de IA, chatbots y flujos de automatización a tu medida —",
++    introStrong: "diseñados, creados e implementados para tu negocio en días, no meses.",
++    introEnd: "Después capacitamos a tu equipo para usarlos. No necesitas desarrolladores de tu lado.",
++    primary: "Agenda una llamada estratégica gratis",
++    secondary: "Descubre lo que hacemos",
++    checks: ["Proyectos con alcance definido", "Todo queda en tus manos — sin ataduras", "Capacitación para tu equipo"],
++  },
++  live: {
++    title: "AUTOMATIZACIÓN EN VIVO",
++    running: "EN CURSO",
++    steps: [
++      { title: "Nuevo prospecto recibido", sub: "desde el formulario web · 9:41 a. m." },
++      { title: "El agente de IA califica y redacta", sub: "con el tono correcto, listo para enviar" },
++      { title: "CRM actualizado y llamada agendada", sub: "sin intervención manual · 14 min ahorrados" },
++    ],
++    footer: "Esta semana, para un cliente",
++    back: "recuperadas",
++  },
++  marquee: ["Agentes de IA a medida", "Automatizaciones con n8n", "Chatbots con IA", "Captura de prospectos", "Integraciones de CRM", "Auditorías de automatización", "Estrategia de IA", "Talleres corporativos", "Capacitación de equipos"],
++  pains: {
++    eyebrow: "¿Te suena familiar?",
++    title: "Tu equipo está haciendo trabajo que",
++    accent: "debería hacer un robot.",
++    intro: "Si te identificas con alguno de estos casos, una llamada estratégica puede marcar la diferencia.",
++    items: [
++      { title: "Horas perdidas en tareas que deberían tomar minutos", body: "Informes manuales, copiar datos entre hojas de cálculo, perseguir reservas y responder las mismas preguntas todos los días. Es tiempo de nómina dedicado a tareas que el software debería resolver." },
++      { title: "Sabes que la IA puede ayudar, pero nadie tiene tiempo para descubrir cómo", body: "Todos hablan de agentes de IA. Ya probaste ChatGPT. Pero convertirlo en sistemas que realmente gestionen partes de tu negocio es otro reto. Ahí entramos nosotros." },
++      { title: "Contratar desarrolladores es lento y costoso", body: "No necesitas un proyecto de software de seis meses. La mayoría de las automatizaciones se pueden definir, crear y poner en marcha en pocas semanas, usando herramientas que tu equipo puede administrar." },
++    ],
++  },
++  services: {
++    eyebrow: "Qué hacemos",
++    title: "Tres formas de trabajar",
++    accent: "con nosotros.",
++    intro: "Empieza con una solución, invítanos a definir tu estrategia o capacita a todo tu equipo. Selecciona una tarjeta para ver qué incluye.",
++    items: [
++      { num: "01", badge: "Más popular", title: "Soluciones de IA a medida", body: "Diseñamos y creamos automatizaciones para tu negocio: chatbots, captura de prospectos, agentes de calendario, flujos de CRM y herramientas internas. Alcance fijo, entrega rápida, documentación y transferencia completa.", tags: ["Chatbots con IA", "Flujos de prospectos", "Agentes de calendario", "Integraciones de CRM"], includes: "Incluye: taller de definición, cotización fija, desarrollo y pruebas, documentación, capacitación y 30 días de soporte después del lanzamiento." },
++      { num: "02", title: "Consultoría y acompañamiento", body: "Una auditoría de automatización identifica dónde la IA genera más valor y crea una hoja de ruta priorizada. Nuestro acompañamiento mensual permite que tu ecosistema crezca junto con el negocio.", tags: ["Auditoría de automatización", "Estrategia de IA", "Acompañamiento mensual"], includes: "Incluye: auditoría de procesos, hoja de ruta priorizada por retorno, selección de herramientas, horas mensuales de desarrollo y revisiones estratégicas trimestrales." },
++      { num: "03", title: "Talleres corporativos", body: "Sesiones prácticas de medio día o día completo, creadas dentro de tus herramientas y adaptadas a tus procesos. Presenciales o remotas. Tu equipo aprende a crear y administrar sus propias soluciones de IA, sin necesidad de programar.", tags: ["Talleres de equipo", "Capacitación a medida", "Presencial o remoto"], includes: "Incluye: encuesta previa, contenido adaptado, sesión práctica de creación, plantillas y una llamada de seguimiento para resolver preguntas." },
++    ],
++  },
++  how: {
++    eyebrow: "Cómo funciona",
++    title: "De la primera llamada a una automatización activa",
++    accent: "en cuatro pasos.",
++    intro: "Sin proyectos de seis meses ni cajas negras. Ves exactamente qué estamos creando y por qué.",
++    steps: [
++      { n: "01", title: "Llamada estratégica", body: "Una conversación inicial gratuita de 45 minutos. Revisamos tus procesos e identificamos las oportunidades de automatización con mayor impacto." },
++      { n: "02", title: "Auditoría de automatización", body: "Una hoja de ruta priorizada: qué automatizar primero, cuánto puedes ahorrar y una cotización fija para cada solución." },
++      { n: "03", title: "Desarrollo e implementación", body: "Trabajamos con herramientas probadas — n8n, Make y Claude — para entregar automatizaciones funcionales en días, no meses." },
++      { n: "04", title: "Entrega y capacitación", body: "Documentación y formación para que tu equipo tenga el control. Sin ataduras: todo lo que creamos es tuyo." },
++    ],
++  },
++  useCases: {
++    eyebrow: "Qué creamos",
++    title: "Automatizaciones reales,",
++    accent: "horas reales recuperadas.",
++    intro: "Estos son algunos ejemplos de lo que creamos para nuestros clientes, siempre adaptado a sus herramientas y procesos.",
++    items: [
++      { title: "Bot de captura y calificación de prospectos", body: "Responde, califica y agenda cada consulta en tu calendario, las 24 horas." },
++      { title: "Chatbot de atención al cliente", body: "Entrenado con tus documentos y preguntas frecuentes. Resuelve lo repetitivo y deriva lo demás." },
++      { title: "Notas de reuniones → CRM", body: "Transcribe, resume y registra cada llamada automáticamente en el contacto correcto." },
++      { title: "Procesamiento de facturas y documentos", body: "Extrae recibos, facturas y formularios hacia tu sistema contable sin digitación manual." },
++      { title: "Informes en piloto automático", body: "Recopila, organiza y entrega los resultados semanales por correo o Slack." },
++      { title: "Flujos de contenido y redes sociales", body: "De la idea a publicaciones redactadas y programadas, con tu voz y bajo tu revisión." },
++    ],
++  },
++  tools: "Creamos con",
++  workshops: {
++    eyebrow: "Talleres corporativos",
++    title: "Capacita a tu equipo para",
++    accent: "crear sus propias soluciones.",
++    intro: "Bancos, firmas legales, agencias y startups: realizamos talleres prácticos en los que tu equipo termina el día creando automatizaciones reales, no mirando diapositivas.",
++    items: [
++      { title: "Intensivo de medio día", body: "Fundamentos de IA y una primera automatización creada en vivo. Ideal para equipos que empiezan desde cero." },
++      { title: "Inmersión de día completo", body: "Desde buenos prompts hasta agentes en producción. Cada participante crea una automatización funcional para su propio rol." },
++      { title: "Programas a medida", body: "Programas de varias sesiones diseñados alrededor de tus herramientas, datos y requisitos de seguridad." },
++    ],
++  },
++  cta: {
++    badge: "Gratis · 45 min · Sin compromiso",
++    title: "Agenda una sesión gratuita de",
++    accent: "estrategia de IA",
++    titleEnd: "",
++    body: "Cuéntanos sobre tu negocio. Identificaremos exactamente dónde la automatización puede ahorrarte tiempo y dinero. Y si no somos la opción adecuada, también te lo diremos.",
++    button: "Agenda una llamada",
++    response: "Normalmente respondemos en 24 horas",
++  },
++  footer: {
++    navigation: "Navegación",
++    connect: "Conecta",
++    contactForm: "Formulario de contacto",
++    freeCall: "Agenda una llamada gratis",
++    closing: "No necesitas programar. Sin excusas. Solo automatización.",
++  },
++  common: { backHome: "Volver al inicio" },
++  contact: {
++    badge: "Gratis · En línea · Seguro",
++    title: "Agenda una sesión gratuita de",
++    accent: "automatización con IA",
++    titleEnd: "",
++    body: "Cuéntanos sobre ti o tu negocio. Te mostraremos exactamente dónde la automatización con IA puede aumentar tu productividad o ahorrarte tiempo y dinero, sin compromiso ni experiencia técnica.",
++    features: ["Llamada de 45 min", "Hoja de ruta a medida", "Sin experiencia técnica"],
++    frameTitle: "Selecciona una fecha y hora - Calendly",
++  },
++  register: {
++    badge: "Contáctanos",
++    title: "Cuéntanos cómo podemos impulsar",
++    accent: "tu negocio",
++    features: ["Pregúntanos lo que quieras", "Empieza a automatizar", "Estamos para ayudarte"],
++    firstName: "Nombre",
++    lastName: "Apellido",
++    email: "Correo electrónico",
++    phone: "Teléfono",
++    type: "Soy...",
++    typePlaceholder: "Selecciona una opción",
++    typeOptions: [
++      { value: "Business owner / Founder", label: "Dueño de negocio / Fundador" },
++      { value: "Self Employed", label: "Trabajador independiente" },
++      { value: "Corporate team member", label: "Miembro de un equipo corporativo" },
++      { value: "Freelancer / Consultant", label: "Freelancer / Consultor" },
++      { value: "Just curious", label: "Solo estoy explorando" },
++    ],
++    assist: "¿Cómo podemos ayudarte?",
++    assistPlaceholder: "Cuéntanos brevemente qué te gustaría automatizar o mejorar...",
++    optional: "opcional",
++    submit: "Enviar consulta",
++    submitting: "Enviando...",
++    required: "Completa los campos obligatorios.",
++    responseTime: "Nos pondremos en contacto contigo en un plazo de 48 horas",
++    successTitle: "¡Gracias!",
++    successBody: "Recibimos tu mensaje. Nos pondremos en contacto contigo muy pronto.",
++    successHome: "Volver al inicio",
++  },
++}
++
++export type Messages = typeof en
++
++export function getMessages(locale: Locale): Messages {
++  return (locale === "es" ? es : en) as Messages
++}
