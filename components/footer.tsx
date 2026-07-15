@@ -104,7 +104,7 @@ export function Footer() {
         {/* Bottom row */}
         <div className="border-t border-[#E9E7DD] pt-5 flex items-center justify-between flex-wrap gap-3">
           <div className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
-            © 2026 matelab.ai
+            © 2026 matelab-ai
           </div>
           <div className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
             No code experience needed. No excuses. Just automation.
