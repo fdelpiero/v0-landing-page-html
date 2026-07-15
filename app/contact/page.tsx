@@ -43,7 +43,7 @@ export default function ContactPage() {
           <MatelabLogoSmall size={28} />
           <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
             <span className="text-foreground">mate</span>
-            <span className="text-primary">lab.ai</span>
+            <span className="text-primary">lab&#8209;ai</span>
           </div>
         </Link>
         <Link href="/" className="font-mono text-xs tracking-[0.1em] uppercase text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap">

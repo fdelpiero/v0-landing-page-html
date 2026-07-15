@@ -32,7 +32,7 @@ export function Navbar() {
         <MatelabLogo size={32} />
         <div className="font-sans font-extrabold text-xl tracking-[-0.04em]">
           <span className="text-foreground">mate</span>
-          <span className="text-primary">lab.ai</span>
+          <span className="text-primary">lab&#8209;ai</span>
         </div>
       </Link>
 

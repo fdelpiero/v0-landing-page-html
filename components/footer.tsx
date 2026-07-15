@@ -15,7 +15,7 @@ export function Footer() {
               <MatelabLogoSmall size={28} />
               <div className="font-sans font-extrabold text-[17px] tracking-[-0.04em]">
                 <span className="text-foreground">mate</span>
-                <span className="text-primary">lab.ai</span>
+                <span className="text-primary">lab&#8209;ai</span>
               </div>
             </Link>
           </div>
