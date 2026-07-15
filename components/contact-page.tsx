@@ -48,7 +48,7 @@ export function ContactPage({ locale }: { locale: Locale }) {
           <MatelabLogoSmall size={28} />
           <div className="font-sans font-extrabold text-lg tracking-[-0.04em]">
             <span className="text-foreground">mate</span>
-            <span className="text-primary">lab.ai</span>
+            <span className="text-primary">lab&#8209;ai</span>
           </div>
         </Link>
         <div className="flex items-center gap-3">
