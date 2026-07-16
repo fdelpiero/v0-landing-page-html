@@ -338,7 +338,7 @@ export default function RegisterPage() {
                 href="/"
                 className="inline-block bg-primary text-white font-sans font-bold text-sm px-6 py-[13px] rounded-lg hover:bg-foreground transition-colors"
               >
-                ← Back to Matelab.ai
+                ← Back to matelab-ai
               </Link>
             </div>
           )}
@@ -349,7 +349,7 @@ export default function RegisterPage() {
       {/* Footer strip */}
       <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
         <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
-          © 2026 matelab-ai · Sydney, AU ·{" "}
+          © 2026 matelab-ai · Sydney, AU
         </p>
       </div>
 

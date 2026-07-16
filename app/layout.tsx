@@ -20,10 +20,10 @@ const instrumentSerif = Instrument_Serif({
 })
 export const metadata: Metadata = {
   metadataBase: new URL('https://matelabai.vercel.app'),
-  title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — matelab.ai',
+  title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — matelab-ai',
   description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
   keywords: ['AI automation consulting', 'AI automation agency Sydney', 'custom AI solutions', 'n8n consulting', 'AI agents for business', 'chatbots for business', 'corporate AI workshops', 'automation consulting Australia'],
-  authors: [{ name: 'Matelab AI' }],
+  authors: [{ name: 'matelab-ai' }],
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -35,16 +35,16 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — Matelab.ai',
+    title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — matelab-ai',
     description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
     url: 'https://matelabai.vercel.app',
-    siteName: 'Matelab.ai',
+    siteName: 'matelab-ai',
     locale: 'en_AU',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — Matelab.ai',
+    title: 'AI Automation Consulting Sydney | Custom AI Solutions for Business — matelab-ai',
     description: 'We design and build custom AI agents, chatbots and automation flows for SMBs — then train your team to run them. Sydney-based, working worldwide.',
   },
   robots: {
