@@ -107,7 +107,6 @@ export function ContactPage({ locale }: { locale: Locale }) {
       <div className="border-t border-[#E9E7DD] py-5 px-6 text-center relative z-10">
         <p className="font-mono text-[11px] text-[#B4B1A4] tracking-[0.05em]">
           © 2026 matelab-ai · Sydney, AU ·{" "}
-          <Link href={localizedPath(locale, "/")} className="text-[#B4B1A4] hover:text-primary transition-colors">@matelab.ai</Link>
         </p>
       </div>
 
