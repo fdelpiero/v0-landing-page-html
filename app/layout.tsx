@@ -62,7 +62,7 @@ export default function RootLayout({
       {/* Body font is now Syne (font-sans); DM Mono is used only for labels/eyebrows/tags */}
       <body className="font-sans antialiased text-[15px] leading-relaxed overflow-x-hidden">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+        <Analytics />
       </body>
     </html>
   )
